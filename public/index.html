@@ -1,65 +1,79 @@
 <!DOCTYPE html>
 <html lang="my"><head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Kachin Link</title>
 <link rel="manifest" href="/manifest.json">
 <meta name="theme-color" content="#d9232d">
 <link rel="apple-touch-icon" href="/icon-192.png">
 <style>
 *{box-sizing:border-box}
-:root{--r:#d9232d;--g:#1f9d55}
-body{margin:0;font-family:system-ui,-apple-system,"Noto Sans Myanmar",sans-serif;color:#1c1e21;min-height:100vh;
-background:linear-gradient(90deg,var(--r) 50%,var(--g) 50%) fixed}
-[hidden]{display:none!important}button{font:inherit;cursor:pointer;border:0}
-input,textarea{font:inherit;width:100%;padding:10px;border:1px solid #ddd;border-radius:6px;margin:4px 0;outline:0;background:#fff}
+:root{color-scheme:light dark;--r:#d9232d;--g:#1f9d55;--bg:#f0f2f5;--cd:#fff;--tx:#1c1e21;--mu:#777;--ln:#eee;--in:#f3f4f6}
+@media(prefers-color-scheme:dark){:root{--bg:#18191a;--cd:#242526;--tx:#e4e6eb;--mu:#a0a4ab;--ln:#3a3b3c;--in:#3a3b3c}}
+body{margin:0;font-family:system-ui,-apple-system,"Noto Sans Myanmar",sans-serif;color:var(--tx);min-height:100vh;background:var(--bg)}
+body.au{background:linear-gradient(90deg,var(--r) 50%,var(--g) 50%) fixed}
+[hidden]{display:none!important}
+button{font:inherit;cursor:pointer;border:0;color:inherit}
+input,textarea{font:inherit;color:var(--tx);width:100%;padding:10px 14px;border:1px solid var(--ln);border-radius:10px;margin:4px 0;outline:0;background:var(--in)}
 input:focus,textarea:focus{border-color:var(--g)}
-.btn{background:var(--r);color:#fff;padding:8px 16px;border-radius:6px;font-weight:600}
-.btn.g{background:var(--g)}.btn.ghost{background:#eee;color:#333}.btn:disabled{opacity:.5}
+textarea{resize:none}
+.btn{background:var(--r);color:#fff;padding:9px 18px;border-radius:999px;font-weight:600;transition:.15s}
+.btn:active{transform:scale(.96)}
+.btn.g{background:var(--g)}.btn.ghost{background:var(--in);color:var(--tx)}.btn:disabled{opacity:.5}.btn.sm{padding:6px 12px;font-size:13px}
 .logo{font-size:22px;font-weight:800;color:var(--r)}.logo i{font-style:normal;color:var(--g)}
-.card{background:#fff;border-radius:6px;box-shadow:0 1px 4px #0003;margin-bottom:14px;overflow:hidden}
-.pad{padding:14px}.ct{font-weight:700;padding:12px 14px;border-bottom:1px solid #eee}
-#auth{max-width:380px;margin:8vh auto;padding:26px;background:#fff;border-radius:10px;box-shadow:0 6px 24px #0004;text-align:center}
+.card{background:var(--cd);border-radius:14px;box-shadow:0 1px 3px #0002;margin-bottom:14px;overflow:hidden;animation:up .25s}
+@keyframes up{from{opacity:0;transform:translateY(8px)}}
+.pad{padding:14px}.ct{font-weight:700;padding:12px 14px;border-bottom:1px solid var(--ln)}
+#auth{max-width:380px;margin:8vh auto;padding:26px;background:var(--cd);border-radius:18px;box-shadow:0 8px 30px #0005;text-align:center}
 #auth a{color:var(--g);cursor:pointer;font-size:14px}
-nav{position:sticky;top:0;z-index:20;background:#fff;box-shadow:0 2px 8px #0003;display:flex;align-items:center;gap:14px;padding:8px 16px}
-nav input{max-width:320px;margin:0;background:#f3f3f3;border-radius:20px}nav .sp{flex:1}
+nav{position:sticky;top:0;z-index:30;background:var(--cd);box-shadow:0 2px 8px #0002;display:flex;align-items:center;gap:10px;padding:8px 14px}
+nav::after{content:"";position:absolute;left:0;right:0;bottom:-3px;height:3px;background:linear-gradient(90deg,var(--r) 50%,var(--g) 50%)}
+nav input{max-width:320px;margin:0;border-radius:999px}nav .sp{flex:1}
+.ib{position:relative;width:40px;height:40px;border-radius:50%;background:var(--in);font-size:18px;flex:none}
+.bd{position:absolute;top:-2px;right:-2px;background:var(--r);color:#fff;font-size:11px;font-weight:700;min-width:18px;height:18px;border-radius:9px;line-height:18px;padding:0 4px}
+#nl{position:fixed;top:58px;right:8px;width:min(360px,94vw);max-height:70vh;overflow:auto;background:var(--cd);border-radius:14px;box-shadow:0 8px 30px #0006;z-index:40}
+.ni{display:flex;gap:10px;align-items:center;padding:10px 14px;cursor:pointer;font-size:14px}.ni.un{background:#d9232d18}.ni:hover{background:var(--in)}
 .wrap{max-width:1100px;margin:16px auto;padding:0 12px;display:grid;grid-template-columns:270px 1fr 300px;gap:16px;align-items:start}
 .cover{height:70px;background:linear-gradient(90deg,var(--r) 50%,var(--g) 50%)}
 .prof{text-align:center;margin-top:-45px}
-.big{width:90px;height:90px;border-radius:50%;object-fit:cover;border:4px solid #fff;background:#ccc}
-.stats{display:flex;border-top:1px solid #eee}.stats div{flex:1;text-align:center;padding:10px;font-size:13px;color:#777}
-.stats b{display:block;font-size:18px;color:#222}
+.big{width:90px;height:90px;border-radius:50%;object-fit:cover;border:4px solid var(--cd);background:#ccc}
+.stats{display:flex;border-top:1px solid var(--ln)}.stats div{flex:1;text-align:center;padding:10px;font-size:13px;color:var(--mu)}
+.stats b{display:block;font-size:18px;color:var(--tx)}
 .av{width:40px;height:40px;border-radius:50%;object-fit:cover;background:#ccc;flex:none}
 .row{display:flex;gap:10px;align-items:center}
-.sg{display:flex;gap:10px;align-items:center;padding:8px 14px;cursor:pointer}.sg:hover{background:#f3f3f3}
+.sg{display:flex;gap:10px;align-items:center;padding:8px 14px}.sg[data-dm]{cursor:pointer}.sg:hover{background:var(--in)}
+.hs{display:flex;gap:10px;overflow-x:auto;padding:12px 14px}
+.pc{flex:none;width:112px;text-align:center;background:var(--in);border-radius:12px;padding:10px 6px}
+.pc .av{width:56px;height:56px;margin:0 auto 6px;display:block}
+.pc .name{font-size:13px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;margin-bottom:6px}
 .top{border-top:3px solid var(--r)}
-.name{font-weight:600}.time{font-size:12px;color:#888}
+.name{font-weight:600}.time{font-size:12px;color:var(--mu)}
 .media{width:calc(100% + 28px);margin:8px -14px 0;max-height:520px;object-fit:contain;background:#111;display:block}
-.shared{border:1px solid #ddd;border-radius:6px;padding:10px;margin-top:8px}
+.shared{border:1px solid var(--ln);border-radius:10px;padding:10px;margin-top:8px}
 .shared .media{width:calc(100% + 20px);margin:8px -10px -10px}
-.sum{font-size:13px;color:#777;padding:8px 0;display:flex;justify-content:space-between}
-.acts{display:flex;border-top:1px solid #eee;padding-top:4px}.acts>*{flex:1}
-.acts button{background:none;color:#777;padding:8px;border-radius:6px;font-weight:600;width:100%}
-.acts button:hover{background:#f3f3f3}.acts .me{color:var(--r)}
+.sum{font-size:13px;color:var(--mu);padding:8px 0;display:flex;justify-content:space-between}
+.acts{display:flex;border-top:1px solid var(--ln);padding-top:4px}.acts>*{flex:1}
+.acts button{background:none;color:var(--mu);padding:8px;border-radius:10px;font-weight:600;width:100%}
+.acts button:hover{background:var(--in)}.acts .me{color:var(--r)}
 .lw{position:relative}
-.pk{display:none;position:absolute;bottom:42px;left:0;background:#fff;border-radius:30px;box-shadow:0 2px 12px #0005;padding:4px 8px;z-index:5}
+.pk{display:none;position:absolute;bottom:42px;left:0;background:var(--cd);border-radius:30px;box-shadow:0 2px 12px #0006;padding:4px 8px;z-index:5}
 .lw:hover .pk,.pk.show{display:flex}
 .pk span{font-size:28px;cursor:pointer;padding:2px 4px;transition:transform .12s}.pk span:hover{transform:scale(1.35)}
-.cm{display:flex;gap:8px;margin-top:8px}.cm div{background:#f3f3f3;border-radius:16px;padding:6px 12px;font-size:14px}
+.cm{display:flex;gap:8px;margin-top:8px}.cm div{background:var(--in);border-radius:16px;padding:6px 12px;font-size:14px}
 .del{color:var(--r);font-size:12px;background:none;margin-left:auto}
-#prev img{max-width:100%;max-height:240px;border-radius:8px;margin-top:6px}
+#prev img{max-width:100%;max-height:240px;border-radius:10px;margin-top:6px}
 .chat{height:340px;overflow-y:auto;display:flex;flex-direction:column;gap:6px;padding:12px}
-.msg{max-width:80%;background:#eee;padding:6px 12px;border-radius:16px;font-size:14px;align-self:flex-start;word-break:break-word}
+.msg{max-width:80%;background:var(--in);padding:7px 13px;border-radius:18px;font-size:14px;align-self:flex-start;word-break:break-word}
 .msg.me{background:var(--g);color:#fff;align-self:flex-end}
 #tabs{display:none}
 @media(max-width:900px){
- .wrap{grid-template-columns:1fr;padding-bottom:70px}
+ .wrap{grid-template-columns:1fr;padding-bottom:84px}
  body[data-t=home] #L,body[data-t=home] #R,body[data-t=chat] #L,body[data-t=chat] #C,body[data-t=me] #C,body[data-t=me] #R{display:none}
- #tabs{display:flex;position:fixed;bottom:0;left:0;right:0;background:#fff;box-shadow:0 -2px 8px #0003;z-index:20}
- #tabs button{flex:1;background:none;padding:12px;font-size:15px}#tabs button.on{color:var(--r);font-weight:700;border-top:3px solid var(--r)}
- nav input{max-width:none}.chat{height:60vh}
+ #tabs{display:flex;position:fixed;bottom:0;left:0;right:0;background:var(--cd);box-shadow:0 -2px 8px #0003;z-index:30;padding-bottom:env(safe-area-inset-bottom)}
+ #tabs button{flex:1;background:none;padding:12px;font-size:15px;color:var(--mu)}#tabs button.on{color:var(--r);font-weight:700;border-top:3px solid var(--r)}
+ nav input{max-width:none}.logo{font-size:18px}.chat{height:60vh}
 }
-</style></head><body data-t="home">
+</style></head><body class="au" data-t="home">
 
 <div id="auth">
   <div class="logo" style="font-size:30px">Kachin <i>Link</i></div>
@@ -77,8 +91,10 @@ nav input{max-width:320px;margin:0;background:#f3f3f3;border-radius:20px}nav .sp
     <div class="logo">Kachin <i>Link</i></div>
     <input id="q" placeholder="🔍 Find...">
     <span class="sp"></span>
-    <button class="btn ghost" id="out">Logout</button>
+    <button class="ib" id="bell">🔔<span class="bd" id="bd" hidden>0</span></button>
+    <button class="ib" id="out" title="Logout">⏻</button>
   </nav>
+  <div id="nl" hidden></div>
 
   <div class="wrap">
     <aside id="L">
@@ -86,7 +102,7 @@ nav input{max-width:320px;margin:0;background:#f3f3f3;border-radius:20px}nav .sp
         <div class="cover"></div>
         <div class="prof"><img class="big myav"><div class="name" id="mn" style="font-size:18px;margin:6px 0 10px"></div></div>
         <div class="stats"><div>Posts<b id="np">0</b></div><div>Friends<b id="nu">0</b></div></div>
-        <div class="pad" style="border-top:1px solid #eee">
+        <div class="pad" style="border-top:1px solid var(--ln)">
           <label class="btn ghost" style="display:block;text-align:center">📷 ပုံပြောင်းမယ်<input id="avf" type="file" accept="image/*" hidden></label>
           <input id="pn" placeholder="Change Profile ">
           <button class="btn g" id="sn" style="width:100%">Save Profile </button>
@@ -104,6 +120,7 @@ nav input{max-width:320px;margin:0;background:#f3f3f3;border-radius:20px}nav .sp
           <button class="btn" id="post">Post</button>
         </div>
       </div>
+      <div id="req"></div>
       <div id="ppl"></div>
       <div id="feed"></div>
     </main>
@@ -112,8 +129,8 @@ nav input{max-width:320px;margin:0;background:#f3f3f3;border-radius:20px}nav .sp
       <div class="card"><div class="ct">💬 Messages</div>
         <div id="plist"></div>
         <div id="conv" hidden>
-          <div class="row pad" style="border-bottom:1px solid #eee;padding:8px 14px">
-            <button class="btn ghost" id="bk" style="padding:6px 12px">←</button>
+          <div class="row pad" style="border-bottom:1px solid var(--ln);padding:8px 14px">
+            <button class="btn ghost sm" id="bk">←</button>
             <img class="av" id="pa"><b id="pnm"></b>
           </div>
           <div class="chat" id="msgs"></div>
@@ -129,7 +146,7 @@ nav input{max-width:320px;margin:0;background:#f3f3f3;border-radius:20px}nav .sp
 <script type="module">
 import {initializeApp} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 import {getAuth,onAuthStateChanged,createUserWithEmailAndPassword,signInWithEmailAndPassword,signOut} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
-import {getFirestore,collection,doc,setDoc,getDoc,addDoc,updateDoc,deleteDoc,deleteField,onSnapshot,query,orderBy,limit,serverTimestamp,increment} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+import {getFirestore,collection,doc,setDoc,getDoc,addDoc,updateDoc,deleteDoc,deleteField,onSnapshot,query,where,orderBy,limit,serverTimestamp,increment} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 const firebaseConfig = {
   apiKey:"AIzaSyDYL20rK-JgxxOIMVaQwTurlVinXBL9q4k", authDomain:"jinghpaw-link.firebaseapp.com", projectId:"jinghpaw-link",
@@ -139,9 +156,10 @@ const app=initializeApp(firebaseConfig),auth=getAuth(app),db=getFirestore(app);
 const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
 const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const EMO=["👍","❤️","😂","😮","😢","😡"];
+const TXT={react:"က သင့်ပို့စ်ကို react လုပ်ခဲ့သည်",comment:"က သင့်ပို့စ်မှာ မှတ်ချက်ပေးခဲ့သည်",share:"က သင့်ပို့စ်ကို မျှဝေခဲ့သည်",friendreq:"က သူငယ်ချင်းဖြစ်ရန် တောင်းဆိုလာသည်",friendacc:"က သင့်တောင်းဆိုမှုကို လက်ခံလိုက်သည်"};
 const DEF="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect fill='%23bcc0c4' width='40' height='40'/%3E%3Ccircle cx='20' cy='15' r='7' fill='%23fff'/%3E%3Cellipse cx='20' cy='37' rx='13' ry='11' fill='%23fff'/%3E%3C/svg%3E";
 let me=null,users={},posts=[],comments={},openC=new Set(),file=null,reg=false,started=false,q="";
-let peer=null,dmMsgs=[],unDM=null;
+let peer=null,dmMsgs=[],unDM=null,friends=[],notifs=[],firstN=true;
 
 // ---------- Auth ----------
 $("#sw").onclick=()=>{reg=!reg;$("#rn").hidden=!reg;$("#go").textContent=reg?"Creat Account":"Login";$("#sw").textContent=reg?"အကောင့်ရှိပြီးသား - Login":"New Creat Account"};
@@ -158,7 +176,7 @@ onAuthStateChanged(auth,async u=>{
   if(!u)return;me=u;
   const d=await getDoc(doc(db,"users",u.uid));
   if(!d.exists())await setDoc(doc(db,"users",u.uid),{name:(u.email||"user").split("@")[0],photo:"",createdAt:serverTimestamp()});
-  $("#auth").hidden=true;$("#app").hidden=false;
+  $("#auth").hidden=true;$("#app").hidden=false;document.body.classList.remove("au");
   if(!started){started=true;start()}
 });
 
@@ -172,6 +190,28 @@ function shrink(f,max,q=.72){return new Promise((ok,no)=>{const r=new FileReader
   c.getContext("2d").drawImage(i,0,0,c.width,c.height);ok(c.toDataURL("image/jpeg",q))};i.src=r.result};r.readAsDataURL(f)})}
 const setTab=t=>{$$("#tabs button").forEach(x=>x.classList.toggle("on",x.dataset.t===t));document.body.dataset.t=t};
 
+// ---------- Friends ----------
+const fid=i=>[me.uid,i].sort().join("_");
+const fst=i=>{const f=friends.find(x=>x.users.includes(i));return !f?"none":f.status==="accepted"?"friend":f.from===me.uid?"sent":"recv"};
+const fl=()=>friends.filter(f=>f.status==="accepted").map(f=>f.users.find(x=>x!==me.uid));
+const fbtn=i=>({
+  friend:`<button class="btn ghost sm" data-dm="${i}">💬</button>`,
+  sent:`<button class="btn ghost sm" data-fa="del" data-u="${i}">ပို့ပြီး ✕</button>`,
+  recv:`<button class="btn g sm" data-fa="ok" data-u="${i}">လက်ခံ</button>`,
+  none:`<button class="btn g sm" data-fa="add" data-u="${i}">+ Add</button>`}[fst(i)]);
+const person=([i,u])=>`<div class="sg" ${fst(i)==="friend"?`data-dm="${i}"`:""}><img class="av" src="${esc(u.photo||DEF)}"><span class="name">${esc(u.name)}</span><span style="flex:1"></span>${fbtn(i)}</div>`;
+
+// ---------- Notifications ----------
+const notify=(to,type,postId="")=>{if(!to||to===me.uid)return;addDoc(collection(db,"notifs"),{to,from:me.uid,type,postId,read:false,createdAt:serverTimestamp()}).catch(()=>{})};
+const popN=n=>{if("Notification" in window&&Notification.permission==="granted")navigator.serviceWorker.getRegistration().then(r=>r&&r.showNotification("Kachin Link",{body:U(n.from).name+" "+(TXT[n.type]||""),icon:"/icon-192.png"}))};
+function renderN(){
+  const un=notifs.filter(n=>!n.read).length,ask="Notification" in window&&Notification.permission==="default";
+  $("#bd").textContent=un>9?"9+":un;$("#bd").hidden=!un;
+  $("#nl").innerHTML=`<div class="ct row"><span>🔔 အသိပေးချက်</span><span style="flex:1"></span>${un?`<button class="btn ghost sm" id="nall">ဖတ်ပြီး</button>`:""}${ask?`<button class="btn g sm" id="nask">Alert ဖွင့်</button>`:""}</div>`+
+  (notifs.map(n=>`<div class="ni ${n.read?"":"un"}" data-n="${n.id}"><img class="av" src="${esc(av(n.from))}"><div><b>${esc(U(n.from).name)}</b> ${TXT[n.type]||""}<div class="time">${when(n.createdAt)}</div></div></div>`).join("")||`<div class="pad time">အသိပေးချက် မရှိသေးပါ</div>`);
+}
+$("#bell").onclick=()=>{$("#nl").hidden=!$("#nl").hidden};
+
 // ---------- Tabs / Search ----------
 $$("#tabs button").forEach(b=>b.onclick=()=>{setTab(b.dataset.t);scrollChat()});
 $("#q").oninput=e=>{q=e.target.value.trim().toLowerCase();render()};
@@ -180,8 +220,13 @@ $("#q").oninput=e=>{q=e.target.value.trim().toLowerCase();render()};
 function start(){
   onSnapshot(collection(db,"users"),s=>{users={};s.forEach(d=>users[d.id]=d.data());
     $$(".myav").forEach(i=>i.src=av(me.uid));$("#mn").textContent=U(me.uid).name;
-    if(document.activeElement!==$("#pn"))$("#pn").value=U(me.uid).name;render();renderChat()});
+    if(document.activeElement!==$("#pn"))$("#pn").value=U(me.uid).name;render();renderChat();renderN()});
   onSnapshot(query(collection(db,"posts"),orderBy("createdAt","desc"),limit(50)),s=>{posts=s.docs.map(d=>({id:d.id,...d.data()}));render()});
+  onSnapshot(query(collection(db,"friends"),where("users","array-contains",me.uid)),s=>{friends=s.docs.map(d=>d.data());render();renderChat()},e=>console.error(e));
+  onSnapshot(query(collection(db,"notifs"),where("to","==",me.uid),limit(50)),s=>{
+    notifs=s.docs.map(d=>({id:d.id,...d.data()})).sort((a,b)=>(b.createdAt?.seconds||9e9)-(a.createdAt?.seconds||9e9));
+    if(!firstN)s.docChanges().forEach(c=>{if(c.type==="added")popN(c.doc.data())});
+    firstN=false;renderN()},e=>console.error(e));
 }
 
 // ---------- Compose ----------
@@ -198,14 +243,16 @@ $("#post").onclick=async()=>{
 
 // ---------- Feed ----------
 const img=p=>p.image?`<img class="media" src="${esc(p.image)}" loading="lazy">`:"";
-const person=([i,u])=>`<div class="sg" data-dm="${i}"><img class="av" src="${esc(u.photo||DEF)}"><span class="name">${esc(u.name)}</span></div>`;
 function render(){
   if(!me)return;
-  $("#np").textContent=posts.filter(p=>p.uid===me.uid).length;$("#nu").textContent=Object.keys(users).length;
-  const match=([i,u])=>i!==me.uid&&(!q||(u.name||"").toLowerCase().includes(q));
-  $("#sug").innerHTML=Object.entries(users).filter(match).slice(0,8).map(person).join("")||`<div class="pad time">မတွေ့ပါ</div>`;
-  const found=q?Object.entries(users).filter(match).slice(0,6):[];
-  $("#ppl").innerHTML=found.length?`<div class="card"><div class="ct">👥 လူများ</div>${found.map(person).join("")}</div>`:"";
+  const fr=fl(),all=Object.entries(users).filter(([i])=>i!==me.uid),nm=([i,u])=>!q||(u.name||"").toLowerCase().includes(q);
+  $("#np").textContent=posts.filter(p=>p.uid===me.uid).length;$("#nu").textContent=fr.length;
+  $("#sug").innerHTML=all.filter(([i])=>fr.includes(i)).filter(nm).map(person).join("")||`<div class="pad time">သူငယ်ချင်း မရှိသေးပါ</div>`;
+  const inc=friends.filter(f=>f.status==="pending"&&f.to===me.uid);
+  $("#req").innerHTML=inc.length?`<div class="card"><div class="ct">👋 သူငယ်ချင်းတောင်းဆိုမှု (${inc.length})</div>${inc.map(f=>`<div class="sg"><img class="av" src="${esc(av(f.from))}"><span class="name">${esc(U(f.from).name)}</span><span style="flex:1"></span><button class="btn g sm" data-fa="ok" data-u="${f.from}">လက်ခံ</button><button class="btn ghost sm" data-fa="del" data-u="${f.from}">ပယ်</button></div>`).join("")}</div>`:"";
+  const found=q?all.filter(nm).slice(0,8):[],sg=q?[]:all.filter(([i])=>fst(i)==="none").slice(0,10);
+  $("#ppl").innerHTML=found.length?`<div class="card"><div class="ct">👥 လူများ</div>${found.map(person).join("")}</div>`
+    :sg.length?`<div class="card"><div class="ct">သူငယ်ချင်းဖြစ်နိုင်သူများ</div><div class="hs">${sg.map(([i,u])=>`<div class="pc"><img class="av" src="${esc(u.photo||DEF)}"><div class="name">${esc(u.name)}</div><button class="btn g sm" data-fa="add" data-u="${i}">+ Add</button></div>`).join("")}</div></div>`:"";
   const list=posts.filter(p=>!q||((p.text||"")+U(p.uid).name).toLowerCase().includes(q));
   $("#feed").innerHTML=list.map(p=>{
     const rs=p.reactions||{},vals=Object.values(rs),mine=rs[me.uid],top=[...new Set(vals)].slice(0,3).join("");
@@ -218,71 +265,4 @@ function render(){
       <div style="margin-top:8px;white-space:pre-wrap">${esc(p.text)}</div>${p.shared?sh:img(p)}
       <div class="sum"><span>${vals.length?top+" "+vals.length:""}</span><span>${p.commentCount?p.commentCount+" မှတ်ချက်":""}</span></div>
       <div class="acts">
-        <div class="lw"><div class="pk">${EMO.map(e=>`<span data-a="react" data-e="${e}">${e}</span>`).join("")}</div>
-          <button data-a="like" class="${mine?"me":""}">${mine?mine:"👍 Like"}</button></div>
-        <button data-a="cm">💬 Comment</button><button data-a="share">↗️ Share</button>
-      </div>${cl}</div>`}).join("")||`<div class="card pad">ပို့စ်မရှိသေးပါ။</div>`;
-}
-document.addEventListener("click",e=>{
-  const d=e.target.closest("[data-dm]");if(d){openChat(d.dataset.dm);return}
-  const t=e.target.closest("[data-a]");if(!t)return;const id=t.closest(".card")?.dataset.id,p=posts.find(x=>x.id===id),a=t.dataset.a;
-  if(a==="react"||a==="like"){
-    const mine=p.reactions?.[me.uid];
-    const val=a==="react"?(t.dataset.e===mine?null:t.dataset.e):(mine?null:"👍");
-    act(()=>updateDoc(doc(db,"posts",id),{[`reactions.${me.uid}`]:val===null?deleteField():val}));
-  }
-  if(a==="cm"){if(openC.has(id))openC.delete(id);else{openC.add(id);subC(id)}render()}
-  if(a==="del"&&confirm("ဖျက်မလား?"))act(()=>deleteDoc(doc(db,"posts",id)));
-  if(a==="share"){const note=prompt("မှတ်ချက်ထည့်မလား? (မထည့်လည်းရ)");if(note===null)return;const s=p.shared||p;
-    act(()=>addDoc(collection(db,"posts"),{uid:me.uid,text:note,image:"",reactions:{},commentCount:0,createdAt:serverTimestamp(),
-      shared:{uid:s.uid,text:s.text||"",image:s.image||""}}).then(()=>alert("မျှဝေပြီးပါပြီ ✅")))}
-});
-// ဖုန်းမှာ Like ကိုဖိထားရင် Emoji ပေါ်
-let lp;document.addEventListener("touchstart",e=>{
-  if(!e.target.closest(".lw"))$$(".pk.show").forEach(x=>x.classList.remove("show"));
-  const b=e.target.closest('[data-a="like"]');if(!b)return;
-  lp=setTimeout(()=>b.parentElement.querySelector(".pk").classList.add("show"),350)},{passive:true});
-document.addEventListener("touchend",()=>clearTimeout(lp));
-
-const subbed=new Set();
-function subC(id){if(subbed.has(id))return;subbed.add(id);
-  onSnapshot(query(collection(db,"posts",id,"comments"),orderBy("createdAt")),s=>{comments[id]=s.docs.map(d=>d.data());
-    const k=document.activeElement?.dataset?.ci,v=document.activeElement?.value;render();
-    if(k){const i=$(`[data-ci="${k}"]`);if(i){i.value=v;i.focus()}}})}
-document.addEventListener("keydown",e=>{const i=e.target.dataset?.ci;if(!i||e.key!=="Enter")return;const text=e.target.value.trim();if(!text)return;e.target.value="";
-  act(async()=>{await addDoc(collection(db,"posts",i,"comments"),{uid:me.uid,text,createdAt:serverTimestamp()});await updateDoc(doc(db,"posts",i),{commentCount:increment(1)})})});
-
-// ---------- Private Chat ----------
-const cid=()=>[me.uid,peer].sort().join("_");
-function openChat(id){
-  if(!id||id===me.uid)return;
-  peer=id;dmMsgs=[];if(unDM)unDM();
-  unDM=onSnapshot(query(collection(db,"dms",cid(),"messages"),orderBy("createdAt"),limit(200)),s=>{dmMsgs=s.docs.map(d=>d.data());renderChat()},
-    e=>alert("Chat ဖွင့်မရပါ: "+e.message));
-  setTab("chat");renderChat();setTimeout(()=>$("#ci").focus(),50);
-}
-$("#bk").onclick=()=>{peer=null;if(unDM){unDM();unDM=null}dmMsgs=[];renderChat()};
-function renderChat(){
-  if(!me)return;
-  $("#plist").hidden=!!peer;$("#conv").hidden=!peer;
-  if(!peer){
-    $("#plist").innerHTML=Object.entries(users).filter(([i])=>i!==me.uid).map(person).join("")||`<div class="pad time">အဖွဲ့ဝင် မရှိသေးပါ</div>`;
-    return;
-  }
-  $("#pa").src=av(peer);$("#pnm").textContent=U(peer).name;
-  $("#msgs").innerHTML=dmMsgs.map(c=>`<div class="msg ${c.uid===me.uid?"me":""}">${esc(c.text)}</div>`).join("")||`<div class="time" style="text-align:center">စကားစပြောလိုက်ပါ 👋</div>`;
-  scrollChat();
-}
-const scrollChat=()=>{const m=$("#msgs");if(m)m.scrollTop=m.scrollHeight};
-const send=async()=>{const t=$("#ci").value.trim();if(!t||!peer)return;$("#ci").value="";
-  act(()=>addDoc(collection(db,"dms",cid(),"messages"),{uid:me.uid,text:t,createdAt:serverTimestamp()}))};
-$("#cs").onclick=send;$("#ci").onkeydown=e=>{if(e.key==="Enter")send()};
-
-// ---------- Profile ----------
-$("#avf").onchange=e=>{const f=e.target.files[0];if(f)act(async()=>{await updateDoc(doc(db,"users",me.uid),{photo:await shrink(f,240,.8)})})};
-$("#sn").onclick=()=>{const n=$("#pn").value.trim();if(n)act(async()=>{await updateDoc(doc(db,"users",me.uid),{name:n});alert("သိမ်းပြီးပါပြီ ✅")})};
-
-// ---------- PWA ----------
-if("serviceWorker" in navigator)navigator.serviceWorker.register("/sw.js");
-</script>
-</body></html>
+        <div class="lw"><div class="pk">${EMO.map(e=>
