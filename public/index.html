@@ -1,9 +1,6 @@
 <!DOCTYPE html>
 <html lang="my"><head>
 
-<link rel="manifest" href="manifest.json">
-<meta name="theme-color" content="#d9232d">
-
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Kachin Link</title>
@@ -284,5 +281,4 @@ $("#cs").onclick=send;$("#ci").onkeydown=e=>{if(e.key==="Enter")send()};
 $("#avf").onchange=e=>{const f=e.target.files[0];if(f)act(async()=>{await updateDoc(doc(db,"users",me.uid),{photo:await shrink(f,240,.8)})})};
 $("#sn").onclick=()=>{const n=$("#pn").value.trim();if(n)act(async()=>{await updateDoc(doc(db,"users",me.uid),{name:n});alert("သိမ်းပြီးပါပြီ ✅")})};
 </script>
-if("serviceWorker" in navigator)navigator.serviceWorker.register("sw.js");
 </body></html>
