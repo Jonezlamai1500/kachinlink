@@ -284,4 +284,5 @@ $("#cs").onclick=send;$("#ci").onkeydown=e=>{if(e.key==="Enter")send()};
 $("#avf").onchange=e=>{const f=e.target.files[0];if(f)act(async()=>{await updateDoc(doc(db,"users",me.uid),{photo:await shrink(f,240,.8)})})};
 $("#sn").onclick=()=>{const n=$("#pn").value.trim();if(n)act(async()=>{await updateDoc(doc(db,"users",me.uid),{name:n});alert("သိမ်းပြီးပါပြီ ✅")})};
 </script>
+if("serviceWorker" in navigator)navigator.serviceWorker.register("sw.js");
 </body></html>
