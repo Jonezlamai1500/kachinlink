@@ -6,140 +6,341 @@
 <title>Kachin Link</title>
 <style>
 *{box-sizing:border-box}
-body{margin:0;min-height:100vh;font-family:system-ui,sans-serif;color:#eee;
-background:linear-gradient(90deg,#d62828 50%,#1b9c4a 50%);display:flex;align-items:center;justify-content:center;padding:16px}
-.card{background:#242628;border-radius:20px;padding:28px 22px;width:100%;max-width:440px;box-shadow:0 10px 40px rgba(0,0,0,.4)}
-h1{text-align:center;margin:0 0 20px;font-size:32px}
+body{margin:0;font-family:system-ui,sans-serif;background:#161718;color:#eee}
+input,button,textarea{font-family:inherit;font-size:16px}
+input,textarea{width:100%;padding:12px;margin-bottom:10px;border-radius:10px;border:1px solid #444;background:#3a3b3f;color:#fff}
+button{border:0;border-radius:10px;background:#1b9c4a;color:#fff;font-weight:600;padding:12px 16px;cursor:pointer}
+button.red{background:#d62828}
+button.ghost{background:none;color:#aaa;padding:6px 10px;font-weight:400}
+button.ghost.on{color:#ff5a5a}
+.hide{display:none!important}
+h1{margin:0;font-size:24px}
 h1 .r{color:#d62828}h1 .g{color:#1b9c4a}
-.tabs{display:flex;border-bottom:2px solid #444;margin-bottom:18px}
+
+/* auth */
+#auth{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:16px;
+background:linear-gradient(90deg,#d62828 50%,#1b9c4a 50%)}
+.card{background:#242628;border-radius:20px;padding:26px 20px;width:100%;max-width:420px}
+.card h1{text-align:center;font-size:32px;margin-bottom:18px}
+.tabs{display:flex;border-bottom:2px solid #444;margin-bottom:16px}
 .tab{flex:1;text-align:center;padding:12px;cursor:pointer;color:#999;border-bottom:3px solid transparent;margin-bottom:-2px}
 .tab.on{color:#fff;border-color:#1b9c4a}
-input{width:100%;padding:14px;margin-bottom:12px;border-radius:10px;border:1px solid #444;background:#3a3b3f;color:#fff;font-size:16px}
-button{width:100%;padding:14px;border:0;border-radius:10px;background:#1b9c4a;color:#fff;font-size:17px;font-weight:600;cursor:pointer}
-.err{color:#ff5252;min-height:20px;margin-bottom:8px;font-size:14px}
-#chat{display:none}
-.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
-.top button{width:auto;padding:8px 14px;background:#d62828;font-size:14px}
-#msgs{height:55vh;overflow-y:auto;background:#1a1b1d;border-radius:12px;padding:12px;margin-bottom:12px}
-.m{margin-bottom:10px;word-wrap:break-word}
-.m b{color:#1b9c4a}.m.me b{color:#ff6b6b}
-.m small{color:#777;margin-left:6px}
-.row{display:flex;gap:8px}
-.row input{margin:0}.row button{width:90px}
+#go{width:100%}
+.err{color:#ff5252;min-height:20px;font-size:14px;margin-bottom:8px}
+
+/* app */
+header{position:sticky;top:0;z-index:5;background:#242628;display:flex;align-items:center;justify-content:space-between;padding:10px 14px}
+nav{display:flex;background:#1d1e20;position:sticky;top:52px;z-index:4}
+nav div{flex:1;text-align:center;padding:12px;color:#999;cursor:pointer;border-bottom:3px solid transparent}
+nav div.on{color:#fff;border-color:#1b9c4a}
+main{max-width:600px;margin:0 auto;padding:12px}
+.box{background:#242628;border-radius:14px;padding:14px;margin-bottom:12px}
+.box textarea{min-height:80px;resize:vertical}
+.ph{display:flex;justify-content:space-between;margin-bottom:6px}
+.ph b{color:#1b9c4a}.ph small{color:#777}
+.pt{white-space:pre-wrap;word-wrap:break-word;margin-bottom:8px}
+.acts{display:flex;gap:4px;border-top:1px solid #38393c;padding-top:6px}
+.cm{background:#1a1b1d;border-radius:10px;padding:8px 10px;margin-top:8px;font-size:15px}
+.cm b{color:#ff8a8a}
+.cf{display:flex;gap:8px;margin-top:8px}
+.cf input{margin:0}
+#chatlist{height:62vh;overflow-y:auto;background:#1a1b1d;border-radius:14px;padding:12px;margin-bottom:10px}
+.msg{max-width:80%;margin-bottom:10px;padding:8px 12px;border-radius:14px;background:#2e3033;word-wrap:break-word}
+.msg.me{margin-left:auto;background:#17773a}
+.msg small{display:block;color:#aaa;font-size:12px}
+.crow{display:flex;gap:8px}
+.crow input{margin:0}
 </style>
 </head>
 <body>
-<div class="card">
-  <h1><span class="r">Kachin</span> <span class="g">Link</span></h1>
 
-  <div id="auth">
+<!-- LOGIN / REGISTER -->
+<div id="auth">
+  <div class="card">
+    <h1><span class="r">Kachin</span> <span class="g">Link</span></h1>
     <div class="tabs">
       <div class="tab on" id="t-login">ဝင်မယ်</div>
       <div class="tab" id="t-reg">အကောင့်ဖွင့်မယ်</div>
     </div>
-    <input id="u" placeholder="နာမည်" autocomplete="username">
-    <input id="p" type="password" placeholder="Password" autocomplete="current-password">
+    <input id="name" class="hide" placeholder="သင့်နာမည် (ပြမယ့်နာမည်)">
+    <input id="email" type="email" placeholder="Email">
+    <input id="pass" type="password" placeholder="Password (အနည်းဆုံး ၆ လုံး)">
     <div class="err" id="err"></div>
     <button id="go">ဝင်မယ်</button>
   </div>
-
-  <div id="chat">
-    <div class="top"><span id="who"></span><button id="out">ထွက်မယ်</button></div>
-    <div id="msgs"></div>
-    <div class="row">
-      <input id="txt" placeholder="စာရိုက်ပါ..." maxlength="500">
-      <button id="send">ပို့မယ်</button>
-    </div>
-  </div>
 </div>
 
-<script>
-const $ = id => document.getElementById(id);
-let mode = 'login', token = localStorage.getItem('kl_token'), me = '', timer = null;
+<!-- MAIN APP -->
+<div id="app" class="hide">
+  <header>
+    <h1><span class="r">Kachin</span> <span class="g">Link</span></h1>
+    <button class="red" id="logout">ထွက်မယ်</button>
+  </header>
+  <nav>
+    <div class="on" id="n-feed">📰 Feed</div>
+    <div id="n-chat">💬 Chat</div>
+  </nav>
 
-async function api(path, method, body) {
-  const r = await fetch('/api/' + path, {
-    method: method || 'GET',
-    headers: { 'Content-Type': 'application/json', Authorization: 'Bearer ' + (token || '') },
-    body: body ? JSON.stringify(body) : undefined
-  });
-  const d = await r.json().catch(() => ({}));
-  if (!r.ok) throw new Error(d.error || 'Error');
-  return d;
+  <main id="v-feed">
+    <div class="box">
+      <textarea id="ptext" maxlength="1000" placeholder="ဘာတွေးနေလဲ..."></textarea>
+      <button id="ppost">တင်မယ်</button>
+    </div>
+    <div id="posts"></div>
+  </main>
+
+  <main id="v-chat" class="hide">
+    <div id="chatlist"></div>
+    <div class="crow">
+      <input id="ctext" maxlength="500" placeholder="စာရိုက်ပါ...">
+      <button id="csend">ပို့</button>
+    </div>
+  </main>
+</div>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword,
+  onAuthStateChanged, signOut, updateProfile }
+  from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+import { getFirestore, collection, addDoc, doc, updateDoc, deleteDoc,
+  arrayUnion, arrayRemove, query, orderBy, limit, onSnapshot, serverTimestamp }
+  from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+// ====== ကိုယ့် Firebase config ထည့်ပါ ======
+const firebaseConfig = {
+  apiKey: "AIzaSyDYL20rK-JgxxOIMVaQwTurlVinXBL9q4k",
+  authDomain: "jinghpaw-link.firebaseapp.com",
+  projectId: "jinghpaw-link",
+  storageBucket: "jinghpaw-link.firebasestorage.app",
+  messagingSenderId: "790888296721",
+  appId: "1:790888296721:web:1f238b0be41ac85d631cb0"
+};
+// ==========================================
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore(app);
+const $ = id => document.getElementById(id);
+
+function el(tag, cls, text) {
+  const e = document.createElement(tag);
+  if (cls) e.className = cls;
+  if (text !== undefined) e.textContent = text;
+  return e;
+}
+function fmt(ts) {
+  if (!ts || !ts.toDate) return '';
+  return ts.toDate().toLocaleString([], { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' });
+}
+function myName() {
+  return (auth.currentUser && auth.currentUser.displayName) || 'User';
 }
 
+/* ---------- AUTH ---------- */
+let mode = 'login';
 function setMode(m) {
   mode = m;
   $('t-login').classList.toggle('on', m === 'login');
   $('t-reg').classList.toggle('on', m === 'reg');
+  $('name').classList.toggle('hide', m === 'login');
   $('go').textContent = m === 'login' ? 'ဝင်မယ်' : 'အကောင့်ဖွင့်မယ်';
   $('err').textContent = '';
 }
 $('t-login').onclick = () => setMode('login');
 $('t-reg').onclick = () => setMode('reg');
 
+function errText(e) {
+  const c = e.code || '';
+  if (c.includes('invalid-email')) return 'Email ပုံစံမှားနေပါတယ်';
+  if (c.includes('email-already-in-use')) return 'ဒီ Email သုံးပြီးသားပါ';
+  if (c.includes('weak-password')) return 'Password အနည်းဆုံး ၆ လုံးထည့်ပါ';
+  if (c.includes('invalid-credential') || c.includes('wrong-password') || c.includes('user-not-found'))
+    return 'Email သို့မဟုတ် Password မှားနေပါတယ်';
+  if (c.includes('unauthorized-domain')) return 'Firebase Authorized domains မှာ ဒီဆိုက်လိပ်စာ ထည့်ပါ';
+  return e.message;
+}
+
 $('go').onclick = async () => {
   $('err').textContent = '';
+  const email = $('email').value.trim();
+  const pass = $('pass').value;
   try {
-    const d = await api(mode === 'login' ? 'login' : 'register', 'POST',
-      { username: $('u').value, password: $('p').value });
-    token = d.token; me = d.username;
-    localStorage.setItem('kl_token', token);
-    showChat();
-  } catch (e) { $('err').textContent = e.message; }
+    if (mode === 'login') {
+      await signInWithEmailAndPassword(auth, email, pass);
+    } else {
+      const name = $('name').value.trim();
+      if (name.length < 2) { $('err').textContent = 'နာမည် ထည့်ပါ'; return; }
+      const cred = await createUserWithEmailAndPassword(auth, email, pass);
+      await updateProfile(cred.user, { displayName: name });
+    }
+  } catch (e) { $('err').textContent = errText(e); }
 };
 
-function showChat() {
-  $('auth').style.display = 'none';
-  $('chat').style.display = 'block';
-  $('who').textContent = '👤 ' + me;
-  load();
-  timer = setInterval(load, 3000);
-}
+$('logout').onclick = () => signOut(auth);
 
-function showAuth() {
-  clearInterval(timer);
-  $('chat').style.display = 'none';
-  $('auth').style.display = 'block';
-}
+let unsubPosts = null, unsubChat = null;
+const unsubComments = {};
+const openComments = new Set();
 
-async function load() {
-  try {
-    const d = await api('messages');
-    const box = $('msgs');
-    const atBottom = box.scrollHeight - box.scrollTop - box.clientHeight < 60;
-    box.innerHTML = '';
-    d.messages.forEach(m => {
-      const div = document.createElement('div');
-      div.className = 'm' + (m.user === me ? ' me' : '');
-      const b = document.createElement('b'); b.textContent = m.user;
-      const s = document.createElement('small');
-      s.textContent = new Date(m.time).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-      const t = document.createElement('div'); t.textContent = m.text;
-      div.append(b, s, t);
-      box.appendChild(div);
-    });
-    if (atBottom) box.scrollTop = box.scrollHeight;
-  } catch (e) {
-    localStorage.removeItem('kl_token'); token = null; showAuth();
+onAuthStateChanged(auth, user => {
+  if (user) {
+    $('auth').classList.add('hide');
+    $('app').classList.remove('hide');
+    startFeed();
+    startChat();
+  } else {
+    $('app').classList.add('hide');
+    $('auth').classList.remove('hide');
+    stopAll();
   }
+});
+
+function stopAll() {
+  if (unsubPosts) unsubPosts();
+  if (unsubChat) unsubChat();
+  Object.values(unsubComments).forEach(f => f());
+  for (const k in unsubComments) delete unsubComments[k];
+  unsubPosts = unsubChat = null;
+  $('posts').innerHTML = '';
+  $('chatlist').innerHTML = '';
 }
 
-async function sendMsg() {
-  const text = $('txt').value.trim();
+/* ---------- TABS ---------- */
+$('n-feed').onclick = () => tab('feed');
+$('n-chat').onclick = () => tab('chat');
+function tab(t) {
+  $('n-feed').classList.toggle('on', t === 'feed');
+  $('n-chat').classList.toggle('on', t === 'chat');
+  $('v-feed').classList.toggle('hide', t !== 'feed');
+  $('v-chat').classList.toggle('hide', t !== 'chat');
+  if (t === 'chat') { const c = $('chatlist'); c.scrollTop = c.scrollHeight; }
+}
+
+/* ---------- POSTS ---------- */
+$('ppost').onclick = async () => {
+  const text = $('ptext').value.trim();
   if (!text) return;
-  $('txt').value = '';
-  try { await api('messages', 'POST', { text }); await load(); $('msgs').scrollTop = 1e9; } catch (e) {}
-}
-$('send').onclick = sendMsg;
-$('txt').onkeydown = e => { if (e.key === 'Enter') sendMsg(); };
-
-$('out').onclick = async () => {
-  try { await api('logout', 'POST'); } catch (e) {}
-  localStorage.removeItem('kl_token'); token = null; showAuth();
+  $('ptext').value = '';
+  await addDoc(collection(db, 'posts'), {
+    uid: auth.currentUser.uid,
+    name: myName(),
+    text,
+    likes: [],
+    createdAt: serverTimestamp()
+  });
 };
 
-if (token) api('me').then(d => { me = d.username; showChat(); }).catch(() => { localStorage.removeItem('kl_token'); });
+function startFeed() {
+  if (unsubPosts) unsubPosts();
+  const q = query(collection(db, 'posts'), orderBy('createdAt', 'desc'), limit(50));
+  unsubPosts = onSnapshot(q, snap => {
+    Object.values(unsubComments).forEach(f => f());
+    for (const k in unsubComments) delete unsubComments[k];
+    const box = $('posts');
+    box.innerHTML = '';
+    snap.forEach(d => box.appendChild(renderPost(d.id, d.data())));
+  });
+}
+
+function renderPost(id, p) {
+  const uid = auth.currentUser.uid;
+  const liked = (p.likes || []).includes(uid);
+  const wrap = el('div', 'box');
+
+  const head = el('div', 'ph');
+  head.append(el('b', '', p.name || 'User'), el('small', '', fmt(p.createdAt)));
+  wrap.append(head, el('div', 'pt', p.text));
+
+  const acts = el('div', 'acts');
+  const likeBtn = el('button', 'ghost' + (liked ? ' on' : ''), (liked ? '❤️ ' : '🤍 ') + (p.likes || []).length);
+  likeBtn.onclick = () => updateDoc(doc(db, 'posts', id), {
+    likes: liked ? arrayRemove(uid) : arrayUnion(uid)
+  });
+  const cmBtn = el('button', 'ghost', '💬 Comment');
+  acts.append(likeBtn, cmBtn);
+  if (p.uid === uid) {
+    const del = el('button', 'ghost', '🗑️');
+    del.onclick = () => { if (confirm('ဖျက်မလား?')) deleteDoc(doc(db, 'posts', id)); };
+    acts.append(del);
+  }
+  wrap.append(acts);
+
+  const cbox = el('div', openComments.has(id) ? '' : 'hide');
+  const clist = el('div');
+  const form = el('div', 'cf');
+  const cin = el('input'); cin.placeholder = 'Comment ရေးပါ...'; cin.maxLength = 300;
+  const cbtn = el('button', '', 'ပို့');
+  const sendC = async () => {
+    const text = cin.value.trim();
+    if (!text) return;
+    cin.value = '';
+    await addDoc(collection(db, 'posts', id, 'comments'), {
+      uid, name: myName(), text, createdAt: serverTimestamp()
+    });
+  };
+  cbtn.onclick = sendC;
+  cin.onkeydown = e => { if (e.key === 'Enter') sendC(); };
+  form.append(cin, cbtn);
+  cbox.append(clist, form);
+  wrap.append(cbox);
+
+  function listen() {
+    if (unsubComments[id]) return;
+    const cq = query(collection(db, 'posts', id, 'comments'), orderBy('createdAt', 'asc'));
+    unsubComments[id] = onSnapshot(cq, snap => {
+      clist.innerHTML = '';
+      snap.forEach(c => {
+        const d = c.data();
+        const row = el('div', 'cm');
+        row.append(el('b', '', d.name || 'User'), el('span', '', '  ' + d.text));
+        clist.appendChild(row);
+      });
+      cmBtn.textContent = '💬 ' + snap.size;
+    });
+  }
+  cmBtn.onclick = () => {
+    if (openComments.has(id)) { openComments.delete(id); cbox.classList.add('hide'); }
+    else { openComments.add(id); cbox.classList.remove('hide'); listen(); }
+  };
+  if (openComments.has(id)) listen();
+  return wrap;
+}
+
+/* ---------- REAL-TIME CHAT ---------- */
+function startChat() {
+  if (unsubChat) unsubChat();
+  const q = query(collection(db, 'messages'), orderBy('createdAt', 'desc'), limit(100));
+  unsubChat = onSnapshot(q, snap => {
+    const list = $('chatlist');
+    const atBottom = list.scrollHeight - list.scrollTop - list.clientHeight < 80;
+    list.innerHTML = '';
+    const docs = [];
+    snap.forEach(d => docs.push(d.data()));
+    docs.reverse().forEach(m => {
+      const mine = m.uid === auth.currentUser.uid;
+      const b = el('div', 'msg' + (mine ? ' me' : ''));
+      b.append(el('small', '', (mine ? 'သင်' : m.name) + ' · ' + fmt(m.createdAt)), el('div', '', m.text));
+      list.appendChild(b);
+    });
+    if (atBottom) list.scrollTop = list.scrollHeight;
+  });
+}
+
+async function sendChat() {
+  const text = $('ctext').value.trim();
+  if (!text) return;
+  $('ctext').value = '';
+  await addDoc(collection(db, 'messages'), {
+    uid: auth.currentUser.uid,
+    name: myName(),
+    text,
+    createdAt: serverTimestamp()
+  });
+  const c = $('chatlist'); c.scrollTop = c.scrollHeight;
+}
+$('csend').onclick = sendChat;
+$('ctext').onkeydown = e => { if (e.key === 'Enter') sendChat(); };
 </script>
 </body>
 </html>
