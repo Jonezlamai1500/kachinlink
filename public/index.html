@@ -59,19 +59,19 @@ nav input{max-width:320px;margin:0;background:#f3f3f3;border-radius:20px}nav .sp
 
 <div id="auth">
   <div class="logo" style="font-size:30px">Kachin <i>Link</i></div>
-  <p style="color:#777;margin-top:4px">သူငယ်ချင်းတွေနဲ့ ချိတ်ဆက်ပါ</p>
-  <input id="rn" placeholder="အမည်" hidden>
+  <p style="color:#777;margin-top:4px">Hkap Tau La Ga Ai</p>
+  <input id="rn" placeholder="Name" hidden>
   <input id="em" type="email" placeholder="Email">
-  <input id="pw" type="password" placeholder="Password (၆ လုံးအထက်)">
+  <input id="pw" type="password" placeholder="Password (6 Number )">
   <button class="btn g" id="go" style="width:100%;margin:8px 0">Login</button>
   <div id="err" style="color:var(--r);font-size:13px"></div>
-  <a id="sw">အကောင့်အသစ်ဖွင့်မယ်</a>
+  <a id="sw">New Creat Account</a>
 </div>
 
 <div id="app" hidden>
   <nav>
     <div class="logo">Kachin <i>Link</i></div>
-    <input id="q" placeholder="🔍 လူ/Post ရှာမယ်...">
+    <input id="q" placeholder="🔍 Find...">
     <span class="sp"></span>
     <button class="btn ghost" id="out">Logout</button>
   </nav>
@@ -81,19 +81,19 @@ nav input{max-width:320px;margin:0;background:#f3f3f3;border-radius:20px}nav .sp
       <div class="card">
         <div class="cover"></div>
         <div class="prof"><img class="big myav"><div class="name" id="mn" style="font-size:18px;margin:6px 0 10px"></div></div>
-        <div class="stats"><div>Posts<b id="np">0</b></div><div>အဖွဲ့ဝင်<b id="nu">0</b></div></div>
+        <div class="stats"><div>Posts<b id="np">0</b></div><div>Follower<b id="nu">0</b></div></div>
         <div class="pad" style="border-top:1px solid #eee">
           <label class="btn ghost" style="display:block;text-align:center">📷 ပုံပြောင်းမယ်<input id="avf" type="file" accept="image/*" hidden></label>
-          <input id="pn" placeholder="အမည်ပြောင်းမယ်">
-          <button class="btn g" id="sn" style="width:100%">အမည်သိမ်းမယ်</button>
+          <input id="pn" placeholder="Change Profile ">
+          <button class="btn g" id="sn" style="width:100%">Save Profile </button>
         </div>
       </div>
-      <div class="card"><div class="ct">အဖွဲ့ဝင်များ</div><div id="sug" style="padding:4px 0"></div></div>
+      <div class="card"><div class="ct">Friend Lists</div><div id="sug" style="padding:4px 0"></div></div>
     </aside>
 
     <main id="C">
       <div class="card top pad">
-        <div class="row" style="align-items:flex-start"><img class="av myav"><textarea id="txt" rows="2" placeholder="ဘာတွေစဉ်းစားနေလဲ?"></textarea></div>
+        <div class="row" style="align-items:flex-start"><img class="av myav"><textarea id="txt" rows="2" placeholder="What's on your mind?"></textarea></div>
         <div id="prev"></div>
         <div class="row" style="justify-content:space-between;margin-top:6px">
           <label class="btn ghost">📷 ပုံထည့်မယ်<input id="file" type="file" accept="image/*" hidden></label>
@@ -141,7 +141,7 @@ let me=null,users={},posts=[],comments={},openC=new Set(),file=null,reg=false,st
 let peer=null,dmMsgs=[],unDM=null;
 
 // ---------- Auth ----------
-$("#sw").onclick=()=>{reg=!reg;$("#rn").hidden=!reg;$("#go").textContent=reg?"အကောင့်ဖွင့်မယ်":"Login";$("#sw").textContent=reg?"အကောင့်ရှိပြီးသား - Login":"အကောင့်အသစ်ဖွင့်မယ်"};
+$("#sw").onclick=()=>{reg=!reg;$("#rn").hidden=!reg;$("#go").textContent=reg?"Creat Account":"Login";$("#sw").textContent=reg?"အကောင့်ရှိပြီးသား - Login":"New Creat Account"};
 $("#go").onclick=async()=>{
   $("#err").textContent="";const e=$("#em").value.trim(),p=$("#pw").value;
   try{
