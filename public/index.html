@@ -3,9 +3,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Kachin Link</title>
-<link rel="manifest" href="manifest.json">
+<link rel="manifest" href="/manifest.json">
 <meta name="theme-color" content="#d9232d">
-<link rel="apple-touch-icon" href="icon-192.png">
+<link rel="apple-touch-icon" href="/icon-192.png">
 <style>
 *{box-sizing:border-box}
 :root{--r:#d9232d;--g:#1f9d55}
@@ -283,6 +283,6 @@ $("#avf").onchange=e=>{const f=e.target.files[0];if(f)act(async()=>{await update
 $("#sn").onclick=()=>{const n=$("#pn").value.trim();if(n)act(async()=>{await updateDoc(doc(db,"users",me.uid),{name:n});alert("သိမ်းပြီးပါပြီ ✅")})};
 
 // ---------- PWA ----------
-if("serviceWorker" in navigator)navigator.serviceWorker.register("sw.js");
+if("serviceWorker" in navigator)navigator.serviceWorker.register("/sw.js");
 </script>
 </body></html>
