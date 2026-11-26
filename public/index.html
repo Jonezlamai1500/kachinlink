@@ -169,12 +169,6 @@ const DEF="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox=
 let me=null,users={},posts=[],comments={},openC=new Set(),file=null,reg=false,started=false,q="";
 let peer=null,dmMsgs=[],unDM=null;
 
-// ---------- Dark mode ----------
-const dk=m=>{document.documentElement.classList.toggle("dk",m);$$(".tg").forEach(b=>b.textContent=m?"☀️":"🌙");try{localStorage.setItem("th",m?"d":"l")}catch{}};
-let th;try{th=localStorage.getItem("th")}catch{}
-dk(th?th==="d":matchMedia("(prefers-color-scheme:dark)").matches);
-$$(".tg").forEach(b=>b.onclick=()=>dk(!document.documentElement.classList.contains("dk")));
-
 // ---------- Auth ----------
 $("#sw").onclick=()=>{reg=!reg;$("#rn").hidden=!reg;$("#go").textContent=reg?"Creat Account":"Login";$("#sw").textContent=reg?"အကောင့်ရှိပြီးသား - Login":"New Creat Account"};
 $("#go").onclick=async()=>{
@@ -282,4 +276,11 @@ function subC(id){if(subbed.has(id))return;subbed.add(id);
     const k=document.activeElement?.dataset?.ci,v=document.activeElement?.value;render();
     if(k){const i=$(`[data-ci="${k}"]`);if(i){i.value=v;i.focus()}}})}
 document.addEventListener("keydown",e=>{const i=e.target.dataset?.ci;if(!i||e.key!=="Enter")return;const text=e.target.value.trim();if(!text)return;e.target.value="";
-  act(async()=>{await addDoc(collection(db,"posts
+  act(async()=>{await addDoc(collection(db,"posts",i,"comments"),{uid:me.uid,text,createdAt:serverTimestamp()});await updateDoc(doc(db,"posts",i),{commentCount:increment(1)})})});
+
+// ---------- Private Chat ----------
+const cid=()=>[me.uid,peer].sort().join("_");
+function openChat(id){
+  if(!id||id===me.uid)return;
+  peer=id;dmMsgs=[];if(unDM)unDM();
+  unDM=onSnapshot(query(collection(db,"dms",cid(),"messages"),orderBy("createdAt"),limit(200)),s=>{dm
