@@ -121,7 +121,9 @@ nav input{max-width:320px;margin:0;background:#f0f2f5;border-color:transparent;b
           <button class="btn g" id="sn" style="width:100%">Save Profile </button>
         </div>
       </div>
-      <div class="card"><div class="ct">Friend Lists</div><div id="sug" style="padding:4px 0"></div></div>
+      <div class="card" id="reqc" hidden><div class="ct">🔔 Friend Requests</div><div id="req"></div></div>
+      <div class="card"><div class="ct">Friends</div><div id="fl" style="padding:4px 0"></div></div>
+      <div class="card"><div class="ct">People</div><div id="sug" style="padding:4px 0"></div></div>
     </aside>
 
     <main id="C">
@@ -158,7 +160,7 @@ nav input{max-width:320px;margin:0;background:#f0f2f5;border-color:transparent;b
 <script type="module">
 import {initializeApp} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 import {getAuth,onAuthStateChanged,createUserWithEmailAndPassword,signInWithEmailAndPassword,signOut,GoogleAuthProvider,signInWithPopup,signInWithRedirect} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
-import {getFirestore,collection,doc,setDoc,getDoc,addDoc,updateDoc,deleteDoc,deleteField,onSnapshot,query,orderBy,limit,serverTimestamp,increment} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+import {getFirestore,collection,doc,setDoc,getDoc,addDoc,updateDoc,deleteDoc,deleteField,onSnapshot,query,orderBy,limit,where,serverTimestamp,increment} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 const firebaseConfig = {
   apiKey:"AIzaSyDYL20rK-JgxxOIMVaQwTurlVinXBL9q4k", authDomain:"jinghpaw-link.firebaseapp.com", projectId:"jinghpaw-link",
@@ -171,6 +173,22 @@ const EMO=["👍","❤️","😂","😮","😢","😡"];
 const DEF="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect fill='%23bcc0c4' width='40' height='40'/%3E%3Ccircle cx='20' cy='15' r='7' fill='%23fff'/%3E%3Cellipse cx='20' cy='37' rx='13' ry='11' fill='%23fff'/%3E%3C/svg%3E";
 let me=null,users={},posts=[],comments={},openC=new Set(),file=null,reg=false,started=false,q="";
 let peer=null,dmMsgs=[],unDM=null;
+
+// ---------- Friends ----------
+let friends=[];
+const fid=o=>[me.uid,o].sort().join("_");
+const fbtn=o=>{
+  const f=friends.find(x=>x.users.includes(o)),s='style="padding:5px 12px;font-size:12px"';
+  if(!f)return `<button class="btn g" ${s} data-f="add" data-u="${o}">➕ Add</button>`;
+  if(f.status==="accepted")return `<button class="btn ghost" ${s} data-f="rm" data-u="${o}">✓ Friends</button>`;
+  if(f.from===me.uid)return `<button class="btn ghost" ${s} data-f="rm" data-u="${o}">Cancel</button>`;
+  return `<button class="btn g" ${s} data-f="ok" data-u="${o}">Confirm</button><button class="btn ghost" ${s} data-f="rm" data-u="${o}">Delete</button>`;
+};
+const friendAct=(a,o)=>act(async()=>{
+  if(a==="add")await setDoc(doc(db,"friends",fid(o)),{from:me.uid,to:o,users:[me.uid,o],status:"pending"});
+  if(a==="ok")await updateDoc(doc(db,"friends",fid(o)),{status:"accepted"});
+  if(a==="rm"&&confirm("သေချာလား?"))await deleteDoc(doc(db,"friends",fid(o)));
+});
 
 // ---------- Auth ----------
 $("#sw").onclick=()=>{reg=!reg;$("#rn").hidden=!reg;$("#go").textContent=reg?"Creat Account":"Login";$("#sw").textContent=reg?"အကောင့်ရှိပြီးသား - Login":"New Creat Account"};
@@ -217,11 +235,16 @@ $("#q").oninput=e=>{q=e.target.value.trim().toLowerCase();render()};
 
 // ---------- Live data ----------
 function start(){
+  onSnapshot(query(collection(db,"friends"),where("users","array-contains",me.uid)),s=>{friends=s.docs.map(d=>d.data());render()},e=>console.error(e));
   onSnapshot(collection(db,"users"),s=>{users={};s.forEach(d=>users[d.id]=d.data());
     $$(".myav").forEach(i=>i.src=av(me.uid));$("#mn").textContent=U(me.uid).name;
     if(document.activeElement!==$("#pn"))$("#pn").value=U(me.uid).name;render();renderChat()});
   onSnapshot(query(collection(db,"posts"),orderBy("createdAt","desc"),limit(50)),s=>{posts=s.docs.map(d=>({id:d.id,...d.data()}));render()});
 }
+
+// ---------- Profile ----------
+$("#sn").onclick=()=>act(async()=>{const n=$("#pn").value.trim();if(n)await updateDoc(doc(db,"users",me.uid),{name:n});alert("သိမ်းပြီးပါပြီ ✅")});
+$("#avf").onchange=e=>act(async()=>{const f=e.target.files[0];if(!f)return;await updateDoc(doc(db,"users",me.uid),{photo:await shrink(f,200)});e.target.value=""});
 
 // ---------- Compose ----------
 $("#file").onchange=e=>{file=e.target.files[0]||null;$("#prev").innerHTML=file?`<img src="${URL.createObjectURL(file)}">`:""};
@@ -237,10 +260,16 @@ $("#post").onclick=async()=>{
 
 // ---------- Feed ----------
 const img=p=>p.image?`<img class="media" src="${esc(p.image)}" loading="lazy">`:"";
-const person=([i,u])=>`<div class="sg" data-dm="${i}"><img class="av" src="${esc(u.photo||DEF)}"><span class="name">${esc(u.name)}</span></div>`;
+const person=([i,u])=>`<div class="sg" data-dm="${i}"><img class="av" src="${esc(u.photo||DEF)}"><span class="name" style="flex:1">${esc(u.name)}</span>${fbtn(i)}</div>`;
 function render(){
   if(!me)return;
-  $("#np").textContent=posts.filter(p=>p.uid===me.uid).length;$("#nu").textContent=Object.keys(users).length;
+  $("#np").textContent=posts.filter(p=>p.uid===me.uid).length;
+  const acc=friends.filter(f=>f.status==="accepted").map(f=>f.users.find(x=>x!==me.uid));
+  $("#nu").textContent=acc.length;
+  $("#fl").innerHTML=acc.map(i=>person([i,U(i)])).join("")||`<div class="pad time">သူငယ်ချင်း မရှိသေးပါ</div>`;
+  const rq=friends.filter(f=>f.status==="pending"&&f.to===me.uid);
+  $("#req").innerHTML=rq.map(f=>person([f.from,U(f.from)])).join("");
+  $("#reqc").hidden=!rq.length;
   const match=([i,u])=>i!==me.uid&&(!q||(u.name||"").toLowerCase().includes(q));
   $("#sug").innerHTML=Object.entries(users).filter(match).slice(0,8).map(person).join("")||`<div class="pad time">မတွေ့ပါ</div>`;
   const found=q?Object.entries(users).filter(match).slice(0,6):[];
@@ -263,6 +292,7 @@ function render(){
       </div>${cl}</div>`}).join("")||`<div class="card pad">ပို့စ်မရှိသေးပါ။</div>`;
 }
 document.addEventListener("click",e=>{
+  const f=e.target.closest("[data-f]");if(f){friendAct(f.dataset.f,f.dataset.u);return}
   const d=e.target.closest("[data-dm]");if(d){openChat(d.dataset.dm);return}
   const t=e.target.closest("[data-a]");if(!t)return;const id=t.closest(".card")?.dataset.id,p=posts.find(x=>x.id===id),a=t.dataset.a;
   if(a==="react"||a==="like"){
@@ -301,27 +331,23 @@ function openChat(id){
   setTab("chat");renderChat();setTimeout(()=>$("#ci").focus(),50);
 }
 $("#bk").onclick=()=>{peer=null;if(unDM){unDM();unDM=null}dmMsgs=[];renderChat()};
+function send(){
+  const text=$("#ci").value.trim();if(!text||!peer)return;$("#ci").value="";
+  act(()=>addDoc(collection(db,"dms",cid(),"messages"),{from:me.uid,text,createdAt:serverTimestamp()}));
+}
+$("#cs").onclick=send;
+$("#ci").onkeydown=e=>{if(e.key==="Enter")send()};
+function scrollChat(){const m=$("#msgs");if(m)m.scrollTop=m.scrollHeight}
 function renderChat(){
   if(!me)return;
   $("#plist").hidden=!!peer;$("#conv").hidden=!peer;
   if(!peer){
-    $("#plist").innerHTML=Object.entries(users).filter(([i])=>i!==me.uid).map(person).join("")||`<div class="pad time">အဖွဲ့ဝင် မရှိသေးပါ</div>`;
+    $("#plist").innerHTML=Object.entries(users).filter(([i])=>i!==me.uid).map(person).join("")||`<div class="pad time">မတွေ့ပါ</div>`;
     return;
   }
   $("#pa").src=av(peer);$("#pnm").textContent=U(peer).name;
-  $("#msgs").innerHTML=dmMsgs.map(c=>`<div class="msg ${c.uid===me.uid?"me":""}">${esc(c.text)}</div>`).join("")||`<div class="time" style="text-align:center">စကားစပြောလိုက်ပါ 👋</div>`;
+  $("#msgs").innerHTML=dmMsgs.map(m=>`<div class="msg ${m.from===me.uid?"me":""}">${esc(m.text)}</div>`).join("");
   scrollChat();
 }
-const scrollChat=()=>{const m=$("#msgs");if(m)m.scrollTop=m.scrollHeight};
-const send=async()=>{const t=$("#ci").value.trim();if(!t||!peer)return;$("#ci").value="";
-  act(()=>addDoc(collection(db,"dms",cid(),"messages"),{uid:me.uid,text:t,createdAt:serverTimestamp()}))};
-$("#cs").onclick=send;$("#ci").onkeydown=e=>{if(e.key==="Enter")send()};
-
-// ---------- Profile ----------
-$("#avf").onchange=e=>{const f=e.target.files[0];if(f)act(async()=>{await updateDoc(doc(db,"users",me.uid),{photo:await shrink(f,240,.8)})})};
-$("#sn").onclick=()=>{const n=$("#pn").value.trim();if(n)act(async()=>{await updateDoc(doc(db,"users",me.uid),{name:n});alert("သိမ်းပြီးပါပြီ ✅")})};
-
-// ---------- PWA ----------
-if("serviceWorker" in navigator)navigator.serviceWorker.register("/sw.js");
 </script>
 </body></html>
