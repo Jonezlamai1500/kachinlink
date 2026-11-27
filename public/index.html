@@ -42,9 +42,14 @@ nav input{max-width:320px;margin:0;padding:8px 14px;font-size:14px;background:#f
 .mi{display:flex;align-items:center;gap:12px;width:100%;background:none;padding:11px 12px;border-radius:10px;font-weight:600;color:var(--ink);text-align:left;font-size:14px}
 .mi:hover{background:#f0f2f5}
 .mic{display:flex}
-#tabs{display:none}
-#tabs .bdg{position:absolute;top:3px;left:calc(50% + 8px);margin:0}
-.wrap{max-width:1100px;margin:18px auto;padding:0 12px;display:grid;grid-template-columns:270px 1fr 300px;gap:18px;align-items:start}
+#tabs{display:flex;flex-direction:column;position:fixed;left:0;top:57px;bottom:0;width:52px;gap:2px;padding:8px 0;background:rgba(255,255,255,.97);border-right:3px solid var(--r);z-index:15;overflow-y:auto;scrollbar-width:none}
+#tabs::-webkit-scrollbar{display:none}
+#tabs button{flex:none;height:48px;position:relative;background:none;color:var(--mut);display:flex;align-items:center;justify-content:center;border-radius:0;border-left:3px solid transparent}
+#tabs button.on{color:var(--r);border-left-color:var(--r)}
+#tabs button.on .ic{fill:currentColor;fill-opacity:.14}
+#tabs .ic{width:25px;height:25px}
+#tabs .bdg{position:absolute;top:4px;right:2px;left:auto;margin:0}
+.wrap{max-width:1100px;margin:18px auto;padding:0 12px 0 64px;display:grid;grid-template-columns:270px 1fr 300px;gap:18px;align-items:start}
 .cover{height:84px;background:linear-gradient(120deg,var(--r) 50%,var(--g) 50%)}
 .pcov{height:160px}
 .prof{text-align:center;margin-top:-46px}
@@ -91,6 +96,9 @@ nav input{max-width:320px;margin:0;padding:8px 14px;font-size:14px;background:#f
 #co textarea{flex:1;min-height:40vh;border:0;box-shadow:none;border-radius:0;font-size:18px;padding:8px 16px;margin:0;background:transparent;color:var(--ink)}
 .cof{border-top:1px solid var(--line);padding:10px 12px}
 .chip{display:inline-flex;align-items:center;gap:8px;padding:10px 16px;border-radius:12px;background:#f0f2f5;font-weight:600;font-size:14px;cursor:pointer;color:var(--ink)}
+#cats{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:10px}
+.cc{padding:7px 14px;border-radius:999px;background:#f0f2f5;color:var(--ink);font-weight:600;font-size:13px}
+.cc.on{background:var(--g);color:#fff}
 #sty{display:flex;gap:8px;overflow-x:auto;padding:12px;scrollbar-width:none}
 #sty::-webkit-scrollbar{display:none}
 .sc{position:relative;flex:none;width:104px;height:176px;border-radius:14px;overflow:hidden;cursor:pointer;background:#ddd;color:#fff}
@@ -153,22 +161,19 @@ nav input{max-width:320px;margin:0;padding:8px 14px;font-size:14px;background:#f
 @media(max-width:900px){
  .wrap{grid-template-columns:1fr;margin-top:12px;padding-bottom:24px}
  body[data-t=home] #L,body[data-t=home] #R,body[data-t=me] #L,body[data-t=me] #R,body[data-t=fr] #C,body[data-t=fr] #R,body[data-t=chat] #L,body[data-t=chat] #C{display:none}
+ body[data-t=news] #L,body[data-t=news] #R,body[data-t=edu] #L,body[data-t=edu] #R,body[data-t=know] #L,body[data-t=know] #R{display:none}
  body[data-t=fr] #mcard{display:none}
  nav{padding:7px 10px;gap:8px}
  nav .sp{display:none}
  nav input{flex:1;max-width:none;min-width:0}
  .logo{font-size:19px}
- #tabs{display:flex;border-top:1px solid var(--line)}
- #tabs button{flex:1;position:relative;background:none;padding:9px 0 7px;color:var(--mut);display:flex;justify-content:center;border-bottom:3px solid transparent;border-radius:0}
- #tabs button.on{color:var(--r);border-bottom-color:var(--r)}
- #tabs button.on .ic{fill:currentColor;fill-opacity:.14}
- #tabs .ic{width:25px;height:25px}
  .chat{height:60vh}
 }
 html.dark{--ink:#e4e6eb;--mut:#a0a6ae;--line:#2e3036;--sh:0 2px 14px rgba(0,0,0,.4);color-scheme:dark}
 html.dark body{background:linear-gradient(135deg,#1c1011 0%,#121316 50%,#0f1a14 100%) fixed}
 html.dark .card,html.dark #auth,html.dark #co{background:#1e2025}
 html.dark #hd{background:rgba(30,32,37,.96)}
+html.dark #tabs{background:#1e2025}
 html.dark input,html.dark textarea,html.dark nav input{background:#2a2d33;border-color:#3a3d44;color:#e4e6eb}
 html.dark .btn.ghost{background:#2f3238;color:#ddd}
 html.dark .ib{background:#2f3238;color:#ddd}
@@ -183,6 +188,8 @@ html.dark .pk,html.dark .pmenu{background:#2a2d33}
 html.dark .dots:hover,html.dark .pmenu button:hover{background:#34373e}
 html.dark .fake{background:#2a2d33}
 html.dark .chip{background:#2f3238}
+html.dark .cc{background:#2f3238;color:#e4e6eb}
+html.dark .cc.on{background:var(--g);color:#fff}
 html.dark .sc.cr{background:#2a2d33}
 html.dark #co textarea{background:transparent}
 html.dark #scr textarea{background:transparent}
@@ -225,13 +232,17 @@ html.dark #auth p{color:#a0a6ae!important}
       <button class="ib" id="bell" title="Notifications"><svg class="ic" viewBox="0 0 24 24"><path d="M6 9a6 6 0 1 1 12 0c0 5 2 6.5 2 6.5H4S6 14 6 9zM10 19a2 2 0 0 0 4 0"/></svg><b class="bdg" id="bb" hidden>0</b></button>
       <button class="ib" id="mb" title="Menu"><svg class="ic" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
     </nav>
-    <div id="tabs">
-      <button data-t="home" class="on" title="Home"><svg class="ic" viewBox="0 0 24 24"><path d="M3 11l9-8 9 8v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg></button>
-      <button data-t="fr" title="Friends"><svg class="ic" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.2"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><circle cx="17" cy="9" r="2.5"/><path d="M16 14.2c2.9.2 5 2.6 5 5.8"/></svg><b class="bdg" id="fb" hidden></b></button>
-      <button data-t="chat" title="Chat"><svg class="ic" viewBox="0 0 24 24"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/></svg><b class="bdg" id="tb" hidden></b></button>
-      <button data-t="me" title="Profile"><svg class="ic" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8"/></svg></button>
-    </div>
   </header>
+
+  <div id="tabs">
+    <button data-t="home" class="on" title="Home"><svg class="ic" viewBox="0 0 24 24"><path d="M3 11l9-8 9 8v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg></button>
+    <button data-t="fr" title="Friends"><svg class="ic" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.2"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><circle cx="17" cy="9" r="2.5"/><path d="M16 14.2c2.9.2 5 2.6 5 5.8"/></svg><b class="bdg" id="fb" hidden></b></button>
+    <button data-t="chat" title="Chat"><svg class="ic" viewBox="0 0 24 24"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/></svg><b class="bdg" id="tb" hidden></b></button>
+    <button data-t="news" title="News"><svg class="ic" viewBox="0 0 24 24"><path d="M4 5h13v14H6a2 2 0 0 1-2-2zM17 9h3v8a2 2 0 0 1-2 2M7 9h7M7 13h7"/></svg></button>
+    <button data-t="edu" title="Education"><svg class="ic" viewBox="0 0 24 24"><path d="M2 9l10-5 10 5-10 5zM6 11.5V16c0 1.5 2.7 3 6 3s6-1.5 6-3v-4.5"/></svg></button>
+    <button data-t="know" title="Knowledge"><svg class="ic" viewBox="0 0 24 24"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-3.5 10.9c.6.5 1 1.2 1 2.1h5c0-.9.4-1.6 1-2.1A6 6 0 0 0 12 3z"/></svg></button>
+    <button data-t="me" title="Profile"><svg class="ic" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8"/></svg></button>
+  </div>
 
   <div class="card" id="npn" hidden><div class="ct" data-i="notif"></div><div id="nl"></div></div>
   <div class="card" id="mnu" hidden>
@@ -253,6 +264,7 @@ html.dark #auth p{color:#a0a6ae!important}
       <div id="prev" style="padding:0 16px"></div>
     </div>
     <div class="cof">
+      <div id="cats"></div>
       <label class="chip"><svg class="ic" viewBox="0 0 24 24" style="color:#27b567"><rect x="3" y="4" width="18" height="16" rx="3"/><circle cx="9" cy="10" r="1.8"/><path d="M4 18l5-5 4 4 3-3 4 4"/></svg><span data-i="gallery"></span><input id="file" type="file" accept="image/*" hidden></label>
     </div>
   </div>
@@ -366,6 +378,7 @@ const I_EDIT='<svg class="ic" viewBox="0 0 24 24"><path d="M4 20h4L19 9l-4-4L4 1
 const I_TRASH='<svg class="ic" viewBox="0 0 24 24"><path d="M4 7h16M9 7V4h6v3M6 7l1 13h10l1-13M10 11v6M14 11v6"/></svg>';
 const I_X='<svg class="ic" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg>';
 const BG=["linear-gradient(135deg,#e8343e,#d9232d)","linear-gradient(135deg,#27b567,#1f9d55)","linear-gradient(135deg,#6a11cb,#2575fc)","linear-gradient(135deg,#f7971e,#ffd200)","linear-gradient(135deg,#232526,#414345)"];
+const CATS=["home","news","edu","know"];
 
 // ---------- Language / ဘာသာစကား ----------
 const L={
@@ -377,6 +390,7 @@ my:{
  editProf:"✏️ Profile ပြင်မယ်",chgAv:"📷 Profile ပုံပြောင်းမယ်",chgCv:"🖼 Cover ပြောင်းမယ်",phEpn:"နာမည်",phBio:"Bio (မိတ်ဆက်စာ)",phLives:"🏠 နေရပ်",phWork:"💼 အလုပ်",
  save:"သိမ်းမယ်",cancel:"မလုပ်တော့ဘူး",mind:"ဘာတွေ စဉ်းစားနေလဲ?",addPic:"📷 ပုံထည့်မယ်",post:"တင်မယ်",
  newPost:"ပို့စ်အသစ်",gallery:"ဓာတ်ပုံ",createStory:"My Day တင်မယ်",yourStory:"သင့် My Day",shareStory:"မျှဝေမယ်",storyTxt:"စာရေးပါ...",
+ c_home:"🏠 Home",c_news:"📰 သတင်း",c_edu:"🎓 ပညာရေး",c_know:"💡 အသိပညာ",
  msgs:"💬 စာများ",phMsg:"စာရိုက်ပါ...",send:"ပို့",
  offB:"📴 အင်တာနက် မရှိပါ · Offline mode (ဖတ်ရုံသာ)",onB:"🟢 အင်တာနက် ပြန်ရပါပြီ",offAlert:"📴 အင်တာနက် မရှိပါ။ ဆက်သွယ်မှု ပြန်ရမှ လုပ်လို့ရပါမယ်။",
  saved:"သိမ်းပြီးပါပြီ ✅",posting:"တင်နေသည်...",postFail:"တင်မရပါ: ",sure:"သေချာလား?",delAsk:"ဖျက်မလား?",editAsk:"ပို့စ်ကို ပြင်ပါ",
@@ -399,6 +413,7 @@ en:{
  editProf:"✏️ Edit Profile",chgAv:"📷 Change profile photo",chgCv:"🖼 Change cover",phEpn:"Name",phBio:"Bio",phLives:"🏠 Lives in",phWork:"💼 Work",
  save:"Save",cancel:"Cancel",mind:"What's on your mind?",addPic:"📷 Add photo",post:"Post",
  newPost:"New post",gallery:"Gallery",createStory:"Add to My Day",yourStory:"Your Day",shareStory:"Share",storyTxt:"Type something...",
+ c_home:"🏠 Home",c_news:"📰 News",c_edu:"🎓 Education",c_know:"💡 Knowledge",
  msgs:"💬 Messages",phMsg:"Type a message...",send:"Send",
  offB:"📴 No internet connection · Offline mode (read only)",onB:"🟢 Back online",offAlert:"📴 No internet connection. Please try again when you're back online.",
  saved:"Saved ✅",posting:"Posting...",postFail:"Could not post: ",sure:"Are you sure?",delAsk:"Delete this?",editAsk:"Edit your post",
@@ -428,7 +443,7 @@ $("#th").onclick=()=>{setTheme(root.classList.contains("dark")?"light":"dark");$
 
 let me=null,users={},posts=[],comments={},openC=new Set(),file=null,reg=false,started=false,q="",posting=false;
 let peer=null,dmMsgs=[],unDM=null,view=null,ptab="posts",notifs=[],fresh=new Set(),lastM={},dmW=new Set(),friends=[],fLoaded=false;
-let stories=[],sg={},sv={uid:null,i:0},svT=null,sBg=0,sFile=null;
+let stories=[],sg={},sv={uid:null,i:0},svT=null,sBg=0,sFile=null,pcat="home";
 
 // ---------- Helpers ----------
 const U=id=>users[id]||{name:"User",photo:""};
@@ -443,6 +458,8 @@ function shrink(f,max,qq=.72){return new Promise((ok,no)=>{const r=new FileReade
   const k=Math.min(1,max/Math.max(i.width,i.height)),c=document.createElement("canvas");c.width=i.width*k;c.height=i.height*k;
   c.getContext("2d").drawImage(i,0,0,c.width,c.height);ok(c.toDataURL("image/jpeg",qq))};i.src=r.result};r.readAsDataURL(f)})}
 const setTab=tb=>{$$("#tabs button").forEach(x=>x.classList.toggle("on",x.dataset.t===tb));document.body.dataset.t=tb};
+const curCat=()=>{const x=document.body.dataset.t;return x==="news"||x==="edu"||x==="know"?x:"home"};
+const catOf=p=>CATS.includes(p.cat)?p.cat:"home";
 const notify=(to,type,extra={})=>{if(!to||to===me.uid)return;addDoc(collection(db,"notifs"),{to,from:me.uid,type,...extra,read:false,createdAt:serverTimestamp()}).catch(()=>{})};
 
 // ---------- Friends ----------
@@ -506,9 +523,10 @@ onAuthStateChanged(auth,u=>{
 // ---------- Tabs / Search / Menu ----------
 $$("#tabs button").forEach(b=>b.onclick=()=>{
   const tb=b.dataset.t;
-  if(tb==="home"){view=null;render()}
+  setTab(tb);
+  if(tb==="home"||tb==="news"||tb==="edu"||tb==="know"){view=null;render();scrollTo(0,0)}
   if(tb==="me"){view=me.uid;ptab="posts";render()}
-  setTab(tb);scrollChat();
+  scrollChat();
 });
 $("#lg").onclick=()=>{view=null;setTab("home");render()};
 $("#q").oninput=e=>{q=e.target.value.trim().toLowerCase();render()};
@@ -591,7 +609,8 @@ $("#cvf").onchange=e=>act(async()=>{const f=e.target.files[0];if(!f)return;await
 
 // ---------- Compose (Facebook-style full screen) ----------
 const syncPost=()=>{$("#post").disabled=posting||(!$("#txt").value.trim()&&!file)};
-const openCo=pick=>{$("#co").hidden=false;syncPost();setTimeout(()=>pick?$("#file").click():$("#txt").focus(),60)};
+function catsUI(){$("#cats").innerHTML=CATS.map(c=>`<button class="cc ${c===pcat?"on":""}" data-cc="${c}">${t("c_"+c)}</button>`).join("")}
+const openCo=pick=>{pcat=curCat();catsUI();$("#co").hidden=false;syncPost();setTimeout(()=>pick?$("#file").click():$("#txt").focus(),60)};
 $("#oc").onclick=()=>openCo();
 $("#og").onclick=()=>openCo(true);
 $("#cc").onclick=()=>{$("#co").hidden=true};
@@ -601,7 +620,7 @@ $("#post").onclick=async()=>{
   if(offl())return;
   const text=$("#txt").value.trim();if(!text&&!file)return;const b=$("#post");posting=true;b.disabled=true;b.textContent=t("posting");
   try{
-    const data={uid:me.uid,text,image:file?await shrink(file,900):"",reactions:{},commentCount:0,createdAt:serverTimestamp()};
+    const data={uid:me.uid,text,image:file?await shrink(file,900):"",cat:pcat,reactions:{},commentCount:0,createdAt:serverTimestamp()};
     await addDoc(collection(db,"posts"),data);
     $("#txt").value="";$("#prev").innerHTML="";file=null;$("#file").value="";$("#co").hidden=true;
   }catch(e){alert(t("postFail")+(e.message||e))}
@@ -719,10 +738,12 @@ function render(){
     else if(ptab==="friends")html=`<div class="card">${fl.map(i=>person([i,U(i)])).join("")||`<div class="pad time">${t("noFr")}</div>`}</div>`;
     else html=posts.filter(p=>p.uid===view).map(postHTML).join("")||`<div class="card pad">${t("noPost")}</div>`;
   }else{
-    $("#pv").innerHTML="";$("#ep").hidden=true;$("#cmp").hidden=false;$("#sty").hidden=false;
+    const cat=curCat();
+    $("#pv").innerHTML="";$("#ep").hidden=true;$("#cmp").hidden=false;$("#sty").hidden=cat!=="home";
     const found=q?Object.entries(users).filter(match).slice(0,6):[];
     $("#ppl").innerHTML=found.length?`<div class="card"><div class="ct">${t("people")}</div>${found.map(person).join("")}</div>`:"";
-    html=posts.filter(p=>!q||((p.text||"")+U(p.uid).name).toLowerCase().includes(q)).map(postHTML).join("")||`<div class="card pad">${t("noPost")}</div>`;
+    const head=cat!=="home"?`<div class="card ct" style="font-size:17px">${t("c_"+cat)}</div>`:"";
+    html=head+(posts.filter(p=>(q||catOf(p)===cat)&&(!q||((p.text||"")+U(p.uid).name).toLowerCase().includes(q))).map(postHTML).join("")||`<div class="card pad">${t("noPost")}</div>`);
   }
   $("#feed").innerHTML=html;
 }
@@ -731,6 +752,7 @@ document.addEventListener("click",e=>{
   if(!e.target.closest("#mnu,#mb"))$("#mnu").hidden=true;
   if(!e.target.closest(".pw"))$$(".pmenu").forEach(m=>m.hidden=true);
   if(e.target.closest("#lb")){$("#lb").hidden=true;return}
+  const cc=e.target.closest("[data-cc]");if(cc){pcat=cc.dataset.cc;catsUI();return}
   const sc=e.target.closest("[data-s]");if(sc){sc.dataset.s==="new"?openScr():openSv(sc.dataset.s);return}
   const sz=e.target.closest("[data-sz]");if(sz){sv.i=Math.max(0,sv.i+(+sz.dataset.sz));showSv();return}
   const sx=e.target.closest("[data-sx]");if(sx){sx.dataset.sx==="close"?closeSv():delStory();return}
@@ -761,7 +783,7 @@ document.addEventListener("click",e=>{
   if(a==="edit"){$$(".pmenu").forEach(x=>x.hidden=true);const nt2=prompt(t("editAsk"),p.text||"");if(nt2===null)return;act(()=>updateDoc(doc(db,"posts",id),{text:nt2.trim(),edited:true}))}
   if(a==="del"){$$(".pmenu").forEach(x=>x.hidden=true);if(confirm(t("delAsk")))act(()=>deleteDoc(doc(db,"posts",id)))}
   if(a==="share"){const note=prompt(t("shareAsk"));if(note===null)return;const s=p.shared||p;
-    act(()=>addDoc(collection(db,"posts"),{uid:me.uid,text:note,image:"",reactions:{},commentCount:0,createdAt:serverTimestamp(),
+    act(()=>addDoc(collection(db,"posts"),{uid:me.uid,text:note,image:"",cat:catOf(p),reactions:{},commentCount:0,createdAt:serverTimestamp(),
       shared:{uid:s.uid,text:s.text||"",image:s.image||""}}).then(()=>{notify(s.uid,"share",{postId:id});alert(t("shareOk"))}))}
 });
 // ဖုန်းမှာ Like ကိုဖိထားရင် Emoji ပေါ်
@@ -824,6 +846,7 @@ function applyLang(){
   setTheme(root.classList.contains("dark")?"dark":"light");
   const pb=$("#post");if(!posting)pb.textContent=t("post");
   if(!offB.hidden&&!navigator.onLine)offB.textContent=t("offB");
+  catsUI();
   if(me){render();renderChat();bellUI();storiesUI()}
 }
 const toggleLang=()=>{lang=lang==="my"?"en":"my";try{localStorage.setItem("lang",lang)}catch(e){}$("#mnu").hidden=true;applyLang()};
