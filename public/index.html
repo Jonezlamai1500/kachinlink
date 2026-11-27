@@ -550,16 +550,10 @@ $("#gg").onclick=async()=>{
     }else if(x.code!=="auth/popup-closed-by-user"){$("#err").textContent=x.code||x.message}
   }
 };
-$("#fbb").onclick=async()=>{
+// Facebook login ကို server (/auth/facebook) ကနေ လုပ်မယ်
+$("#fbb").onclick=()=>{
   if(offl())return;
-  $("#err").textContent="";
-  const fp=new FacebookAuthProvider();
-  try{await signInWithPopup(auth,fp)}
-  catch(x){
-    if(x.code==="auth/popup-blocked"||x.code==="auth/operation-not-supported-in-this-environment"){
-      try{await signInWithRedirect(auth,fp)}catch(y){$("#err").textContent=y.code||y.message}
-    }else if(x.code!=="auth/popup-closed-by-user"){$("#err").textContent=x.code||x.message}
-  }
+  location.href="/auth/facebook";
 };
 $("#out").onclick=async()=>{
   if(navigator.onLine)updateDoc(doc(db,"users",me.uid),{lastSeen:Date.now()-151000}).catch(()=>{});
@@ -991,6 +985,32 @@ applyLang();
     await P.register();
     P.addListener('registration',t=>{window.fcmToken=t.value});
   }
+})();
+</script>
+<script>
+(function () {
+  if (location.search.indexOf("login=failed") > -1) {
+    alert("Facebook login မအောင်မြင်ပါ။ ပြန်စမ်းကြည့်ပါ။");
+    history.replaceState(null, "", "/");
+  }
+  fetch("/api/me", { credentials: "same-origin" })
+    .then(function (r) { return r.json(); })
+    .then(function (d) {
+      if (!d || !d.user) return;
+      var bar = document.createElement("div");
+      bar.style.cssText =
+        "position:fixed;top:0;left:0;right:0;z-index:999;background:#1f9d55;" +
+        "color:#fff;padding:8px 12px;display:flex;align-items:center;gap:10px;" +
+        "font-size:14px;font-weight:600";
+      var img = d.user.picture
+        ? '<img src="' + d.user.picture + '" style="width:28px;height:28px;border-radius:50%">'
+        : "";
+      bar.innerHTML = img + "<span style='flex:1'>Facebook: " +
+        String(d.user.name).replace(/</g, "&lt;") +
+        "</span><a href='/logout' style='color:#fff'>Logout</a>";
+      document.body.appendChild(bar);
+    })
+    .catch(function () {});
 })();
 </script>
 </body>
