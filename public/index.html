@@ -19,7 +19,8 @@ textarea{resize:none}
 .btn:active{transform:scale(.97)}
 .btn.g{background:linear-gradient(135deg,#27b567,var(--g));box-shadow:0 3px 10px rgba(31,157,85,.3)}
 .btn.ghost{background:#eef0f3;color:#444;box-shadow:none}.btn:disabled{opacity:.5}
-.logo{font-size:22px;font-weight:800;color:var(--r);cursor:pointer}.logo i{font-style:normal;color:var(--g)}
+.logo{font-size:22px;font-weight:800;color:var(--r);cursor:pointer;white-space:nowrap;flex:none}.logo i{font-style:normal;color:var(--g)}
+.ic{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round;flex:none}
 .card{background:#fff;border-radius:18px;box-shadow:var(--sh);margin-bottom:16px;overflow:hidden}
 .pad{padding:16px}.ct{font-weight:700;padding:14px 16px;border-bottom:1px solid var(--line)}
 #auth{width:calc(100% - 56px);max-width:320px;margin:14vh auto;padding:22px 18px;background:#fff;border-radius:20px;box-shadow:0 12px 36px rgba(0,0,0,.18);text-align:center;border-top:5px solid var(--g)}
@@ -31,8 +32,18 @@ textarea{resize:none}
 .or{margin:6px 0 2px;color:#999;font-size:12px}
 #boot{text-align:center;margin-top:30vh}
 #off{position:fixed;left:0;right:0;bottom:0;z-index:80;color:#fff;text-align:center;padding:8px 10px;font-size:13px;font-weight:600;background:#444}
-nav{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.9);box-shadow:0 2px 12px rgba(0,0,0,.08);display:flex;align-items:center;gap:10px;padding:10px 18px;border-bottom:3px solid var(--r)}
-nav input{max-width:320px;margin:0;background:#f0f2f5;border-color:transparent;border-radius:999px}nav .sp{flex:1}
+#hd{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.96);box-shadow:0 2px 12px rgba(0,0,0,.08);border-bottom:3px solid var(--r);backdrop-filter:blur(8px)}
+nav{display:flex;align-items:center;gap:8px;padding:8px 14px}
+nav input{max-width:320px;margin:0;padding:8px 14px;font-size:14px;background:#f0f2f5;border-color:transparent;border-radius:999px}nav .sp{flex:1}
+.ib{width:36px;height:36px;border-radius:50%;background:#eef0f3;color:#444;display:flex;align-items:center;justify-content:center;padding:0;position:relative;flex:none}
+.ib:active{transform:scale(.94)}
+#bb{position:absolute;top:-4px;right:-4px;margin:0}
+#mnu{position:fixed;top:58px;right:8px;width:220px;z-index:40;margin:0;padding:6px}
+.mi{display:flex;align-items:center;gap:12px;width:100%;background:none;padding:11px 12px;border-radius:10px;font-weight:600;color:var(--ink);text-align:left;font-size:14px}
+.mi:hover{background:#f0f2f5}
+.mic{display:flex}
+#tabs{display:none}
+#tabs .bdg{position:absolute;top:3px;left:calc(50% + 8px);margin:0}
 .wrap{max-width:1100px;margin:18px auto;padding:0 12px;display:grid;grid-template-columns:270px 1fr 300px;gap:18px;align-items:start}
 .cover{height:84px;background:linear-gradient(120deg,var(--r) 50%,var(--g) 50%)}
 .pcov{height:160px}
@@ -69,8 +80,7 @@ nav input{max-width:320px;margin:0;background:#f0f2f5;border-color:transparent;b
 .dot{position:absolute;right:0;bottom:0;width:12px;height:12px;border-radius:50%;background:#31c552;border:2px solid #fff}
 .big+.dot{width:18px;height:18px;right:4px;bottom:6px}
 .bdg{background:var(--r);color:#fff;border-radius:999px;font-size:11px;padding:1px 6px;margin-left:4px;font-weight:700;font-style:normal;line-height:1.4}
-#bell{position:relative;padding:9px 14px}#bb{position:absolute;top:-5px;right:-5px;margin:0}
-#npn{position:fixed;top:62px;right:8px;width:min(340px,calc(100vw - 16px));max-height:70vh;overflow-y:auto;z-index:40;margin:0}
+#npn{position:fixed;top:58px;right:8px;width:min(340px,calc(100vw - 16px));max-height:70vh;overflow-y:auto;z-index:40;margin:0}
 .nt{padding:10px 16px;cursor:pointer;font-size:14px;border-bottom:1px solid var(--line)}.nt:hover{background:#f4f6f8}.nt.fr{background:#fff1f1}
 .bio{font-size:14px;color:var(--ink);padding:2px 16px 8px;white-space:pre-wrap;text-align:center}
 .intro{font-size:14px;color:var(--mut);padding:0 16px 10px;display:flex;flex-direction:column;gap:3px;align-items:center}
@@ -81,22 +91,29 @@ nav input{max-width:320px;margin:0;background:#f0f2f5;border-color:transparent;b
 .pg img{width:100%;aspect-ratio:1;object-fit:cover;cursor:pointer;border-radius:6px;background:#ddd}
 #lb{position:fixed;inset:0;background:rgba(0,0,0,.92);z-index:60;display:flex;align-items:center;justify-content:center;padding:10px}
 #lb img{max-width:100%;max-height:100%;object-fit:contain}
-#tabs{display:none}
 @media(max-width:900px){
- .wrap{grid-template-columns:1fr;padding-bottom:76px}
+ .wrap{grid-template-columns:1fr;margin-top:12px;padding-bottom:24px}
  body[data-t=home] #L,body[data-t=home] #R,body[data-t=me] #L,body[data-t=me] #R,body[data-t=fr] #C,body[data-t=fr] #R,body[data-t=chat] #L,body[data-t=chat] #C{display:none}
- #tabs{display:flex;position:fixed;bottom:0;left:0;right:0;background:rgba(255,255,255,.95);box-shadow:0 -2px 14px rgba(0,0,0,.1);z-index:20}
- #tabs button{flex:1;background:none;padding:13px 4px;font-size:14px;color:var(--mut)}#tabs button.on{color:var(--r);font-weight:700;border-top:3px solid var(--r)}
- nav input{max-width:none;min-width:0}.chat{height:60vh}nav{padding:10px 10px;gap:6px}nav .logo{display:none}
- #off{bottom:48px}
+ body[data-t=fr] #mcard{display:none}
+ nav{padding:7px 10px;gap:8px}
+ nav .sp{display:none}
+ nav input{flex:1;max-width:none;min-width:0}
+ .logo{font-size:19px}
+ #tabs{display:flex;border-top:1px solid var(--line)}
+ #tabs button{flex:1;position:relative;background:none;padding:9px 0 7px;color:var(--mut);display:flex;justify-content:center;border-bottom:3px solid transparent;border-radius:0}
+ #tabs button.on{color:var(--r);border-bottom-color:var(--r)}
+ #tabs button.on .ic{fill:currentColor;fill-opacity:.14}
+ #tabs .ic{width:25px;height:25px}
+ .chat{height:60vh}
 }
-@media(max-width:900px){body[data-t=fr] #mcard{display:none}}
 html.dark{--ink:#e4e6eb;--mut:#a0a6ae;--line:#2e3036;--sh:0 2px 14px rgba(0,0,0,.4);color-scheme:dark}
 html.dark body{background:linear-gradient(135deg,#1c1011 0%,#121316 50%,#0f1a14 100%) fixed}
 html.dark .card,html.dark #auth{background:#1e2025}
-html.dark nav,html.dark #tabs{background:rgba(30,32,37,.95)}
+html.dark #hd{background:rgba(30,32,37,.96)}
 html.dark input,html.dark textarea,html.dark nav input{background:#2a2d33;border-color:#3a3d44;color:#e4e6eb}
 html.dark .btn.ghost{background:#2f3238;color:#ddd}
+html.dark .ib{background:#2f3238;color:#ddd}
+html.dark .mi:hover{background:#2a2d33}
 html.dark [style*="#eee"]{border-color:#2e3036!important}
 html.dark .sg:hover,html.dark .acts button:hover,html.dark .nt:hover{background:#2a2d33}
 html.dark .cm div,html.dark .msg{background:#2a2d33}
@@ -134,16 +151,28 @@ html.dark #auth p{color:#a0a6ae!important}
 <div id="off" hidden></div>
 
 <div id="app" hidden>
-  <nav>
-    <div class="logo" id="lg">Kachin <i>Link</i></div>
-    <input id="q" data-ph="search">
-    <span class="sp"></span>
-    <button class="btn ghost" id="bell">🔔<b class="bdg" id="bb" hidden>0</b></button>
-    <button class="btn ghost" id="lgb">EN</button>
-    <button class="btn ghost" id="th">🌙</button>
-    <button class="btn ghost" id="out" data-i="logout"></button>
-  </nav>
+  <header id="hd">
+    <nav>
+      <div class="logo" id="lg">Kachin <i>Link</i></div>
+      <input id="q" data-ph="search">
+      <span class="sp"></span>
+      <button class="ib" id="bell" title="Notifications"><svg class="ic" viewBox="0 0 24 24"><path d="M6 9a6 6 0 1 1 12 0c0 5 2 6.5 2 6.5H4S6 14 6 9zM10 19a2 2 0 0 0 4 0"/></svg><b class="bdg" id="bb" hidden>0</b></button>
+      <button class="ib" id="mb" title="Menu"><svg class="ic" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+    </nav>
+    <div id="tabs">
+      <button data-t="home" class="on" title="Home"><svg class="ic" viewBox="0 0 24 24"><path d="M3 11l9-8 9 8v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg></button>
+      <button data-t="fr" title="Friends"><svg class="ic" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.2"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><circle cx="17" cy="9" r="2.5"/><path d="M16 14.2c2.9.2 5 2.6 5 5.8"/></svg><b class="bdg" id="fb" hidden></b></button>
+      <button data-t="chat" title="Chat"><svg class="ic" viewBox="0 0 24 24"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/></svg><b class="bdg" id="tb" hidden></b></button>
+      <button data-t="me" title="Profile"><svg class="ic" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8"/></svg></button>
+    </div>
+  </header>
+
   <div class="card" id="npn" hidden><div class="ct" data-i="notif"></div><div id="nl"></div></div>
+  <div class="card" id="mnu" hidden>
+    <button class="mi" id="th"><span class="mic" id="thi"></span><span id="thl"></span></button>
+    <button class="mi" id="lgb"><svg class="ic" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.6 2.6 3.9 5.6 3.9 9s-1.3 6.4-3.9 9c-2.6-2.6-3.9-5.6-3.9-9S9.4 5.6 12 3z"/></svg><span id="lgl"></span></button>
+    <button class="mi" id="out"><svg class="ic" viewBox="0 0 24 24"><path d="M9 4H5a1 1 0 0 0-1 1v14a1 1 0 0 0 1 1h4M16 8l4 4-4 4M20 12H9"/></svg><span data-i="logout"></span></button>
+  </div>
   <div id="lb" hidden><img></div>
 
   <div class="wrap">
@@ -200,8 +229,6 @@ html.dark #auth p{color:#a0a6ae!important}
       </div>
     </aside>
   </div>
-
-  <div id="tabs"><button data-t="home" class="on"><span data-i="tHome"></span></button><button data-t="fr"><span data-i="tFr"></span><b class="bdg" id="fb" hidden></b></button><button data-t="chat"><span data-i="tChat"></span><b class="bdg" id="tb" hidden></b></button><button data-t="me"><span data-i="tMe"></span></button></div>
 </div>
 
 <script type="module">
@@ -222,6 +249,8 @@ const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
 const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const EMO=["👍","❤️","😂","😮","😢","😡"];
 const DEF="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect fill='%23bcc0c4' width='40' height='40'/%3E%3Ccircle cx='20' cy='15' r='7' fill='%23fff'/%3E%3Cellipse cx='20' cy='37' rx='13' ry='11' fill='%23fff'/%3E%3C/svg%3E";
+const SUN='<svg class="ic" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.3M12 19.2v2.3M2.5 12h2.3M19.2 12h2.3M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6"/></svg>';
+const MOON='<svg class="ic" viewBox="0 0 24 24"><path d="M21 13.5A8.5 8.5 0 1 1 10.5 3a7 7 0 0 0 10.5 10.5z"/></svg>';
 
 // ---------- Language / ဘာသာစကား ----------
 const L={
@@ -232,7 +261,7 @@ my:{
  frReq:"သူငယ်ချင်း တောင်းဆိုမှုများ",pymk:"သိကောင်းနိုင်သူများ",allFr:"သူငယ်ချင်းအားလုံး",online:"Online",
  editProf:"✏️ Profile ပြင်မယ်",chgAv:"📷 Profile ပုံပြောင်းမယ်",chgCv:"🖼 Cover ပြောင်းမယ်",phEpn:"နာမည်",phBio:"Bio (မိတ်ဆက်စာ)",phLives:"🏠 နေရပ်",phWork:"💼 အလုပ်",
  save:"သိမ်းမယ်",cancel:"မလုပ်တော့ဘူး",mind:"ဘာတွေ စဉ်းစားနေလဲ?",addPic:"📷 ပုံထည့်မယ်",post:"တင်မယ်",
- msgs:"💬 စာများ",phMsg:"စာရိုက်ပါ...",send:"ပို့",tHome:"🏠 ပင်မ",tFr:"👥 သူငယ်ချင်း",tChat:"💬 စကားပြော",tMe:"👤 ကိုယ်ပိုင်",
+ msgs:"💬 စာများ",phMsg:"စာရိုက်ပါ...",send:"ပို့",
  offB:"📴 အင်တာနက် မရှိပါ · Offline mode (ဖတ်ရုံသာ)",onB:"🟢 အင်တာနက် ပြန်ရပါပြီ",offAlert:"📴 အင်တာနက် မရှိပါ။ ဆက်သွယ်မှု ပြန်ရမှ လုပ်လို့ရပါမယ်။",
  saved:"သိမ်းပြီးပါပြီ ✅",posting:"တင်နေသည်...",postFail:"တင်မရပါ: ",sure:"သေချာလား?",delAsk:"ဖျက်မလား?",editAsk:"ပို့စ်ကို ပြင်ပါ",
  shareAsk:"မှတ်ချက်ထည့်မလား? (မထည့်လည်းရ)",shareOk:"မျှဝေပြီးပါပြီ ✅",noNotif:"အသိပေးချက် မရှိသေးပါ",
@@ -243,7 +272,8 @@ my:{
  lives:"🏠 နေရပ် <b>{n}</b>",works:"💼 အလုပ် <b>{n}</b>",nFr:"👥 <b>{n}</b> သူငယ်ချင်း",message:"💬 စာပို့မယ်",photos:"ဓာတ်ပုံ",
  noPhoto:"ဓာတ်ပုံ မရှိသေးပါ",noPost:"ပို့စ်မရှိသေးပါ။",people:"👥 လူများ",shareTag:"မျှဝေသည်",edited:"ပြင်ပြီး",justNow:"ယခုလေးတင်",
  nCm:"{n} မှတ်ချက်",phCm:"မှတ်ချက်ရေးပါ...(Enter)",edit:"✏️ ပြင်မယ်",del:"ဖျက်မယ်",like:"👍 Like",comment:"💬 မှတ်ချက်",share:"↗️ မျှဝေမယ်",
- add:"➕ သူငယ်ချင်းထည့်မယ်",isFr:"✓ သူငယ်ချင်း",cancelReq:"ပယ်ဖျက်မယ်",confirm:"လက်ခံမယ်",delete:"ဖျက်မယ်",lang:"EN",langA:"🌐 English"
+ add:"➕ သူငယ်ချင်းထည့်မယ်",isFr:"✓ သူငယ်ချင်း",cancelReq:"ပယ်ဖျက်မယ်",confirm:"လက်ခံမယ်",delete:"ဖျက်မယ်",
+ langA:"🌐 English",langM:"English",themeDark:"ညမုဒ်",themeLight:"နေ့မုဒ်"
 },
 en:{
  boot:"Loading...",phName:"Name",phEmail:"Email",phPw:"Password (min 6 characters)",login:"Login",or:"or",google:"🔵 Continue with Google",
@@ -252,7 +282,7 @@ en:{
  frReq:"Friend Requests",pymk:"People You May Know",allFr:"All Friends",online:"Online",
  editProf:"✏️ Edit Profile",chgAv:"📷 Change profile photo",chgCv:"🖼 Change cover",phEpn:"Name",phBio:"Bio",phLives:"🏠 Lives in",phWork:"💼 Work",
  save:"Save",cancel:"Cancel",mind:"What's on your mind?",addPic:"📷 Add photo",post:"Post",
- msgs:"💬 Messages",phMsg:"Type a message...",send:"Send",tHome:"🏠 Home",tFr:"👥 Friends",tChat:"💬 Chat",tMe:"👤 Profile",
+ msgs:"💬 Messages",phMsg:"Type a message...",send:"Send",
  offB:"📴 No internet connection · Offline mode (read only)",onB:"🟢 Back online",offAlert:"📴 No internet connection. Please try again when you're back online.",
  saved:"Saved ✅",posting:"Posting...",postFail:"Could not post: ",sure:"Are you sure?",delAsk:"Delete this?",editAsk:"Edit your post",
  shareAsk:"Add a comment? (optional)",shareOk:"Shared ✅",noNotif:"No notifications yet",
@@ -263,7 +293,8 @@ en:{
  lives:"🏠 Lives in <b>{n}</b>",works:"💼 Works at <b>{n}</b>",nFr:"👥 <b>{n}</b> Friends",message:"💬 Message",photos:"Photos",
  noPhoto:"No photos yet",noPost:"No posts yet.",people:"👥 People",shareTag:"Shared",edited:"edited",justNow:"Just now",
  nCm:"{n} comments",phCm:"Write a comment...(Enter)",edit:"✏️ Edit",del:"Delete",like:"👍 Like",comment:"💬 Comment",share:"↗️ Share",
- add:"➕ Add Friend",isFr:"✓ Friends",cancelReq:"Cancel",confirm:"Confirm",delete:"Delete",lang:"မြန်မာ",langA:"🌐 မြန်မာဘာသာ"
+ add:"➕ Add Friend",isFr:"✓ Friends",cancelReq:"Cancel",confirm:"Confirm",delete:"Delete",
+ langA:"🌐 မြန်မာဘာသာ",langM:"မြန်မာဘာသာ",themeDark:"Dark mode",themeLight:"Light mode"
 }};
 let lang="my";try{lang=localStorage.getItem("lang")||"my"}catch(e){}
 const t=(k,n)=>String(L[lang][k]??L.my[k]??k).replace("{n}",n??"");
@@ -273,10 +304,10 @@ if("serviceWorker" in navigator)addEventListener("load",()=>navigator.serviceWor
 
 // ---------- Theme ----------
 const root=document.documentElement;
-const setTheme=th=>{root.classList.toggle("dark",th==="dark");const b=document.getElementById("th");if(b)b.textContent=th==="dark"?"☀️":"🌙";try{localStorage.setItem("th",th)}catch(e){}};
+const setTheme=th=>{root.classList.toggle("dark",th==="dark");$("#thi").innerHTML=th==="dark"?SUN:MOON;$("#thl").textContent=t(th==="dark"?"themeLight":"themeDark");try{localStorage.setItem("th",th)}catch(e){}};
 let saved=null;try{saved=localStorage.getItem("th")}catch(e){}
 setTheme(saved||(matchMedia("(prefers-color-scheme:dark)").matches?"dark":"light"));
-document.getElementById("th").onclick=()=>setTheme(root.classList.contains("dark")?"light":"dark");
+$("#th").onclick=()=>{setTheme(root.classList.contains("dark")?"light":"dark");$("#mnu").hidden=true};
 
 let me=null,users={},posts=[],comments={},openC=new Set(),file=null,reg=false,started=false,q="";
 let peer=null,dmMsgs=[],unDM=null,view=null,ptab="posts",notifs=[],fresh=new Set(),lastM={},dmW=new Set(),friends=[],fLoaded=false;
@@ -354,7 +385,7 @@ onAuthStateChanged(auth,u=>{
   if(!started){started=true;start()}
 });
 
-// ---------- Tabs / Search ----------
+// ---------- Tabs / Search / Menu ----------
 $$("#tabs button").forEach(b=>b.onclick=()=>{
   const tb=b.dataset.t;
   if(tb==="home"){view=null;render()}
@@ -363,6 +394,7 @@ $$("#tabs button").forEach(b=>b.onclick=()=>{
 });
 $("#lg").onclick=()=>{view=null;setTab("home");render()};
 $("#q").oninput=e=>{q=e.target.value.trim().toLowerCase();render()};
+$("#mb").onclick=e=>{e.stopPropagation();$("#npn").hidden=true;$("#mnu").hidden=!$("#mnu").hidden};
 
 // ---------- Presence / DM watchers ----------
 const beat=()=>me&&navigator.onLine&&updateDoc(doc(db,"users",me.uid),{lastSeen:Date.now()}).catch(()=>{});
@@ -422,7 +454,7 @@ function bellUI(){
   $("#nl").innerHTML=sorted.map(x=>`<div class="nt ${fresh.has(x.id)?"fr":""}" data-n="${x.id}" data-t="${x.type}" data-u="${x.from}" data-p="${x.postId||""}">${ntxt(x)}<div class="time">${when(x.createdAt)}</div></div>`).join("")||`<div class="pad time">${t("noNotif")}</div>`;
 }
 $("#bell").onclick=e=>{
-  e.stopPropagation();const p=$("#npn");p.hidden=!p.hidden;
+  e.stopPropagation();$("#mnu").hidden=true;const p=$("#npn");p.hidden=!p.hidden;
   if(!p.hidden){
     const un=notifs.filter(x=>!x.read);fresh=new Set(un.map(x=>x.id));bellUI();
     if(navigator.onLine)un.forEach(x=>updateDoc(doc(db,"notifs",x.id),{read:true}).catch(()=>{}));
@@ -519,6 +551,7 @@ function render(){
 }
 document.addEventListener("click",e=>{
   if(!e.target.closest("#npn,#bell"))$("#npn").hidden=true;
+  if(!e.target.closest("#mnu,#mb"))$("#mnu").hidden=true;
   if(e.target.closest("#lb")){$("#lb").hidden=true;return}
   const lb=e.target.closest("[data-lb]");if(lb){$("#lb img").src=lb.src;$("#lb").hidden=false;return}
   const nt=e.target.closest("[data-n]");
@@ -603,13 +636,14 @@ function applyLang(){
   $$("[data-ph]").forEach(el=>el.placeholder=t(el.dataset.ph));
   $("#go").textContent=t(reg?"createBtn":"login");
   $("#sw").textContent=t(reg?"haveAcc":"newAcc");
-  $("#lgb").textContent=t("lang");
+  $("#lgl").textContent=t("langM");
   $("#lga").textContent=t("langA");
+  setTheme(root.classList.contains("dark")?"dark":"light");
   const pb=$("#post");if(!pb.disabled)pb.textContent=t("post");
   if(!offB.hidden&&!navigator.onLine)offB.textContent=t("offB");
   if(me){render();renderChat();bellUI()}
 }
-const toggleLang=()=>{lang=lang==="my"?"en":"my";try{localStorage.setItem("lang",lang)}catch(e){}applyLang()};
+const toggleLang=()=>{lang=lang==="my"?"en":"my";try{localStorage.setItem("lang",lang)}catch(e){}$("#mnu").hidden=true;applyLang()};
 $("#lgb").onclick=toggleLang;$("#lga").onclick=toggleLang;
 applyLang();
 </script>
