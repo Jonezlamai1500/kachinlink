@@ -551,10 +551,18 @@ $("#gg").onclick=async()=>{
   }
 };
 // Facebook login ကို server (/auth/facebook) ကနေ လုပ်မယ်
-$("#fbb").onclick=()=>{
+  $("#fbb").onclick=async()=>{
   if(offl())return;
-  location.href="/auth/facebook";
+  $("#err").textContent="";
+  const fp=new FacebookAuthProvider();
+  try{await signInWithPopup(auth,fp)}
+  catch(x){
+    if(x.code==="auth/popup-blocked"||x.code==="auth/operation-not-supported-in-this-environment"){
+      try{await signInWithRedirect(auth,fp)}catch(y){$("#err").textContent=y.code||y.message}
+    }else if(x.code!=="auth/popup-closed-by-user"){$("#err").textContent=x.code||x.message}
+  }
 };
+       
 $("#out").onclick=async()=>{
   if(navigator.onLine)updateDoc(doc(db,"users",me.uid),{lastSeen:Date.now()-151000}).catch(()=>{});
   try{await signOut(auth)}catch(e){}
