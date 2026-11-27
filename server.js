@@ -54,12 +54,17 @@ app.get("/auth/facebook/callback", async (req, res) => {
   }
 });
 
-app.get("/api/me", (req, res) => {
-  res.json({ user: req.session.user || null });
-});
-
-app.get("/logout", (req, res) => {
-  req.session.destroy(() => res.redirect("/"));
-});
-
 app.get("/sw.js", (req, res) => {
+  res.sendFile(path.join(pub, "sw.js"));
+});
+
+app.use(express.static(pub));
+
+app.get("*", (req, res) => {
+  res.sendFile(path.join(pub, "index.html"));
+});
+
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, "0.0.0.0", () => {
+  console.log("Running on " + PORT);
+});
