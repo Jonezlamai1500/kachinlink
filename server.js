@@ -36,6 +36,7 @@ app.get("/auth/facebook/callback", async (req, res) => {
     }
     const tokenUrl = `https://graph.facebook.com/v19.0/oauth/access_token?client_id=${APP_ID}&redirect_uri=${encodeURIComponent(REDIRECT)}&client_secret=${APP_SECRET}&code=${encodeURIComponent(req.query.code)}`;
     const token = await (await fetch(tokenUrl)).json();
+    console.log("FB token response:", JSON.stringify(token));
     if (!token.access_token) return res.redirect("/?login=failed");
 
     const meUrl = `https://graph.facebook.com/me?fields=id,name,picture.type(large)&access_token=${token.access_token}`;
