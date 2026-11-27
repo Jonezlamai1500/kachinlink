@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "790888296721",
+    "firebase_url": "https://jinghpaw-link-default-rtdb.firebaseio.com",
+    "project_id": "jinghpaw-link",
+    "storage_bucket": "jinghpaw-link.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:790888296721:android:7ff9afb1e28cfd02631cb0",
+        "android_client_info": {
+          "package_name": "com.kachinlink.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "790888296721-5ods5guf877grdek6ea990qvgs2blvp2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAiPMBAyWVanW4IpU9Ji2IeBtFZZs-CWuE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "790888296721-5ods5guf877grdek6ea990qvgs2blvp2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
