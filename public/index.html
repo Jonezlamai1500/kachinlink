@@ -969,4 +969,20 @@ $("#stl").onclick=toggleLang;
 
 applyLang();
 </script>
-</body></html>
+ <script>
+(async()=>{
+  const C=window.Capacitor;
+  if(!C||!C.isNativePlatform||!C.isNativePlatform())return;
+  const P=C.Plugins.PushNotifications;
+  const r=await P.requestPermissions();
+  if(r.receive==='granted'){
+    await P.register();
+    P.addListener('registration',t=>{window.fcmToken=t.value});
+  }
+})();
+</script>
+</body>
+
+
+
+</html>
