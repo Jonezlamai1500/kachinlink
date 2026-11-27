@@ -19,7 +19,7 @@ textarea{resize:none}
 .btn:active{transform:scale(.97)}
 .btn.g{background:linear-gradient(135deg,#27b567,var(--g));box-shadow:0 3px 10px rgba(31,157,85,.3)}
 .btn.ghost{background:#eef0f3;color:#444;box-shadow:none}.btn:disabled{opacity:.5}
-.logo{font-size:22px;font-weight:800;color:var(--r)}.logo i{font-style:normal;color:var(--g)}
+.logo{font-size:22px;font-weight:800;color:var(--r);cursor:pointer}.logo i{font-style:normal;color:var(--g)}
 .card{background:#fff;border-radius:18px;box-shadow:var(--sh);margin-bottom:16px;overflow:hidden}
 .pad{padding:16px}.ct{font-weight:700;padding:14px 16px;border-bottom:1px solid var(--line)}
 #auth{width:calc(100% - 56px);max-width:320px;margin:14vh auto;padding:22px 18px;background:#fff;border-radius:20px;box-shadow:0 12px 36px rgba(0,0,0,.18);text-align:center;border-top:5px solid var(--g)}
@@ -33,8 +33,11 @@ nav{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.9);box-shadow:
 nav input{max-width:320px;margin:0;background:#f0f2f5;border-color:transparent;border-radius:999px}nav .sp{flex:1}
 .wrap{max-width:1100px;margin:18px auto;padding:0 12px;display:grid;grid-template-columns:270px 1fr 300px;gap:18px;align-items:start}
 .cover{height:84px;background:linear-gradient(120deg,var(--r) 50%,var(--g) 50%)}
+.pcov{height:160px}
 .prof{text-align:center;margin-top:-46px}
+.pf2{margin-top:-58px}
 .big{width:92px;height:92px;border-radius:50%;object-fit:cover;border:4px solid #fff;background:#ccc;box-shadow:0 4px 14px rgba(0,0,0,.2)}
+.pb{width:112px;height:112px}
 .stats{display:flex;border-top:1px solid var(--line)}.stats div{flex:1;text-align:center;padding:12px;font-size:13px;color:var(--mut)}
 .stats b{display:block;font-size:19px;color:var(--ink)}
 .av{width:42px;height:42px;border-radius:50%;object-fit:cover;background:#ccc;flex:none}
@@ -67,13 +70,21 @@ nav input{max-width:320px;margin:0;background:#f0f2f5;border-color:transparent;b
 #bell{position:relative;padding:9px 14px}#bb{position:absolute;top:-5px;right:-5px;margin:0}
 #npn{position:fixed;top:62px;right:8px;width:min(340px,calc(100vw - 16px));max-height:70vh;overflow-y:auto;z-index:40;margin:0}
 .nt{padding:10px 16px;cursor:pointer;font-size:14px;border-bottom:1px solid var(--line)}.nt:hover{background:#f4f6f8}.nt.fr{background:#fff1f1}
-.bio{font-size:13px;color:var(--mut);padding:0 16px 12px;white-space:pre-wrap;text-align:center}
+.bio{font-size:14px;color:var(--ink);padding:2px 16px 8px;white-space:pre-wrap;text-align:center}
+.intro{font-size:14px;color:var(--mut);padding:0 16px 10px;display:flex;flex-direction:column;gap:3px;align-items:center}
+.ptabs{display:flex;border-top:1px solid var(--line)}
+.ptabs button{flex:1;background:none;padding:12px;color:var(--mut);font-weight:600;border-bottom:3px solid transparent;border-radius:0}
+.ptabs button.on{color:var(--g);border-bottom-color:var(--g)}
+.pg{display:grid;grid-template-columns:repeat(3,1fr);gap:4px}
+.pg img{width:100%;aspect-ratio:1;object-fit:cover;cursor:pointer;border-radius:6px;background:#ddd}
+#lb{position:fixed;inset:0;background:rgba(0,0,0,.92);z-index:60;display:flex;align-items:center;justify-content:center;padding:10px}
+#lb img{max-width:100%;max-height:100%;object-fit:contain}
 #tabs{display:none}
 @media(max-width:900px){
  .wrap{grid-template-columns:1fr;padding-bottom:76px}
- body[data-t=home] #L,body[data-t=home] #R,body[data-t=chat] #L,body[data-t=chat] #C,body[data-t=me] #C,body[data-t=me] #R{display:none}
+ body[data-t=home] #L,body[data-t=home] #R,body[data-t=me] #L,body[data-t=me] #R,body[data-t=fr] #C,body[data-t=fr] #R,body[data-t=chat] #L,body[data-t=chat] #C{display:none}
  #tabs{display:flex;position:fixed;bottom:0;left:0;right:0;background:rgba(255,255,255,.95);box-shadow:0 -2px 14px rgba(0,0,0,.1);z-index:20}
- #tabs button{flex:1;background:none;padding:13px;font-size:15px;color:var(--mut)}#tabs button.on{color:var(--r);font-weight:700;border-top:3px solid var(--r)}
+ #tabs button{flex:1;background:none;padding:13px 4px;font-size:14px;color:var(--mut)}#tabs button.on{color:var(--r);font-weight:700;border-top:3px solid var(--r)}
  nav input{max-width:none;min-width:0}.chat{height:60vh}nav{padding:10px 10px;gap:6px}nav .logo{display:none}
 }
 html.dark{--ink:#e4e6eb;--mut:#a0a6ae;--line:#2e3036;--sh:0 2px 14px rgba(0,0,0,.4);color-scheme:dark}
@@ -112,7 +123,7 @@ html.dark #auth p{color:#a0a6ae!important}
 
 <div id="app" hidden>
   <nav>
-    <div class="logo">Kachin <i>Link</i></div>
+    <div class="logo" id="lg">Kachin <i>Link</i></div>
     <input id="q" placeholder="🔍 Find...">
     <span class="sp"></span>
     <button class="btn ghost" id="bell">🔔<b class="bdg" id="bb" hidden>0</b></button>
@@ -120,21 +131,15 @@ html.dark #auth p{color:#a0a6ae!important}
     <button class="btn ghost" id="out">Logout</button>
   </nav>
   <div class="card" id="npn" hidden><div class="ct">🔔 Notifications</div><div id="nl"></div></div>
+  <div id="lb" hidden><img></div>
 
   <div class="wrap">
     <aside id="L">
       <div class="card">
         <div class="cover" id="mcv"></div>
-        <div class="prof"><img class="big myav"><div class="name" id="mn" style="font-size:18px;margin:6px 0 4px"></div></div>
-        <div class="bio" id="mb"></div>
+        <div class="prof"><img class="big myav" data-pf="me" style="cursor:pointer"><div class="name" id="mn" data-pf="me" style="font-size:18px;margin:6px 0 10px;cursor:pointer"></div></div>
         <div class="stats"><div>Posts<b id="np">0</b></div><div>Friends<b id="nu">0</b></div></div>
-        <div class="pad" style="border-top:1px solid #eee">
-          <label class="btn ghost" style="display:block;text-align:center">📷 ပုံပြောင်းမယ်<input id="avf" type="file" accept="image/*" hidden></label>
-          <label class="btn ghost" style="display:block;text-align:center;margin-top:6px">🖼 Cover ပြောင်းမယ်<input id="cvf" type="file" accept="image/*" hidden></label>
-          <input id="pn" placeholder="Change Profile ">
-          <textarea id="pbio" rows="2" placeholder="Bio (ကိုယ်ရေးအကျဉ်း)"></textarea>
-          <button class="btn g" id="sn" style="width:100%">Save Profile </button>
-        </div>
+        <div class="pad" style="border-top:1px solid #eee"><button class="btn g" data-pf="me" style="width:100%">👤 My Profile</button></div>
       </div>
       <div class="card" id="reqc" hidden><div class="ct">🔔 Friend Requests</div><div id="req"></div></div>
       <div class="card"><div class="ct">Friends</div><div id="fl" style="padding:4px 0"></div></div>
@@ -143,6 +148,16 @@ html.dark #auth p{color:#a0a6ae!important}
 
     <main id="C">
       <div id="pv"></div>
+      <div class="card pad" id="ep" hidden>
+        <b>✏️ Edit Profile</b>
+        <label class="btn ghost" style="display:block;text-align:center;margin-top:8px">📷 Profile ပုံပြောင်းမယ်<input id="avf" type="file" accept="image/*" hidden></label>
+        <label class="btn ghost" style="display:block;text-align:center;margin-top:6px">🖼 Cover ပြောင်းမယ်<input id="cvf" type="file" accept="image/*" hidden></label>
+        <input id="epn" placeholder="နာမည်">
+        <textarea id="epb" rows="2" placeholder="Bio (မိတ်ဆက်စာ)"></textarea>
+        <input id="epl" placeholder="🏠 နေရပ် (Lives in)">
+        <input id="epw" placeholder="💼 အလုပ် (Work)">
+        <div class="row" style="margin-top:6px"><button class="btn g" id="sn" style="flex:1">Save</button><button class="btn ghost" id="ec" style="flex:1">Cancel</button></div>
+      </div>
       <div class="card top pad" id="cmp">
         <div class="row" style="align-items:flex-start"><img class="av myav"><textarea id="txt" rows="2" placeholder="What's on your mind?"></textarea></div>
         <div id="prev"></div>
@@ -173,7 +188,7 @@ html.dark #auth p{color:#a0a6ae!important}
     </aside>
   </div>
 
-  <div id="tabs"><button data-t="home" class="on">🏠 Home</button><button data-t="chat">💬 Chat<b class="bdg" id="tb" hidden></b></button><button data-t="me">👤 Profile</button></div>
+  <div id="tabs"><button data-t="home" class="on">🏠 Home</button><button data-t="fr">👥 Friends</button><button data-t="chat">💬 Chat<b class="bdg" id="tb" hidden></b></button><button data-t="me">👤 Profile</button></div>
 </div>
 
 <script type="module">
@@ -199,7 +214,7 @@ setTheme(saved||(matchMedia("(prefers-color-scheme:dark)").matches?"dark":"light
 document.getElementById("th").onclick=()=>setTheme(root.classList.contains("dark")?"light":"dark");
 
 let me=null,users={},posts=[],comments={},openC=new Set(),file=null,reg=false,started=false,q="";
-let peer=null,dmMsgs=[],unDM=null,view=null,notifs=[],fresh=new Set(),lastM={},dmW=new Set(),friends=[];
+let peer=null,dmMsgs=[],unDM=null,view=null,ptab="posts",notifs=[],fresh=new Set(),lastM={},dmW=new Set(),friends=[],fLoaded=false;
 
 // ---------- Helpers ----------
 const U=id=>users[id]||{name:"User",photo:""};
@@ -217,9 +232,10 @@ const notify=(to,type,extra={})=>{if(!to||to===me.uid)return;addDoc(collection(d
 
 // ---------- Friends ----------
 const fid=o=>[me.uid,o].sort().join("_");
+const accIds=()=>friends.filter(f=>f.status==="accepted").map(f=>f.users.find(x=>x!==me.uid));
 const fbtn=o=>{
   const f=friends.find(x=>x.users.includes(o)),s='style="padding:5px 12px;font-size:12px"';
-  if(!f)return `<button class="btn g" ${s} data-f="add" data-u="${o}">➕ Add</button>`;
+  if(!f)return `<button class="btn g" ${s} data-f="add" data-u="${o}">➕ Add Friend</button>`;
   if(f.status==="accepted")return `<button class="btn ghost" ${s} data-f="rm" data-u="${o}">✓ Friends</button>`;
   if(f.from===me.uid)return `<button class="btn ghost" ${s} data-f="rm" data-u="${o}">Cancel</button>`;
   return `<button class="btn g" ${s} data-f="ok" data-u="${o}">Confirm</button><button class="btn ghost" ${s} data-f="rm" data-u="${o}">Delete</button>`;
@@ -229,6 +245,12 @@ const friendAct=(a,o)=>act(async()=>{
   if(a==="ok")await updateDoc(doc(db,"friends",fid(o)),{status:"accepted"});
   if(a==="rm"&&confirm("သေချာလား?"))await deleteDoc(doc(db,"friends",fid(o)));
 });
+// ကိုယ့် Friend စာရင်းကို ကိုယ့် user doc ထဲ ထပ်သိမ်း (တခြားသူ Profile ကနေ ကြည့်လို့ရအောင်)
+function syncFl(){
+  if(!me||!fLoaded||!users[me.uid])return;
+  const a=accIds(),x=[...a].sort().join(","),y=[...(U(me.uid).fl||[])].sort().join(",");
+  if(x!==y)updateDoc(doc(db,"users",me.uid),{fl:a}).catch(()=>{});
+}
 
 // ---------- Auth ----------
 $("#sw").onclick=()=>{reg=!reg;$("#rn").hidden=!reg;$("#go").textContent=reg?"Creat Account":"Login";$("#sw").textContent=reg?"အကောင့်ရှိပြီးသား - Login":"New Creat Account"};
@@ -260,7 +282,13 @@ onAuthStateChanged(auth,async u=>{
 });
 
 // ---------- Tabs / Search ----------
-$$("#tabs button").forEach(b=>b.onclick=()=>{setTab(b.dataset.t);scrollChat()});
+$$("#tabs button").forEach(b=>b.onclick=()=>{
+  const t=b.dataset.t;
+  if(t==="home"){view=null;render()}
+  if(t==="me"){view=me.uid;ptab="posts";render()}
+  setTab(t);scrollChat();
+});
+$("#lg").onclick=()=>{view=null;setTab("home");render()};
 $("#q").oninput=e=>{q=e.target.value.trim().toLowerCase();render()};
 
 // ---------- Presence / DM watchers ----------
@@ -288,16 +316,14 @@ function start(){
   beat();setInterval(beat,90000);
   document.addEventListener("visibilitychange",()=>{if(!document.hidden)beat()});
   setInterval(()=>{keep(render);renderChat()},60000);
-  onSnapshot(query(collection(db,"friends"),where("users","array-contains",me.uid)),s=>{friends=s.docs.map(d=>d.data());keep(render)},e=>console.error(e));
+  onSnapshot(query(collection(db,"friends"),where("users","array-contains",me.uid)),s=>{friends=s.docs.map(d=>d.data());fLoaded=true;syncFl();keep(render)},e=>console.error(e));
   onSnapshot(query(collection(db,"notifs"),where("to","==",me.uid)),s=>{notifs=s.docs.map(d=>({id:d.id,...d.data()}));bellUI()},e=>console.error(e));
   onSnapshot(collection(db,"users"),s=>{users={};s.forEach(d=>users[d.id]=d.data());
     const m=U(me.uid);
-    $$(".myav").forEach(i=>i.src=av(me.uid));$("#mn").textContent=m.name;$("#mb").textContent=m.bio||"";
+    $$(".myav").forEach(i=>i.src=av(me.uid));$("#mn").textContent=m.name;
     $("#mcv").style.background=m.cover?`url('${m.cover}') center/cover`:"";
-    if(document.activeElement!==$("#pn"))$("#pn").value=m.name;
-    if(document.activeElement!==$("#pbio"))$("#pbio").value=m.bio||"";
     Object.keys(users).slice(0,40).forEach(watchDM);
-    keep(render);unreadUI();bellUI()});
+    syncFl();keep(render);unreadUI();bellUI()});
   onSnapshot(query(collection(db,"posts"),orderBy("createdAt","desc"),limit(50)),s=>{posts=s.docs.map(d=>({id:d.id,...d.data()}));keep(render)});
 }
 
@@ -322,10 +348,13 @@ $("#bell").onclick=e=>{
 };
 
 // ---------- Profile ----------
-$("#sn").onclick=()=>act(async()=>{const n=$("#pn").value.trim();await updateDoc(doc(db,"users",me.uid),{...(n?{name:n}:{}),bio:$("#pbio").value.trim()});alert("သိမ်းပြီးပါပြီ ✅")});
+const openProfile=id=>{view=id==="me"?me.uid:id;ptab="posts";setTab("me");render();scrollTo(0,0)};
+$("#sn").onclick=()=>act(async()=>{const n=$("#epn").value.trim();
+  await updateDoc(doc(db,"users",me.uid),{...(n?{name:n}:{}),bio:$("#epb").value.trim(),lives:$("#epl").value.trim(),work:$("#epw").value.trim()});
+  $("#ep").hidden=true;alert("သိမ်းပြီးပါပြီ ✅")});
+$("#ec").onclick=()=>{$("#ep").hidden=true};
 $("#avf").onchange=e=>act(async()=>{const f=e.target.files[0];if(!f)return;await updateDoc(doc(db,"users",me.uid),{photo:await shrink(f,300)});e.target.value=""});
 $("#cvf").onchange=e=>act(async()=>{const f=e.target.files[0];if(!f)return;await updateDoc(doc(db,"users",me.uid),{cover:await shrink(f,640,.6)});e.target.value=""});
-const openProfile=id=>{view=id;setTab("home");render();scrollTo(0,0)};
 
 // ---------- Compose ----------
 $("#file").onchange=e=>{file=e.target.files[0]||null;$("#prev").innerHTML=file?`<img src="${URL.createObjectURL(file)}">`:""};
@@ -341,7 +370,7 @@ $("#post").onclick=async()=>{
 
 // ---------- Feed ----------
 const img=p=>p.image?`<img class="media" src="${esc(p.image)}" loading="lazy">`:"";
-const person=([i,u])=>`<div class="sg" data-pf="${i}">${avw(i)}<span class="name" style="flex:1">${esc(u.name)}</span>${fbtn(i)}<button class="btn ghost" style="padding:5px 10px;font-size:12px" data-dm="${i}">💬</button></div>`;
+const person=([i,u])=>`<div class="sg" data-pf="${i}">${avw(i)}<span class="name" style="flex:1">${esc(u.name)}</span>${i===me.uid?"":fbtn(i)+`<button class="btn ghost" style="padding:5px 10px;font-size:12px" data-dm="${i}">💬</button>`}</div>`;
 const chatRow=i=>{const n=unreadN(i);return `<div class="sg" data-dm="${i}">${avw(i)}<span class="name" style="flex:1">${esc(U(i).name)}</span>${n?`<b class="bdg">${n>9?"9+":n}</b>`:""}</div>`};
 function postHTML(p){
   const rs=p.reactions||{},vals=Object.values(rs),mine=rs[me.uid],top=[...new Set(vals)].slice(0,3).join("");
@@ -362,7 +391,7 @@ function postHTML(p){
 function render(){
   if(!me)return;
   $("#np").textContent=posts.filter(p=>p.uid===me.uid).length;
-  const acc=friends.filter(f=>f.status==="accepted").map(f=>f.users.find(x=>x!==me.uid));
+  const acc=accIds();
   $("#nu").textContent=acc.length;
   $("#fl").innerHTML=acc.map(i=>person([i,U(i)])).join("")||`<div class="pad time">သူငယ်ချင်း မရှိသေးပါ</div>`;
   const rq=friends.filter(f=>f.status==="pending"&&f.to===me.uid);
@@ -370,36 +399,48 @@ function render(){
   $("#reqc").hidden=!rq.length;
   const match=([i,u])=>i!==me.uid&&(!q||(u.name||"").toLowerCase().includes(q));
   $("#sug").innerHTML=Object.entries(users).filter(match).slice(0,8).map(person).join("")||`<div class="pad time">မတွေ့ပါ</div>`;
-  let list;
+  let html;
   if(view){
-    const u=U(view),n=posts.filter(p=>p.uid===view).length,cv=u.cover?`style="background:url('${u.cover}') center/cover"`:"";
-    const nf=view===me.uid?acc.length:"";
+    const u=U(view),isMe=view===me.uid,fl=(isMe?acc:(u.fl||[])).filter(i=>users[i]);
+    const cv=u.cover?`style="background:url('${u.cover}') center/cover"`:"";
     $("#pv").innerHTML=`<div class="card"><button class="btn ghost" data-bk style="margin:10px">← Back</button>
-      <div class="cover" ${cv}></div>
-      <div class="prof"><span class="aw"><img class="big" src="${esc(av(view))}">${on(view)?'<i class="dot"></i>':""}</span>
-      <div class="name" style="font-size:18px;margin:6px 0 4px">${esc(u.name)}</div>
-      <div class="time">${on(view)?"🟢 Online":"Offline"}</div></div>
-      ${u.bio?`<div class="bio" style="padding-top:8px">${esc(u.bio)}</div>`:""}
-      <div class="stats"><div>Posts<b>${n}</b></div>${nf!==""?`<div>Friends<b>${nf}</b></div>`:""}</div>
-      ${view!==me.uid?`<div class="pad row" style="justify-content:center;border-top:1px solid var(--line)">${fbtn(view)}<button class="btn ghost" style="padding:5px 12px;font-size:12px" data-dm="${view}">💬 Message</button></div>`:""}</div>`;
+      <div class="cover pcov" ${cv}></div>
+      <div class="prof pf2"><span class="aw"><img class="big pb" src="${esc(av(view))}">${on(view)?'<i class="dot"></i>':""}</span>
+        <div class="name" style="font-size:22px;margin:8px 0 2px">${esc(u.name)}</div>
+        <div class="time" style="margin-bottom:6px">${on(view)?"🟢 Online":"Offline"}</div></div>
+      ${u.bio?`<div class="bio">${esc(u.bio)}</div>`:""}
+      <div class="intro">${u.lives?`<div>🏠 Lives in <b>${esc(u.lives)}</b></div>`:""}${u.work?`<div>💼 Works at <b>${esc(u.work)}</b></div>`:""}<div>👥 <b>${fl.length}</b> Friends</div></div>
+      <div class="pad row" style="justify-content:center;flex-wrap:wrap">${isMe?`<button class="btn g" data-edit>✏️ Edit Profile</button>`
+        :`${fbtn(view)}<button class="btn ghost" style="padding:5px 12px;font-size:12px" data-dm="${view}">💬 Message</button>`}</div>
+      <div class="ptabs">${[["posts","Posts"],["photos","Photos"],["friends","Friends"]].map(([k,n])=>`<button data-pt="${k}" class="${ptab===k?"on":""}">${n}</button>`).join("")}</div></div>`;
     $("#cmp").hidden=true;$("#ppl").innerHTML="";
-    list=posts.filter(p=>p.uid===view);
+    if(!isMe)$("#ep").hidden=true;
+    if(ptab==="photos"){const ph=posts.filter(p=>p.uid===view&&p.image);
+      html=`<div class="card pad">${ph.length?`<div class="pg">${ph.map(p=>`<img data-lb src="${esc(p.image)}" loading="lazy">`).join("")}</div>`:`<div class="time">ဓာတ်ပုံ မရှိသေးပါ</div>`}</div>`}
+    else if(ptab==="friends")html=`<div class="card">${fl.map(i=>person([i,U(i)])).join("")||`<div class="pad time">သူငယ်ချင်း မရှိသေးပါ</div>`}</div>`;
+    else html=posts.filter(p=>p.uid===view).map(postHTML).join("")||`<div class="card pad">ပို့စ်မရှိသေးပါ။</div>`;
   }else{
-    $("#pv").innerHTML="";$("#cmp").hidden=false;
+    $("#pv").innerHTML="";$("#ep").hidden=true;$("#cmp").hidden=false;
     const found=q?Object.entries(users).filter(match).slice(0,6):[];
     $("#ppl").innerHTML=found.length?`<div class="card"><div class="ct">👥 လူများ</div>${found.map(person).join("")}</div>`:"";
-    list=posts.filter(p=>!q||((p.text||"")+U(p.uid).name).toLowerCase().includes(q));
+    html=posts.filter(p=>!q||((p.text||"")+U(p.uid).name).toLowerCase().includes(q)).map(postHTML).join("")||`<div class="card pad">ပို့စ်မရှိသေးပါ။</div>`;
   }
-  $("#feed").innerHTML=list.map(postHTML).join("")||`<div class="card pad">ပို့စ်မရှိသေးပါ။</div>`;
+  $("#feed").innerHTML=html;
 }
 document.addEventListener("click",e=>{
   if(!e.target.closest("#npn,#bell"))$("#npn").hidden=true;
+  if(e.target.closest("#lb")){$("#lb").hidden=true;return}
+  const lb=e.target.closest("[data-lb]");if(lb){$("#lb img").src=lb.src;$("#lb").hidden=false;return}
   const nt=e.target.closest("[data-n]");
   if(nt){$("#npn").hidden=true;
     if(nt.dataset.t==="friend")openProfile(nt.dataset.u);
     else{view=null;setTab("home");render();setTimeout(()=>document.querySelector(`[data-id="${nt.dataset.p}"]`)?.scrollIntoView({behavior:"smooth",block:"center"}),60)}
     return}
-  if(e.target.closest("[data-bk]")){view=null;render();return}
+  if(e.target.closest("[data-bk]")){view=null;setTab("home");render();return}
+  const pt=e.target.closest("[data-pt]");if(pt){ptab=pt.dataset.pt;render();return}
+  if(e.target.closest("[data-edit]")){const m=U(me.uid);
+    $("#epn").value=m.name||"";$("#epb").value=m.bio||"";$("#epl").value=m.lives||"";$("#epw").value=m.work||"";
+    $("#ep").hidden=false;$("#ep").scrollIntoView({behavior:"smooth"});return}
   const f=e.target.closest("[data-f]");if(f){friendAct(f.dataset.f,f.dataset.u);return}
   const d=e.target.closest("[data-dm]");if(d){openChat(d.dataset.dm);return}
   const pf=e.target.closest("[data-pf]");if(pf){openProfile(pf.dataset.pf);return}
