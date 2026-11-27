@@ -15,6 +15,7 @@ background:linear-gradient(135deg,#ffeceb 0%,#f4f6f8 45%,#e6f6ec 100%) fixed}
 input,textarea{font:inherit;width:100%;padding:11px 14px;border:1.5px solid #e3e6ea;border-radius:12px;margin:4px 0;outline:0;background:#fff;transition:.15s}
 input:focus,textarea:focus{border-color:var(--g);box-shadow:0 0 0 3px rgba(31,157,85,.15)}
 textarea{resize:none}
+select{font:inherit;border:1.5px solid #e3e6ea;border-radius:12px;background:#fff;color:var(--ink);outline:0}
 .btn{background:linear-gradient(135deg,#e8343e,var(--r));color:#fff;padding:9px 18px;border-radius:999px;font-weight:600;box-shadow:0 3px 10px rgba(217,35,45,.28)}
 .btn:active{transform:scale(.97)}
 .btn.g{background:linear-gradient(135deg,#27b567,var(--g));box-shadow:0 3px 10px rgba(31,157,85,.3)}
@@ -22,6 +23,7 @@ textarea{resize:none}
 .logo{font-size:22px;font-weight:800;color:var(--r);cursor:pointer;white-space:nowrap;flex:none}.logo i{font-style:normal;color:var(--g)}
 .ic{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round;flex:none}
 .card{background:#fff;border-radius:18px;box-shadow:var(--sh);margin-bottom:16px;overflow:hidden}
+.card:has(.pmenu:not([hidden])){overflow:visible}
 .pad{padding:16px}.ct{font-weight:700;padding:14px 16px;border-bottom:1px solid var(--line)}
 #auth{width:calc(100% - 56px);max-width:320px;margin:14vh auto;padding:22px 18px;background:#fff;border-radius:20px;box-shadow:0 12px 36px rgba(0,0,0,.18);text-align:center;border-top:5px solid var(--g)}
 #auth .logo{font-size:26px!important}
@@ -32,7 +34,8 @@ textarea{resize:none}
 .or{margin:6px 0 2px;color:#999;font-size:12px}
 #boot{text-align:center;margin-top:30vh}
 #off{position:fixed;left:0;right:0;bottom:0;z-index:90;color:#fff;text-align:center;padding:8px 10px;font-size:13px;font-weight:600;background:#444}
-#hd{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.96);box-shadow:0 2px 12px rgba(0,0,0,.08);border-bottom:3px solid var(--r);backdrop-filter:blur(8px)}
+#hd{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.96);box-shadow:0 2px 12px rgba(0,0,0,.08);padding-bottom:3px;backdrop-filter:blur(8px)}
+#hd::after{content:"";position:absolute;left:0;right:0;bottom:0;height:3px;background:linear-gradient(90deg,var(--r) 50%,var(--g) 50%)}
 nav{display:flex;align-items:center;gap:8px;padding:8px 14px}
 nav input{max-width:320px;margin:0;padding:8px 14px;font-size:14px;background:#f0f2f5;border-color:transparent;border-radius:999px}nav .sp{flex:1}
 .ib{width:36px;height:36px;border-radius:50%;background:#eef0f3;color:#444;display:flex;align-items:center;justify-content:center;padding:0;position:relative;flex:none}
@@ -89,7 +92,7 @@ body.tc #tg{left:0}
 .dots{width:36px;height:36px;border-radius:50%;background:none;color:var(--mut);display:flex;align-items:center;justify-content:center;padding:0}
 .dots .ic{width:24px;height:24px}
 .dots:hover{background:#f0f2f5}
-.pmenu{position:absolute;right:0;top:38px;background:#fff;border-radius:12px;box-shadow:0 6px 24px rgba(0,0,0,.22);padding:6px;z-index:10;min-width:150px}
+.pmenu{position:absolute;right:0;top:38px;background:#fff;border-radius:12px;box-shadow:0 6px 24px rgba(0,0,0,.22);padding:6px;z-index:10;min-width:210px}
 .pmenu button{display:flex;gap:10px;align-items:center;width:100%;background:none;padding:10px 12px;border-radius:8px;font-weight:600;color:var(--ink);font-size:14px;text-align:left}
 .pmenu button:hover{background:#f0f2f5}
 .pmenu .rd{color:var(--r)}
@@ -105,6 +108,7 @@ body.tc #tg{left:0}
 #cats{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:10px}
 .cc{padding:7px 14px;border-radius:999px;background:#f0f2f5;color:var(--ink);font-weight:600;font-size:13px}
 .cc.on{background:var(--g);color:#fff}
+#st{position:fixed;inset:0;z-index:72;background:#fff;overflow-y:auto}
 #sty{display:flex;gap:8px;overflow-x:auto;padding:12px;scrollbar-width:none}
 #sty::-webkit-scrollbar{display:none}
 .sc{position:relative;flex:none;width:104px;height:176px;border-radius:14px;overflow:hidden;cursor:pointer;background:#ddd;color:#fff}
@@ -142,9 +146,15 @@ body.tc #tg{left:0}
 .svc{position:absolute;inset:0;display:flex;align-items:center;justify-content:center}
 .svc img{width:100%;height:100%;object-fit:contain}
 .svt{position:absolute;color:#fff;font-size:26px;font-weight:700;text-align:center;padding:24px;text-shadow:0 2px 8px rgba(0,0,0,.4);white-space:pre-wrap;word-break:break-word}
-.svt.cap{bottom:40px;font-size:18px;background:rgba(0,0,0,.45);border-radius:12px;left:16px;right:16px;padding:10px}
+.svt.cap{bottom:120px;font-size:18px;background:rgba(0,0,0,.45);border-radius:12px;left:16px;right:16px;padding:10px}
 .svz{position:absolute;top:80px;bottom:0;z-index:2;cursor:pointer}
 .svz.l{left:0;width:35%}.svz.r{right:0;width:65%}
+.svr{position:absolute;left:0;right:0;bottom:0;z-index:4;padding:24px 12px 18px;background:linear-gradient(transparent,rgba(0,0,0,.6));display:flex;flex-direction:column;align-items:center;gap:8px}
+.svr .em{display:flex;gap:6px;background:rgba(0,0,0,.45);border-radius:30px;padding:6px 10px}
+.svr .em span{font-size:28px;cursor:pointer;padding:2px 4px;border-radius:50%;transition:transform .12s}
+.svr .em span:active{transform:scale(1.4)}
+.svr .em span.on{background:rgba(255,255,255,.3)}
+.svr .who{color:#fff;font-size:13px;text-shadow:0 1px 4px rgba(0,0,0,.6);text-align:center}
 .chat{height:340px;overflow-y:auto;display:flex;flex-direction:column;gap:6px;padding:14px;background:#f7f8fa}
 .msg{max-width:80%;background:#fff;padding:8px 14px;border-radius:18px 18px 18px 4px;font-size:14px;align-self:flex-start;word-break:break-word;box-shadow:0 1px 3px rgba(0,0,0,.08)}
 .msg.me{background:linear-gradient(135deg,#27b567,var(--g));color:#fff;align-self:flex-end;border-radius:18px 18px 4px 18px}
@@ -177,10 +187,10 @@ body.tc #tg{left:0}
 }
 html.dark{--ink:#e4e6eb;--mut:#a0a6ae;--line:#2e3036;--sh:0 2px 14px rgba(0,0,0,.4);color-scheme:dark}
 html.dark body{background:linear-gradient(135deg,#1c1011 0%,#121316 50%,#0f1a14 100%) fixed}
-html.dark .card,html.dark #auth,html.dark #co{background:#1e2025}
+html.dark .card,html.dark #auth,html.dark #co,html.dark #st{background:#1e2025}
 html.dark #hd{background:rgba(30,32,37,.96)}
 html.dark #tabs{background:#1e2025}
-html.dark input,html.dark textarea,html.dark nav input{background:#2a2d33;border-color:#3a3d44;color:#e4e6eb}
+html.dark input,html.dark textarea,html.dark nav input,html.dark select{background:#2a2d33;border-color:#3a3d44;color:#e4e6eb}
 html.dark .btn.ghost{background:#2f3238;color:#ddd}
 html.dark .ib{background:#2f3238;color:#ddd}
 html.dark .mi:hover{background:#2a2d33}
@@ -253,10 +263,28 @@ html.dark #auth p{color:#a0a6ae!important}
   <button id="tg">‹</button>
   <div class="card" id="npn" hidden><div class="ct" data-i="notif"></div><div id="nl"></div></div>
   <div class="card" id="mnu" hidden>
+    <button class="mi" id="mpf"><span data-i="myProf"></span></button>
+    <button class="mi" id="stb"><span data-i="settings"></span></button>
     <button class="mi" id="th"><span class="mic" id="thi"></span><span id="thl"></span></button>
     <button class="mi" id="lgb"><svg class="ic" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.6 2.6 3.9 5.6 3.9 9s-1.3 6.4-3.9 9c-2.6-2.6-3.9-5.6-3.9-9S9.4 5.6 12 3z"/></svg><span id="lgl"></span></button>
     <button class="mi" id="out"><svg class="ic" viewBox="0 0 24 24"><path d="M9 4H5a1 1 0 0 0-1 1v14a1 1 0 0 0 1 1h4M16 8l4 4-4 4M20 12H9"/></svg><span data-i="logout"></span></button>
   </div>
+
+  <div id="st" hidden>
+    <div class="coh">
+      <button class="ib" id="stx">✕</button>
+      <b class="cot" data-i="settings"></b>
+      <span style="width:36px"></span>
+    </div>
+    <div class="pad">
+      <div class="name" data-i="defVis"></div>
+      <select id="sdv" style="width:100%;margin:6px 0 16px;padding:11px 14px"></select>
+      <button class="btn ghost" id="sep" style="width:100%;margin-bottom:10px" data-i="editProf"></button>
+      <button class="btn ghost" id="sth" style="width:100%;margin-bottom:10px" data-i="themeSw"></button>
+      <button class="btn ghost" id="stl" style="width:100%" data-i="langA"></button>
+    </div>
+  </div>
+
   <div id="lb" hidden><img></div>
 
   <div id="co" hidden>
@@ -271,6 +299,7 @@ html.dark #auth p{color:#a0a6ae!important}
       <div id="prev" style="padding:0 16px"></div>
     </div>
     <div class="cof">
+      <select id="cvis" style="width:auto;margin:0 0 10px;padding:8px 12px"></select>
       <div id="cats"></div>
       <label class="chip"><svg class="ic" viewBox="0 0 24 24" style="color:#27b567"><rect x="3" y="4" width="18" height="16" rx="3"/><circle cx="9" cy="10" r="1.8"/><path d="M4 18l5-5 4 4 3-3 4 4"/></svg><span data-i="gallery"></span><input id="file" type="file" accept="image/*" hidden></label>
     </div>
@@ -296,6 +325,7 @@ html.dark #auth p{color:#a0a6ae!important}
       <div class="svb" id="svb"></div>
       <div class="svh" id="svh"></div>
       <div class="svc" id="svc"></div>
+      <div class="svr" id="svr"></div>
       <div class="svz l" data-sz="-1"></div>
       <div class="svz r" data-sz="1"></div>
     </div>
@@ -402,7 +432,7 @@ my:{
  offB:"📴 အင်တာနက် မရှိပါ · Offline mode (ဖတ်ရုံသာ)",onB:"🟢 အင်တာနက် ပြန်ရပါပြီ",offAlert:"📴 အင်တာနက် မရှိပါ။ ဆက်သွယ်မှု ပြန်ရမှ လုပ်လို့ရပါမယ်။",
  saved:"သိမ်းပြီးပါပြီ ✅",posting:"တင်နေသည်...",postFail:"တင်မရပါ: ",sure:"သေချာလား?",delAsk:"ဖျက်မလား?",editAsk:"ပို့စ်ကို ပြင်ပါ",
  shareAsk:"မှတ်ချက်ထည့်မလား? (မထည့်လည်းရ)",shareOk:"မျှဝေပြီးပါပြီ ✅",noNotif:"အသိပေးချက် မရှိသေးပါ",
- nReact:"က သင့်ပို့စ်ကို Reaction ပေးသည်",nComment:"က သင့်ပို့စ်မှာ Comment ရေးသည်",nShare:"က သင့်ပို့စ်ကို Share လုပ်သည်",nFriend:"က သူငယ်ချင်းဖြစ်ဖို့ တောင်းဆိုသည်",
+ nReact:"က သင့်ပို့စ်ကို Reaction ပေးသည်",nComment:"က သင့်ပို့စ်မှာ Comment ရေးသည်",nShare:"က သင့်ပို့စ်ကို Share လုပ်သည်",nFriend:"က သူငယ်ချင်းဖြစ်ဖို့ တောင်းဆိုသည်",nSReact:"က သင့် My Day ကို Reaction ပေးသည်",
  appOn:"● App သုံးနေသည်",lastOff:"Offline · {n} သုံးသွားသည်",never:"App မသုံးသေးပါ",
  agoNow:"ခုနလေးက",agoM:"{n} မိနစ်က",agoH:"{n} နာရီက",agoD:"{n} ရက်က",mutual:"မိတ်ဆွေတူ {n} ယောက်",
  noFr:"သူငယ်ချင်း မရှိသေးပါ",none:"မတွေ့ပါ",back:"← နောက်သို့",onl:"🟢 Online",offl:"Offline",
@@ -410,7 +440,8 @@ my:{
  noPhoto:"ဓာတ်ပုံ မရှိသေးပါ",noPost:"ပို့စ်မရှိသေးပါ။",people:"👥 လူများ",shareTag:"မျှဝေသည်",edited:"ပြင်ပြီး",justNow:"ယခုလေးတင်",
  nCm:"{n} မှတ်ချက်",phCm:"မှတ်ချက်ရေးပါ...(Enter)",edit:"ပြင်မယ်",del:"ဖျက်မယ်",like:"Like",comment:"မှတ်ချက်",share:"မျှဝေမယ်",
  add:"➕ သူငယ်ချင်းထည့်မယ်",isFr:"✓ သူငယ်ချင်း",cancelReq:"ပယ်ဖျက်မယ်",confirm:"လက်ခံမယ်",delete:"ဖျက်မယ်",
- langA:"🌐 English",langM:"English",themeDark:"ညမုဒ်",themeLight:"နေ့မုဒ်"
+ langA:"🌐 English",langM:"English",themeDark:"ညမုဒ်",themeLight:"နေ့မုဒ်",
+ v_public:"🌐 အားလုံး (Public)",v_friends:"👥 သူငယ်ချင်းများ",v_private:"🔒 ကိုယ်တိုင်သာ (Only me)",noShare:"Public ပို့စ်ကိုသာ မျှဝေလို့ရပါတယ်",settings:"⚙️ Settings",defVis:"ပို့စ်အသစ်၏ မူလ privacy",themeSw:"🌓 နေ့/ညမုဒ် ပြောင်းမယ်"
 },
 en:{
  boot:"Loading...",phName:"Name",phEmail:"Email",phPw:"Password (min 6 characters)",login:"Login",or:"or",google:"🔵 Continue with Google",
@@ -425,7 +456,7 @@ en:{
  offB:"📴 No internet connection · Offline mode (read only)",onB:"🟢 Back online",offAlert:"📴 No internet connection. Please try again when you're back online.",
  saved:"Saved ✅",posting:"Posting...",postFail:"Could not post: ",sure:"Are you sure?",delAsk:"Delete this?",editAsk:"Edit your post",
  shareAsk:"Add a comment? (optional)",shareOk:"Shared ✅",noNotif:"No notifications yet",
- nReact:"reacted to your post",nComment:"commented on your post",nShare:"shared your post",nFriend:"sent you a friend request",
+ nReact:"reacted to your post",nComment:"commented on your post",nShare:"shared your post",nFriend:"sent you a friend request",nSReact:"reacted to your My Day",
  appOn:"● Active now",lastOff:"Offline · active {n}",never:"Hasn't used the app yet",
  agoNow:"just now",agoM:"{n} min ago",agoH:"{n} hr ago",agoD:"{n} d ago",mutual:"{n} mutual friends",
  noFr:"No friends yet",none:"Nothing found",back:"← Back",onl:"🟢 Online",offl:"Offline",
@@ -433,10 +464,16 @@ en:{
  noPhoto:"No photos yet",noPost:"No posts yet.",people:"👥 People",shareTag:"Shared",edited:"edited",justNow:"Just now",
  nCm:"{n} comments",phCm:"Write a comment...(Enter)",edit:"Edit",del:"Delete",like:"Like",comment:"Comment",share:"Share",
  add:"➕ Add Friend",isFr:"✓ Friends",cancelReq:"Cancel",confirm:"Confirm",delete:"Delete",
- langA:"🌐 မြန်မာဘာသာ",langM:"မြန်မာဘာသာ",themeDark:"Dark mode",themeLight:"Light mode"
+ langA:"🌐 မြန်မာဘာသာ",langM:"မြန်မာဘာသာ",themeDark:"Dark mode",themeLight:"Light mode",
+ v_public:"🌐 Public",v_friends:"👥 Friends",v_private:"🔒 Only me",noShare:"Only public posts can be shared",settings:"⚙️ Settings",defVis:"Default privacy for new posts",themeSw:"🌓 Switch theme"
 }};
 let lang="my";try{lang=localStorage.getItem("lang")||"my"}catch(e){}
 const t=(k,n)=>String(L[lang][k]??L.my[k]??k).replace("{n}",n??"");
+
+// ---------- Privacy (Public / Friends / Only me) ----------
+const VIS=["public","friends","private"];
+const vico=v=>v==="private"?"🔒":v==="friends"?"👥":"🌐";
+const defVis=()=>U(me.uid).defVis||"public";
 
 // ---------- Offline app shell ----------
 if("serviceWorker" in navigator)addEventListener("load",()=>navigator.serviceWorker.register("/sw.js").catch(()=>{}));
@@ -571,12 +608,39 @@ function markRead(){
   if(last>(reads()[peer]||0)){(U(me.uid).reads=reads())[peer]=last;if(navigator.onLine)updateDoc(doc(db,"users",me.uid),{[`reads.${peer}`]:last}).catch(()=>{});unreadUI()}
 }
 
+// ---------- Posts (privacy အလိုက် ဖတ်ခြင်း) ----------
+const pm={pub:[],mine:[],fr:{}},frU={};
+const pmap=s=>s.docs.map(d=>({id:d.id,...d.data()}));
+const tms=p=>p.createdAt?.toMillis?.()||Date.now();
+function mergeP(){
+  const m=new Map();
+  [...pm.pub,...pm.mine,...Object.values(pm.fr).flat()].forEach(p=>m.set(p.id,p));
+  posts=[...m.values()].sort((a,b)=>tms(b)-tms(a)).slice(0,60);keep(render);
+}
+function watchPosts(){
+  const P=collection(db,"posts");
+  onSnapshot(query(P,where("visibility","==","public")),s=>{pm.pub=pmap(s);mergeP()},e=>console.error(e));
+  onSnapshot(query(P,where("uid","==",me.uid)),s=>{
+    pm.mine=pmap(s);
+    s.docs.forEach(d=>{if(!d.data().visibility&&navigator.onLine)updateDoc(d.ref,{visibility:"public"}).catch(()=>{})});
+    mergeP();
+  },e=>console.error(e));
+}
+function watchFr(){
+  const a=accIds();
+  Object.keys(frU).forEach(i=>{if(!a.includes(i)){frU[i]();delete frU[i];delete pm.fr[i]}});
+  a.forEach(i=>{if(frU[i])return;
+    frU[i]=onSnapshot(query(collection(db,"posts"),where("uid","==",i),where("visibility","==","friends")),
+      s=>{pm.fr[i]=pmap(s);mergeP()},e=>console.error(e))});
+  mergeP();
+}
+
 // ---------- Live data ----------
 function start(){
   beat();setInterval(beat,90000);
   document.addEventListener("visibilitychange",()=>{if(!document.hidden)beat()});
   setInterval(()=>{keep(render);renderChat();storiesUI()},60000);
-  onSnapshot(query(collection(db,"friends"),where("users","array-contains",me.uid)),s=>{friends=s.docs.map(d=>d.data());fLoaded=true;syncFl();keep(render)},e=>console.error(e));
+  onSnapshot(query(collection(db,"friends"),where("users","array-contains",me.uid)),s=>{friends=s.docs.map(d=>d.data());fLoaded=true;syncFl();watchFr();keep(render)},e=>console.error(e));
   onSnapshot(query(collection(db,"notifs"),where("to","==",me.uid)),s=>{notifs=s.docs.map(d=>({id:d.id,...d.data()}));bellUI()},e=>console.error(e));
   onSnapshot(collection(db,"users"),s=>{users={};s.forEach(d=>users[d.id]=d.data());
     const m=U(me.uid);
@@ -584,7 +648,7 @@ function start(){
     $("#mcv").style.background=m.cover?`url('${m.cover}') center/cover`:"";
     Object.keys(users).slice(0,40).forEach(watchDM);
     syncFl();keep(render);unreadUI();bellUI();storiesUI()});
-  onSnapshot(query(collection(db,"posts"),orderBy("createdAt","desc"),limit(50)),s=>{posts=s.docs.map(d=>({id:d.id,...d.data()}));keep(render)});
+  watchPosts();
   onSnapshot(query(collection(db,"stories"),orderBy("createdAt","desc"),limit(60)),s=>{stories=s.docs.map(d=>({id:d.id,...d.data()}));storiesUI()},e=>console.error(e));
 }
 
@@ -593,6 +657,7 @@ const ntxt=n=>{const u=esc(U(n.from).name);
   return n.type==="react"?`${esc(n.emoji||"👍")} <b>${u}</b> ${t("nReact")}`
   :n.type==="comment"?`💬 <b>${u}</b> ${t("nComment")}`
   :n.type==="share"?`↗️ <b>${u}</b> ${t("nShare")}`
+  :n.type==="sreact"?`${esc(n.emoji||"👍")} <b>${u}</b> ${t("nSReact")}`
   :`👥 <b>${u}</b> ${t("nFriend")}`};
 function bellUI(){
   const sorted=[...notifs].sort((a,b)=>(b.createdAt?.toMillis?.()||Date.now())-(a.createdAt?.toMillis?.()||Date.now())).slice(0,30);
@@ -620,7 +685,9 @@ $("#cvf").onchange=e=>act(async()=>{const f=e.target.files[0];if(!f)return;await
 // ---------- Compose (Facebook-style full screen) ----------
 const syncPost=()=>{$("#post").disabled=posting||(!$("#txt").value.trim()&&!file)};
 function catsUI(){$("#cats").innerHTML=CATS.map(c=>`<button class="cc ${c===pcat?"on":""}" data-cc="${c}">${t("c_"+c)}</button>`).join("")}
-const openCo=pick=>{pcat=curCat();catsUI();$("#co").hidden=false;syncPost();setTimeout(()=>pick?$("#file").click():$("#txt").focus(),60)};
+const openCo=pick=>{pcat=curCat();catsUI();
+  $("#cvis").innerHTML=VIS.map(v=>`<option value="${v}">${t("v_"+v)}</option>`).join("");$("#cvis").value=defVis();
+  $("#co").hidden=false;syncPost();setTimeout(()=>pick?$("#file").click():$("#txt").focus(),60)};
 $("#oc").onclick=()=>openCo();
 $("#og").onclick=()=>openCo(true);
 $("#cc").onclick=()=>{$("#co").hidden=true};
@@ -630,7 +697,7 @@ $("#post").onclick=async()=>{
   if(offl())return;
   const text=$("#txt").value.trim();if(!text&&!file)return;const b=$("#post");posting=true;b.disabled=true;b.textContent=t("posting");
   try{
-    const data={uid:me.uid,text,image:file?await shrink(file,900):"",cat:pcat,reactions:{},commentCount:0,createdAt:serverTimestamp()};
+    const data={uid:me.uid,text,image:file?await shrink(file,900):"",cat:pcat,visibility:$("#cvis").value,reactions:{},commentCount:0,createdAt:serverTimestamp()};
     await addDoc(collection(db,"posts"),data);
     $("#txt").value="";$("#prev").innerHTML="";file=null;$("#file").value="";$("#co").hidden=true;
   }catch(e){alert(t("postFail")+(e.message||e))}
@@ -650,6 +717,7 @@ function storiesUI(){
   $("#sty").innerHTML=`<div class="sc cr" data-s="new"><img src="${esc(av(me.uid))}"><div class="plus">+</div><span>${t("createStory")}</span></div>`
    +ids.map(i=>{const l=g[i][g[i].length-1];
      return `<div class="sc" data-s="${i}" style="${l.image?"":"background:"+esc(l.bg||BG[0])}">${l.image?`<img class="bgi" src="${esc(l.image)}">`:`<div class="stx">${esc(l.text)}</div>`}<img class="ring" src="${esc(av(i))}"><span>${esc(i===me.uid?t("yourStory"):U(i).name)}</span></div>`}).join("");
+  if(!$("#sv").hidden)svBar();
 }
 function scrUI(){
   $("#scp").style.background=sFile?"#000":BG[sBg];
@@ -680,7 +748,26 @@ function showSv(){
   $("#svh").innerHTML=`<img class="av" src="${esc(av(sv.uid))}" style="width:36px;height:36px"><div style="flex:1;min-width:0"><div class="name">${esc(U(sv.uid).name)}</div><div class="time">${ago(sts(s))}</div></div>${sv.uid===me.uid?`<button class="svx" data-sx="del">${I_TRASH}</button>`:""}<button class="svx" data-sx="close">${I_X}</button>`;
   $("#svc").style.background=s.image?"#000":(s.bg||BG[0]);
   $("#svc").innerHTML=(s.image?`<img src="${esc(s.image)}">`:"")+(s.text?`<div class="svt ${s.image?"cap":""}">${esc(s.text)}</div>`:"");
+  svBar();
   svT=setTimeout(()=>{sv.i++;showSv()},5000);
+}
+function svBar(){
+  const s=(sg[sv.uid]||[])[sv.i];
+  if(!s){$("#svr").innerHTML="";return}
+  const rs=s.reactions||{},mine=rs[me.uid];
+  const who=sv.uid===me.uid?Object.entries(rs).map(([u,e])=>`${e} ${esc(U(u).name)}`).join(" · "):"";
+  $("#svr").innerHTML=`<div class="em">${EMO.map(e=>`<span data-sr="${e}" class="${mine===e?"on":""}">${e}</span>`).join("")}</div>${who?`<div class="who">${who}</div>`:""}`;
+}
+function reactStory(e){
+  const s=(sg[sv.uid]||[])[sv.i];if(!s)return;
+  const val=s.reactions?.[me.uid]===e?null:e;
+  s.reactions={...(s.reactions||{})};
+  if(val)s.reactions[me.uid]=val;else delete s.reactions[me.uid];
+  svBar();
+  act(async()=>{
+    await updateDoc(doc(db,"stories",s.id),{[`reactions.${me.uid}`]:val===null?deleteField():val});
+    if(val)notify(s.uid,"sreact",{emoji:val});
+  });
 }
 function openSv(uid){if(!sg[uid]?.length)return;sv={uid,i:0};showSv()}
 function delStory(){
@@ -701,9 +788,10 @@ function postHTML(p){
   const sh=p.shared?`<div class="shared"><div class="row"><img class="av" src="${esc(av(p.shared.uid))}" style="width:30px;height:30px"><span class="name">${esc(U(p.shared.uid).name)}</span></div><div>${esc(p.shared.text)}</div>${img(p.shared)}</div>`:"";
   const cl=openC.has(p.id)?`<div>${(comments[p.id]||[]).map(c=>`<div class="cm"><img class="av" src="${esc(av(c.uid))}" style="width:30px;height:30px"><div><b>${esc(U(c.uid).name)}</b><br>${esc(c.text)}</div></div>`).join("")}
     <div class="cm"><input data-ci="${p.id}" placeholder="${t("phCm")}" style="margin:0;border-radius:20px"></div></div>`:"";
+  const pv=p.visibility||"public";
   return `<div class="card pad" data-id="${p.id}">
-    <div class="row"><span data-pf="${p.uid}" style="cursor:pointer">${avw(p.uid)}</span><div><div class="name" data-pf="${p.uid}" style="cursor:pointer">${esc(U(p.uid).name)}${p.shared?` <span class='time'>${t("shareTag")}</span>`:""}</div><div class="time">${when(p.createdAt)}${p.edited?" · "+t("edited"):""}</div></div>
-    ${p.uid===me.uid?`<span class="pw"><button class="dots" data-a="menu">${I_DOTS}</button><div class="pmenu" hidden><button data-a="edit">${I_EDIT}<span>${t("edit")}</span></button><button class="rd" data-a="del">${I_TRASH}<span>${t("del")}</span></button></div></span>`:""}</div>
+    <div class="row"><span data-pf="${p.uid}" style="cursor:pointer">${avw(p.uid)}</span><div><div class="name" data-pf="${p.uid}" style="cursor:pointer">${esc(U(p.uid).name)}${p.shared?` <span class='time'>${t("shareTag")}</span>`:""}</div><div class="time">${when(p.createdAt)} · ${vico(pv)}${p.edited?" · "+t("edited"):""}</div></div>
+    ${p.uid===me.uid?`<span class="pw"><button class="dots" data-a="menu">${I_DOTS}</button><div class="pmenu" hidden><button data-a="edit">${I_EDIT}<span>${t("edit")}</span></button>${VIS.map(v=>`<button data-a="vis" data-v="${v}">${pv===v?"✓ ":""}${t("v_"+v)}</button>`).join("")}<button class="rd" data-a="del">${I_TRASH}<span>${t("del")}</span></button></div></span>`:""}</div>
     <div style="margin-top:8px;white-space:pre-wrap">${esc(p.text)}</div>${p.shared?sh:img(p)}
     <div class="sum"><span class="lc">${vals.length?`<span class="emo">${top}</span><span>${vals.length}</span>`:""}</span><span>${p.commentCount?t("nCm",p.commentCount):""}</span></div>
     <div class="acts">
@@ -764,6 +852,7 @@ document.addEventListener("click",e=>{
   if(e.target.closest("#lb")){$("#lb").hidden=true;return}
   const cc=e.target.closest("[data-cc]");if(cc){pcat=cc.dataset.cc;catsUI();return}
   const sc=e.target.closest("[data-s]");if(sc){sc.dataset.s==="new"?openScr():openSv(sc.dataset.s);return}
+  const sr=e.target.closest("[data-sr]");if(sr){reactStory(sr.dataset.sr);return}
   const sz=e.target.closest("[data-sz]");if(sz){sv.i=Math.max(0,sv.i+(+sz.dataset.sz));showSv();return}
   const sx=e.target.closest("[data-sx]");if(sx){sx.dataset.sx==="close"?closeSv():delStory();return}
   const sb=e.target.closest("[data-sb]");if(sb){sBg=+sb.dataset.sb;sFile=null;$("#sf").value="";scrUI();return}
@@ -771,6 +860,7 @@ document.addEventListener("click",e=>{
   const nt=e.target.closest("[data-n]");
   if(nt){$("#npn").hidden=true;
     if(nt.dataset.t==="friend")openProfile(nt.dataset.u);
+    else if(nt.dataset.t==="sreact"){view=null;setTab("home");render();scrollTo(0,0)}
     else{view=null;setTab("home");render();setTimeout(()=>document.querySelector(`[data-id="${nt.dataset.p}"]`)?.scrollIntoView({behavior:"smooth",block:"center"}),60)}
     return}
   if(e.target.closest("[data-bk]")){view=null;setTab("home");render();return}
@@ -791,9 +881,11 @@ document.addEventListener("click",e=>{
   }
   if(a==="cm"){if(openC.has(id))openC.delete(id);else{openC.add(id);subC(id)}render()}
   if(a==="edit"){$$(".pmenu").forEach(x=>x.hidden=true);const nt2=prompt(t("editAsk"),p.text||"");if(nt2===null)return;act(()=>updateDoc(doc(db,"posts",id),{text:nt2.trim(),edited:true}))}
+  if(a==="vis"){$$(".pmenu").forEach(x=>x.hidden=true);act(()=>updateDoc(doc(db,"posts",id),{visibility:ta.dataset.v}));return}
   if(a==="del"){$$(".pmenu").forEach(x=>x.hidden=true);if(confirm(t("delAsk")))act(()=>deleteDoc(doc(db,"posts",id)))}
-  if(a==="share"){const note=prompt(t("shareAsk"));if(note===null)return;const s=p.shared||p;
-    act(()=>addDoc(collection(db,"posts"),{uid:me.uid,text:note,image:"",cat:catOf(p),reactions:{},commentCount:0,createdAt:serverTimestamp(),
+  if(a==="share"){if((p.visibility||"public")!=="public"){alert(t("noShare"));return}
+    const note=prompt(t("shareAsk"));if(note===null)return;const s=p.shared||p;
+    act(()=>addDoc(collection(db,"posts"),{uid:me.uid,text:note,image:"",cat:catOf(p),visibility:defVis(),reactions:{},commentCount:0,createdAt:serverTimestamp(),
       shared:{uid:s.uid,text:s.text||"",image:s.image||""}}).then(()=>{notify(s.uid,"share",{postId:id});alert(t("shareOk"))}))}
 });
 // ဖုန်းမှာ Like ကိုဖိထားရင် Emoji ပေါ်
@@ -861,6 +953,20 @@ function applyLang(){
 }
 const toggleLang=()=>{lang=lang==="my"?"en":"my";try{localStorage.setItem("lang",lang)}catch(e){}$("#mnu").hidden=true;applyLang()};
 $("#lgb").onclick=toggleLang;$("#lga").onclick=toggleLang;
+
+// ---------- Settings ----------
+$("#mpf").onclick=()=>{$("#mnu").hidden=true;openProfile("me")};
+$("#stb").onclick=()=>{
+  $("#mnu").hidden=true;
+  $("#sdv").innerHTML=VIS.map(v=>`<option value="${v}">${t("v_"+v)}</option>`).join("");
+  $("#sdv").value=defVis();$("#st").hidden=false;
+};
+$("#stx").onclick=()=>{$("#st").hidden=true};
+$("#sdv").onchange=e=>act(()=>updateDoc(doc(db,"users",me.uid),{defVis:e.target.value}));
+$("#sep").onclick=()=>{$("#st").hidden=true;openProfile("me");setTimeout(()=>document.querySelector("[data-edit]")?.click(),80)};
+$("#sth").onclick=()=>$("#th").click();
+$("#stl").onclick=toggleLang;
+
 applyLang();
 </script>
 </body></html>
