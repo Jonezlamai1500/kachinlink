@@ -16,25 +16,30 @@ input,textarea{font:inherit;width:100%;padding:11px 14px;border:1.5px solid #e3e
 input:focus,textarea:focus{border-color:var(--g);box-shadow:0 0 0 3px rgba(31,157,85,.15)}
 textarea{resize:none}
 .btn{background:linear-gradient(135deg,#e8343e,var(--r));color:#fff;padding:9px 18px;border-radius:999px;font-weight:600;box-shadow:0 3px 10px rgba(217,35,45,.28)}
-.btn:hover{transform:translateY(-1px)}.btn:active{transform:scale(.97)}
+.btn:active{transform:scale(.97)}
 .btn.g{background:linear-gradient(135deg,#27b567,var(--g));box-shadow:0 3px 10px rgba(31,157,85,.3)}
-.btn.ghost{background:#eef0f3;color:#444;box-shadow:none}.btn.ghost:hover{background:#e3e6ea}.btn:disabled{opacity:.5}
-.logo{font-size:22px;font-weight:800;color:var(--r);letter-spacing:-.3px}.logo i{font-style:normal;color:var(--g)}
+.btn.ghost{background:#eef0f3;color:#444;box-shadow:none}.btn:disabled{opacity:.5}
+.logo{font-size:22px;font-weight:800;color:var(--r)}.logo i{font-style:normal;color:var(--g)}
 .card{background:#fff;border-radius:18px;box-shadow:var(--sh);margin-bottom:16px;overflow:hidden}
 .pad{padding:16px}.ct{font-weight:700;padding:14px 16px;border-bottom:1px solid var(--line)}
-#auth{max-width:390px;margin:9vh auto;padding:32px 26px;background:rgba(255,255,255,.95);border-radius:24px;box-shadow:0 20px 50px rgba(0,0,0,.18);text-align:center;border-top:5px solid;border-image:linear-gradient(90deg,var(--r) 50%,var(--g) 50%) 1}
+#auth{width:calc(100% - 56px);max-width:320px;margin:14vh auto;padding:22px 18px;background:#fff;border-radius:20px;box-shadow:0 12px 36px rgba(0,0,0,.18);text-align:center;border-top:5px solid var(--g)}
+#auth .logo{font-size:26px!important}
+#auth p{font-size:14px;margin:2px 0 10px!important}
+#auth input{padding:10px 12px;font-size:15px}
+#auth .btn{padding:10px;font-size:15px}
 #auth a{color:var(--g);cursor:pointer;font-size:14px;font-weight:600}
-nav{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.85);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);box-shadow:0 2px 12px rgba(0,0,0,.08);display:flex;align-items:center;gap:14px;padding:10px 18px;border-bottom:3px solid;border-image:linear-gradient(90deg,var(--r) 50%,var(--g) 50%) 1}
+.or{margin:6px 0 2px;color:#999;font-size:12px}
+nav{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.9);box-shadow:0 2px 12px rgba(0,0,0,.08);display:flex;align-items:center;gap:14px;padding:10px 18px;border-bottom:3px solid var(--r)}
 nav input{max-width:320px;margin:0;background:#f0f2f5;border-color:transparent;border-radius:999px}nav .sp{flex:1}
 .wrap{max-width:1100px;margin:18px auto;padding:0 12px;display:grid;grid-template-columns:270px 1fr 300px;gap:18px;align-items:start}
 .cover{height:84px;background:linear-gradient(120deg,var(--r) 50%,var(--g) 50%)}
 .prof{text-align:center;margin-top:-46px}
 .big{width:92px;height:92px;border-radius:50%;object-fit:cover;border:4px solid #fff;background:#ccc;box-shadow:0 4px 14px rgba(0,0,0,.2)}
 .stats{display:flex;border-top:1px solid var(--line)}.stats div{flex:1;text-align:center;padding:12px;font-size:13px;color:var(--mut)}
-.stats div+div{border-left:1px solid var(--line)}.stats b{display:block;font-size:19px;color:var(--ink)}
-.av{width:42px;height:42px;border-radius:50%;object-fit:cover;background:#ccc;flex:none;box-shadow:0 0 0 2px #fff,0 0 0 3.5px #e8eaed}
+.stats b{display:block;font-size:19px;color:var(--ink)}
+.av{width:42px;height:42px;border-radius:50%;object-fit:cover;background:#ccc;flex:none}
 .row{display:flex;gap:10px;align-items:center}
-.sg{display:flex;gap:12px;align-items:center;padding:9px 16px;cursor:pointer;transition:.15s}.sg:hover{background:#f4f6f8;padding-left:20px}
+.sg{display:flex;gap:12px;align-items:center;padding:9px 16px;cursor:pointer}.sg:hover{background:#f4f6f8}
 .top{border-top:4px solid var(--r)}
 .name{font-weight:600}.time{font-size:12px;color:#8a919a}
 .media{width:calc(100% + 32px);margin:10px -16px 0;max-height:520px;object-fit:contain;background:#111;display:block}
@@ -47,9 +52,9 @@ nav input{max-width:320px;margin:0;background:#f0f2f5;border-color:transparent;b
 .lw{position:relative}
 .pk{display:none;position:absolute;bottom:46px;left:0;background:#fff;border-radius:30px;box-shadow:0 6px 20px rgba(0,0,0,.22);padding:6px 10px;z-index:5}
 .lw:hover .pk,.pk.show{display:flex}
-.pk span{font-size:28px;cursor:pointer;padding:2px 4px;transition:transform .12s}.pk span:hover{transform:scale(1.4) translateY(-4px)}
+.pk span{font-size:28px;cursor:pointer;padding:2px 4px;transition:transform .12s}.pk span:hover{transform:scale(1.4)}
 .cm{display:flex;gap:8px;margin-top:10px}.cm div{background:#f0f2f5;border-radius:18px;padding:8px 14px;font-size:14px}
-.del{color:var(--r);font-size:12px;background:none;margin-left:auto;padding:6px 10px;border-radius:8px}.del:hover{background:#fdecec}
+.del{color:var(--r);font-size:12px;background:none;margin-left:auto;padding:6px 10px;border-radius:8px}
 #prev img{max-width:100%;max-height:240px;border-radius:14px;margin-top:8px}
 .chat{height:340px;overflow-y:auto;display:flex;flex-direction:column;gap:6px;padding:14px;background:#f7f8fa}
 .msg{max-width:80%;background:#fff;padding:8px 14px;border-radius:18px 18px 18px 4px;font-size:14px;align-self:flex-start;word-break:break-word;box-shadow:0 1px 3px rgba(0,0,0,.08)}
@@ -58,41 +63,40 @@ nav input{max-width:320px;margin:0;background:#f0f2f5;border-color:transparent;b
 @media(max-width:900px){
  .wrap{grid-template-columns:1fr;padding-bottom:76px}
  body[data-t=home] #L,body[data-t=home] #R,body[data-t=chat] #L,body[data-t=chat] #C,body[data-t=me] #C,body[data-t=me] #R{display:none}
- #tabs{display:flex;position:fixed;bottom:0;left:0;right:0;background:rgba(255,255,255,.92);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);box-shadow:0 -2px 14px rgba(0,0,0,.1);z-index:20;padding-bottom:env(safe-area-inset-bottom,0)}
+ #tabs{display:flex;position:fixed;bottom:0;left:0;right:0;background:rgba(255,255,255,.95);box-shadow:0 -2px 14px rgba(0,0,0,.1);z-index:20}
  #tabs button{flex:1;background:none;padding:13px;font-size:15px;color:var(--mut)}#tabs button.on{color:var(--r);font-weight:700;border-top:3px solid var(--r)}
  nav input{max-width:none}.chat{height:60vh}
 }
-.tg{padding:8px 12px}#auth .tg{position:absolute;top:12px;right:12px}#auth{position:relative}
-html.dk{--ink:#e4e6eb;--mut:#a0a6ae;--line:#2e3036;--sh:0 2px 14px rgba(0,0,0,.4);color-scheme:dark}
-html.dk body{background:linear-gradient(135deg,#1c1011 0%,#121316 50%,#0f1a14 100%) fixed}
-html.dk .card{background:#1e2025}
-html.dk #auth{background:rgba(30,32,37,.96)}
-html.dk nav,html.dk #tabs{background:rgba(30,32,37,.88)}
-html.dk input,html.dk textarea{background:#2a2d33;border-color:#3a3d44;color:#e4e6eb}
-html.dk nav input{background:#2a2d33;border-color:transparent}
-html.dk .btn.ghost{background:#2f3238;color:#ddd}html.dk .btn.ghost:hover{background:#3a3d44}
-html.dk [style*="#eee"]{border-color:#2e3036!important}
-html.dk .sg:hover,html.dk .acts button:hover{background:#2a2d33}
-html.dk .cm div,html.dk .msg{background:#2a2d33}
-html.dk .msg.me{background:linear-gradient(135deg,#27b567,var(--g))}
-html.dk .chat{background:#17181b}
-html.dk .shared{background:#24262b;border-color:#3a3d44}
-html.dk .pk{background:#2a2d33}
-html.dk .av{box-shadow:0 0 0 2px #1e2025,0 0 0 3.5px #3a3d44}
-html.dk .big{border-color:#1e2025}
-html.dk .time{color:#9aa0a8}
-html.dk .del:hover{background:#3a1d20}
-html.dk #auth p{color:#a0a6ae!important}
-</style></head><body data-t="home">
+@media(prefers-color-scheme:dark){
+ :root{--ink:#e4e6eb;--mut:#a0a6ae;--line:#2e3036;--sh:0 2px 14px rgba(0,0,0,.4);color-scheme:dark}
+ body{background:linear-gradient(135deg,#1c1011 0%,#121316 50%,#0f1a14 100%) fixed}
+ .card,#auth{background:#1e2025}
+ nav,#tabs{background:rgba(30,32,37,.95)}
+ input,textarea,nav input{background:#2a2d33;border-color:#3a3d44;color:#e4e6eb}
+ .btn.ghost{background:#2f3238;color:#ddd}
+ [style*="#eee"]{border-color:#2e3036!important}
+ .sg:hover,.acts button:hover{background:#2a2d33}
+ .cm div,.msg{background:#2a2d33}
+ .msg.me{background:linear-gradient(135deg,#27b567,var(--g))}
+ .chat{background:#17181b}
+ .shared{background:#24262b;border-color:#3a3d44}
+ .pk{background:#2a2d33}
+ .big{border-color:#1e2025}
+ .time{color:#9aa0a8}
+ #auth p{color:#a0a6ae!important}
+}
+</style>
+</head><body data-t="home">
 
 <div id="auth">
-  <button class="btn ghost tg">🌙</button>
-  <div class="logo" style="font-size:32px">Kachin <i>Link</i></div>
-  <p style="color:#777;margin:4px 0 14px">Hkap Tau La Ga Ai</p>
+  <div class="logo" style="font-size:30px">Kachin <i>Link</i></div>
+  <p style="color:#777;margin-top:4px">Hkap Tau La Ga Ai</p>
   <input id="rn" placeholder="Name" hidden>
   <input id="em" type="email" placeholder="Email">
   <input id="pw" type="password" placeholder="Password (6 Number )">
-  <button class="btn g" id="go" style="width:100%;margin:10px 0">Login</button>
+  <button class="btn g" id="go" style="width:100%;margin:8px 0">Login</button>
+  <div class="or">သို့မဟုတ်</div>
+  <button class="btn ghost" id="gg" style="width:100%;margin:6px 0">🔵 Google နဲ့ ဝင်မယ်</button>
   <div id="err" style="color:var(--r);font-size:13px"></div>
   <a id="sw">New Creat Account</a>
 </div>
@@ -102,7 +106,6 @@ html.dk #auth p{color:#a0a6ae!important}
     <div class="logo">Kachin <i>Link</i></div>
     <input id="q" placeholder="🔍 Find...">
     <span class="sp"></span>
-    <button class="btn ghost tg">🌙</button>
     <button class="btn ghost" id="out">Logout</button>
   </nav>
 
@@ -143,7 +146,7 @@ html.dk #auth p{color:#a0a6ae!important}
             <img class="av" id="pa"><b id="pnm"></b>
           </div>
           <div class="chat" id="msgs"></div>
-          <div class="row pad" style="padding-top:8px"><input id="ci" placeholder="စာရိုက်ပါ..."><button class="btn g" id="cs">ပို့</button></div>
+          <div class="row pad" style="padding-top:0"><input id="ci" placeholder="စာရိုက်ပါ..."><button class="btn g" id="cs">ပို့</button></div>
         </div>
       </div>
     </aside>
@@ -154,7 +157,7 @@ html.dk #auth p{color:#a0a6ae!important}
 
 <script type="module">
 import {initializeApp} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-import {getAuth,onAuthStateChanged,createUserWithEmailAndPassword,signInWithEmailAndPassword,signOut} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+import {getAuth,onAuthStateChanged,createUserWithEmailAndPassword,signInWithEmailAndPassword,signOut,GoogleAuthProvider,signInWithPopup,signInWithRedirect} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 import {getFirestore,collection,doc,setDoc,getDoc,addDoc,updateDoc,deleteDoc,deleteField,onSnapshot,query,orderBy,limit,serverTimestamp,increment} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 const firebaseConfig = {
@@ -169,12 +172,6 @@ const DEF="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox=
 let me=null,users={},posts=[],comments={},openC=new Set(),file=null,reg=false,started=false,q="";
 let peer=null,dmMsgs=[],unDM=null;
 
-// ---------- Dark mode ----------
-const dk=m=>{document.documentElement.classList.toggle("dk",m);$$(".tg").forEach(b=>b.textContent=m?"☀️":"🌙");try{localStorage.setItem("th",m?"d":"l")}catch{}};
-let th;try{th=localStorage.getItem("th")}catch{}
-dk(th?th==="d":matchMedia("(prefers-color-scheme:dark)").matches);
-$$(".tg").forEach(b=>b.onclick=()=>dk(!document.documentElement.classList.contains("dk")));
-
 // ---------- Auth ----------
 $("#sw").onclick=()=>{reg=!reg;$("#rn").hidden=!reg;$("#go").textContent=reg?"Creat Account":"Login";$("#sw").textContent=reg?"အကောင့်ရှိပြီးသား - Login":"New Creat Account"};
 $("#go").onclick=async()=>{
@@ -185,11 +182,21 @@ $("#go").onclick=async()=>{
     else await signInWithEmailAndPassword(auth,e,p);
   }catch(x){$("#err").textContent=x.code||x.message}
 };
+$("#gg").onclick=async()=>{
+  $("#err").textContent="";
+  const gp=new GoogleAuthProvider();
+  try{await signInWithPopup(auth,gp)}
+  catch(x){
+    if(x.code==="auth/popup-blocked"||x.code==="auth/operation-not-supported-in-this-environment"){
+      try{await signInWithRedirect(auth,gp)}catch(y){$("#err").textContent=y.code||y.message}
+    }else if(x.code!=="auth/popup-closed-by-user"){$("#err").textContent=x.code||x.message}
+  }
+};
 $("#out").onclick=async()=>{await signOut(auth);location.reload()};
 onAuthStateChanged(auth,async u=>{
   if(!u)return;me=u;
   const d=await getDoc(doc(db,"users",u.uid));
-  if(!d.exists())await setDoc(doc(db,"users",u.uid),{name:(u.email||"user").split("@")[0],photo:"",createdAt:serverTimestamp()});
+  if(!d.exists())await setDoc(doc(db,"users",u.uid),{name:u.displayName||(u.email||"user").split("@")[0],photo:u.photoURL||"",createdAt:serverTimestamp()});
   $("#auth").hidden=true;$("#app").hidden=false;
   if(!started){started=true;start()}
 });
