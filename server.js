@@ -22,8 +22,6 @@ app.use(session({
 app.get("/auth/facebook", (req, res) => {
   const state = crypto.randomBytes(16).toString("hex");
   req.session.state = state;
-  const url = "https://www.facebook.com/v19.0/dialog/oauth" +
-    "?client_id=" + APP_ID +
-    "&redirect_uri=" + encodeURIComponent(REDIRECT) +
-    "&state=" + state +
-    "&scope=public_profile
+  const url = `https://www.facebook.com/v19.0/dialog/oauth?client_id=${APP_ID}&redirect_uri=${encodeURIComponent(REDIRECT)}&state=${state}&scope=public_profile`;
+  res.redirect(url);
+});
