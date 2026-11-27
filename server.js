@@ -1,25 +1,29 @@
 const express = require("express");
+const session = require("express-session");
+const crypto = require("crypto");
 const path = require("path");
 
 const app = express();
 const pub = path.join(__dirname, "public");
 
-app.get("/sw.js", (req, res) => {
-  res.set("Content-Type", "application/javascript");
-  res.set("Cache-Control", "no-cache");
-  res.sendFile(path.join(pub, "sw.js"));
-});
+const APP_ID = process.env.FB_APP_ID;
+const APP_SECRET = process.env.FB_APP_SECRET;
+const BASE_URL = process.env.BASE_URL;
+const REDIRECT = BASE_URL + "/auth/facebook/callback";
 
-app.get("/manifest.json", (req, res) => {
-  res.set("Content-Type", "application/manifest+json");
-  res.sendFile(path.join(pub, "manifest.json"));
-});
+app.set("trust proxy", 1);
+app.use(session({
+  secret: process.env.SESSION_SECRET || "change-me",
+  resave: false,
+  saveUninitialized: false,
+  cookie: { secure: true, httpOnly: true, sameSite: "lax", maxAge: 7 * 24 * 3600 * 1000 }
+}));
 
-app.use(express.static(pub));
-
-app.use((req, res) => {
-  res.sendFile(path.join(pub, "index.html"));
-});
-
-const port = process.env.PORT || 3000;
-app.listen(port, () => console.log("Running on " + port));
+app.get("/auth/facebook", (req, res) => {
+  const state = crypto.randomBytes(16).toString("hex");
+  req.session.state = state;
+  const url = "https://www.facebook.com/v19.0/dialog/oauth" +
+    "?client_id=" + APP_ID +
+    "&redirect_uri=" + encodeURIComponent(REDIRECT) +
+    "&state=" + state +
+    "&scope=public_profile
