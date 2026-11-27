@@ -232,6 +232,7 @@ html.dark #auth p{color:#a0a6ae!important}
   <button class="btn g" id="go" style="width:100%;margin:8px 0">Login</button>
   <div class="or" data-i="or"></div>
   <button class="btn ghost" id="gg" style="width:100%;margin:6px 0" data-i="google"></button>
+  <button class="btn ghost" id="fbb" style="width:100%;margin:6px 0">🔷 Facebook</button>
   <div id="err" style="color:var(--r);font-size:13px"></div>
   <a id="sw"></a>
   <div style="margin-top:12px"><a id="lga"></a></div>
@@ -389,7 +390,7 @@ html.dark #auth p{color:#a0a6ae!important}
 
 <script type="module">
 import {initializeApp} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-import {initializeAuth,indexedDBLocalPersistence,browserLocalPersistence,browserPopupRedirectResolver,onAuthStateChanged,createUserWithEmailAndPassword,signInWithEmailAndPassword,signOut,GoogleAuthProvider,signInWithPopup,signInWithRedirect} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+import {initializeAuth,indexedDBLocalPersistence,browserLocalPersistence,browserPopupRedirectResolver,onAuthStateChanged,createUserWithEmailAndPassword,signInWithEmailAndPassword,signOut,GoogleAuthProvider,FacebookAuthProvider,signInWithPopup,signInWithRedirect} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 import {initializeFirestore,persistentLocalCache,persistentMultipleTabManager,collection,doc,setDoc,getDoc,addDoc,updateDoc,deleteDoc,deleteField,onSnapshot,query,orderBy,limit,where,serverTimestamp,increment} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 const firebaseConfig = {
@@ -546,6 +547,17 @@ $("#gg").onclick=async()=>{
   catch(x){
     if(x.code==="auth/popup-blocked"||x.code==="auth/operation-not-supported-in-this-environment"){
       try{await signInWithRedirect(auth,gp)}catch(y){$("#err").textContent=y.code||y.message}
+    }else if(x.code!=="auth/popup-closed-by-user"){$("#err").textContent=x.code||x.message}
+  }
+};
+$("#fbb").onclick=async()=>{
+  if(offl())return;
+  $("#err").textContent="";
+  const fp=new FacebookAuthProvider();
+  try{await signInWithPopup(auth,fp)}
+  catch(x){
+    if(x.code==="auth/popup-blocked"||x.code==="auth/operation-not-supported-in-this-environment"){
+      try{await signInWithRedirect(auth,fp)}catch(y){$("#err").textContent=y.code||y.message}
     }else if(x.code!=="auth/popup-closed-by-user"){$("#err").textContent=x.code||x.message}
   }
 };
@@ -982,7 +994,4 @@ applyLang();
 })();
 </script>
 </body>
-
-
-
 </html>
