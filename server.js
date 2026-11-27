@@ -31,8 +31,18 @@ app.get("/auth/facebook", (req, res) => {
 
 app.get("/auth/facebook/callback", async (req, res) => {
   try {
+
     if (!req.query.code || req.query.state !== req.session.state) {
-      return res.redirect("/?login=failed");
+  console.log("STATE CHECK FAILED", {
+    hasCode: !!req.query.code,
+    queryState: req.query.state,
+    sessionState: req.session.state,
+    fbError: req.query.error_description || req.query.error
+  });
+  return res.redirect("/?login=failed");
+}
+
+    
     }
     const tokenUrl = `https://graph.facebook.com/v19.0/oauth/access_token?client_id=${APP_ID}&redirect_uri=${encodeURIComponent(REDIRECT)}&client_secret=${APP_SECRET}&code=${encodeURIComponent(req.query.code)}`;
     const token = await (await fetch(tokenUrl)).json();
