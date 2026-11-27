@@ -29,7 +29,7 @@ textarea{resize:none}
 #auth .btn{padding:10px;font-size:15px}
 #auth a{color:var(--g);cursor:pointer;font-size:14px;font-weight:600}
 .or{margin:6px 0 2px;color:#999;font-size:12px}
-nav{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.9);box-shadow:0 2px 12px rgba(0,0,0,.08);display:flex;align-items:center;gap:14px;padding:10px 18px;border-bottom:3px solid var(--r)}
+nav{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.9);box-shadow:0 2px 12px rgba(0,0,0,.08);display:flex;align-items:center;gap:10px;padding:10px 18px;border-bottom:3px solid var(--r)}
 nav input{max-width:320px;margin:0;background:#f0f2f5;border-color:transparent;border-radius:999px}nav .sp{flex:1}
 .wrap{max-width:1100px;margin:18px auto;padding:0 12px;display:grid;grid-template-columns:270px 1fr 300px;gap:18px;align-items:start}
 .cover{height:84px;background:linear-gradient(120deg,var(--r) 50%,var(--g) 50%)}
@@ -39,7 +39,7 @@ nav input{max-width:320px;margin:0;background:#f0f2f5;border-color:transparent;b
 .stats b{display:block;font-size:19px;color:var(--ink)}
 .av{width:42px;height:42px;border-radius:50%;object-fit:cover;background:#ccc;flex:none}
 .row{display:flex;gap:10px;align-items:center}
-.sg{display:flex;gap:12px;align-items:center;padding:9px 16px;cursor:pointer}.sg:hover{background:#f4f6f8}
+.sg{display:flex;gap:10px;align-items:center;padding:9px 16px;cursor:pointer}.sg:hover{background:#f4f6f8}
 .top{border-top:4px solid var(--r)}
 .name{font-weight:600}.time{font-size:12px;color:#8a919a}
 .media{width:calc(100% + 32px);margin:10px -16px 0;max-height:520px;object-fit:contain;background:#111;display:block}
@@ -59,13 +59,22 @@ nav input{max-width:320px;margin:0;background:#f0f2f5;border-color:transparent;b
 .chat{height:340px;overflow-y:auto;display:flex;flex-direction:column;gap:6px;padding:14px;background:#f7f8fa}
 .msg{max-width:80%;background:#fff;padding:8px 14px;border-radius:18px 18px 18px 4px;font-size:14px;align-self:flex-start;word-break:break-word;box-shadow:0 1px 3px rgba(0,0,0,.08)}
 .msg.me{background:linear-gradient(135deg,#27b567,var(--g));color:#fff;align-self:flex-end;border-radius:18px 18px 4px 18px}
+.msg img{max-width:100%;border-radius:12px;display:block}
+.aw{position:relative;display:inline-block;flex:none;line-height:0}
+.dot{position:absolute;right:0;bottom:0;width:12px;height:12px;border-radius:50%;background:#31c552;border:2px solid #fff}
+.big+.dot{width:18px;height:18px;right:4px;bottom:6px}
+.bdg{background:var(--r);color:#fff;border-radius:999px;font-size:11px;padding:1px 6px;margin-left:4px;font-weight:700;font-style:normal;line-height:1.4}
+#bell{position:relative;padding:9px 14px}#bb{position:absolute;top:-5px;right:-5px;margin:0}
+#npn{position:fixed;top:62px;right:8px;width:min(340px,calc(100vw - 16px));max-height:70vh;overflow-y:auto;z-index:40;margin:0}
+.nt{padding:10px 16px;cursor:pointer;font-size:14px;border-bottom:1px solid var(--line)}.nt:hover{background:#f4f6f8}.nt.fr{background:#fff1f1}
+.bio{font-size:13px;color:var(--mut);padding:0 16px 12px;white-space:pre-wrap;text-align:center}
 #tabs{display:none}
 @media(max-width:900px){
  .wrap{grid-template-columns:1fr;padding-bottom:76px}
  body[data-t=home] #L,body[data-t=home] #R,body[data-t=chat] #L,body[data-t=chat] #C,body[data-t=me] #C,body[data-t=me] #R{display:none}
  #tabs{display:flex;position:fixed;bottom:0;left:0;right:0;background:rgba(255,255,255,.95);box-shadow:0 -2px 14px rgba(0,0,0,.1);z-index:20}
  #tabs button{flex:1;background:none;padding:13px;font-size:15px;color:var(--mut)}#tabs button.on{color:var(--r);font-weight:700;border-top:3px solid var(--r)}
- nav input{max-width:none}.chat{height:60vh}
+ nav input{max-width:none;min-width:0}.chat{height:60vh}nav{padding:10px 10px;gap:6px}nav .logo{display:none}
 }
 html.dark{--ink:#e4e6eb;--mut:#a0a6ae;--line:#2e3036;--sh:0 2px 14px rgba(0,0,0,.4);color-scheme:dark}
 html.dark body{background:linear-gradient(135deg,#1c1011 0%,#121316 50%,#0f1a14 100%) fixed}
@@ -74,13 +83,15 @@ html.dark nav,html.dark #tabs{background:rgba(30,32,37,.95)}
 html.dark input,html.dark textarea,html.dark nav input{background:#2a2d33;border-color:#3a3d44;color:#e4e6eb}
 html.dark .btn.ghost{background:#2f3238;color:#ddd}
 html.dark [style*="#eee"]{border-color:#2e3036!important}
-html.dark .sg:hover,html.dark .acts button:hover{background:#2a2d33}
+html.dark .sg:hover,html.dark .acts button:hover,html.dark .nt:hover{background:#2a2d33}
 html.dark .cm div,html.dark .msg{background:#2a2d33}
 html.dark .msg.me{background:linear-gradient(135deg,#27b567,var(--g))}
 html.dark .chat{background:#17181b}
 html.dark .shared{background:#24262b;border-color:#3a3d44}
 html.dark .pk{background:#2a2d33}
 html.dark .big{border-color:#1e2025}
+html.dark .dot{border-color:#1e2025}
+html.dark .nt.fr{background:#2a1c1d}
 html.dark .time{color:#9aa0a8}
 html.dark #auth p{color:#a0a6ae!important}
 </style>
@@ -104,19 +115,24 @@ html.dark #auth p{color:#a0a6ae!important}
     <div class="logo">Kachin <i>Link</i></div>
     <input id="q" placeholder="🔍 Find...">
     <span class="sp"></span>
+    <button class="btn ghost" id="bell">🔔<b class="bdg" id="bb" hidden>0</b></button>
     <button class="btn ghost" id="th">🌙</button>
     <button class="btn ghost" id="out">Logout</button>
   </nav>
+  <div class="card" id="npn" hidden><div class="ct">🔔 Notifications</div><div id="nl"></div></div>
 
   <div class="wrap">
     <aside id="L">
       <div class="card">
-        <div class="cover"></div>
-        <div class="prof"><img class="big myav"><div class="name" id="mn" style="font-size:18px;margin:6px 0 10px"></div></div>
+        <div class="cover" id="mcv"></div>
+        <div class="prof"><img class="big myav"><div class="name" id="mn" style="font-size:18px;margin:6px 0 4px"></div></div>
+        <div class="bio" id="mb"></div>
         <div class="stats"><div>Posts<b id="np">0</b></div><div>Friends<b id="nu">0</b></div></div>
         <div class="pad" style="border-top:1px solid #eee">
           <label class="btn ghost" style="display:block;text-align:center">📷 ပုံပြောင်းမယ်<input id="avf" type="file" accept="image/*" hidden></label>
+          <label class="btn ghost" style="display:block;text-align:center;margin-top:6px">🖼 Cover ပြောင်းမယ်<input id="cvf" type="file" accept="image/*" hidden></label>
           <input id="pn" placeholder="Change Profile ">
+          <textarea id="pbio" rows="2" placeholder="Bio (ကိုယ်ရေးအကျဉ်း)"></textarea>
           <button class="btn g" id="sn" style="width:100%">Save Profile </button>
         </div>
       </div>
@@ -126,7 +142,8 @@ html.dark #auth p{color:#a0a6ae!important}
     </aside>
 
     <main id="C">
-      <div class="card top pad">
+      <div id="pv"></div>
+      <div class="card top pad" id="cmp">
         <div class="row" style="align-items:flex-start"><img class="av myav"><textarea id="txt" rows="2" placeholder="What's on your mind?"></textarea></div>
         <div id="prev"></div>
         <div class="row" style="justify-content:space-between;margin-top:6px">
@@ -139,21 +156,24 @@ html.dark #auth p{color:#a0a6ae!important}
     </main>
 
     <aside id="R">
-      <div class="card"><div class="ct">💬 Messages</div>
+      <div class="card"><div class="ct">💬 Messages<b class="bdg" id="tb2" hidden></b></div>
         <div id="plist"></div>
         <div id="conv" hidden>
           <div class="row pad" style="border-bottom:1px solid #eee;padding:8px 14px">
             <button class="btn ghost" id="bk" style="padding:6px 12px">←</button>
-            <img class="av" id="pa"><b id="pnm"></b>
+            <span class="aw"><img class="av" id="pa"><i class="dot" id="pd"></i></span><b id="pnm"></b>
           </div>
           <div class="chat" id="msgs"></div>
-          <div class="row pad" style="padding-top:0"><input id="ci" placeholder="စာရိုက်ပါ..."><button class="btn g" id="cs">ပို့</button></div>
+          <div class="row pad" style="padding-top:0">
+            <label class="btn ghost" style="padding:9px 12px;margin:0">📷<input id="cimg" type="file" accept="image/*" hidden></label>
+            <input id="ci" placeholder="စာရိုက်ပါ..."><button class="btn g" id="cs">ပို့</button>
+          </div>
         </div>
       </div>
     </aside>
   </div>
 
-  <div id="tabs"><button data-t="home" class="on">🏠 Home</button><button data-t="chat">💬 Chat</button><button data-t="me">👤 Profile</button></div>
+  <div id="tabs"><button data-t="home" class="on">🏠 Home</button><button data-t="chat">💬 Chat<b class="bdg" id="tb" hidden></b></button><button data-t="me">👤 Profile</button></div>
 </div>
 
 <script type="module">
@@ -171,7 +191,7 @@ const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&
 const EMO=["👍","❤️","😂","😮","😢","😡"];
 const DEF="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect fill='%23bcc0c4' width='40' height='40'/%3E%3Ccircle cx='20' cy='15' r='7' fill='%23fff'/%3E%3Cellipse cx='20' cy='37' rx='13' ry='11' fill='%23fff'/%3E%3C/svg%3E";
 
-// ---------- Theme (Dark / Light) ----------
+// ---------- Theme ----------
 const root=document.documentElement;
 const setTheme=t=>{root.classList.toggle("dark",t==="dark");const b=document.getElementById("th");if(b)b.textContent=t==="dark"?"☀️":"🌙";try{localStorage.setItem("th",t)}catch(e){}};
 let saved=null;try{saved=localStorage.getItem("th")}catch(e){}
@@ -179,10 +199,23 @@ setTheme(saved||(matchMedia("(prefers-color-scheme:dark)").matches?"dark":"light
 document.getElementById("th").onclick=()=>setTheme(root.classList.contains("dark")?"light":"dark");
 
 let me=null,users={},posts=[],comments={},openC=new Set(),file=null,reg=false,started=false,q="";
-let peer=null,dmMsgs=[],unDM=null;
+let peer=null,dmMsgs=[],unDM=null,view=null,notifs=[],fresh=new Set(),lastM={},dmW=new Set(),friends=[];
+
+// ---------- Helpers ----------
+const U=id=>users[id]||{name:"User",photo:""};
+const av=id=>U(id).photo||DEF;
+const on=id=>id===me?.uid||(Date.now()-(U(id).lastSeen||0)<150000);
+const avw=(id,c="av")=>`<span class="aw"><img class="${c}" src="${esc(av(id))}">${on(id)?'<i class="dot"></i>':""}</span>`;
+const when=t=>t?.toDate?t.toDate().toLocaleString("my-MM",{dateStyle:"medium",timeStyle:"short"}):"ယခုလေးတင်";
+const act=async fn=>{try{await fn()}catch(e){alert(e.message)}};
+const keep=fn=>{const k=document.activeElement?.dataset?.ci,v=document.activeElement?.value;fn();if(k){const i=$(`[data-ci="${k}"]`);if(i){i.value=v;i.focus()}}};
+function shrink(f,max,q=.72){return new Promise((ok,no)=>{const r=new FileReader();r.onerror=no;r.onload=()=>{const i=new Image();i.onerror=no;i.onload=()=>{
+  const k=Math.min(1,max/Math.max(i.width,i.height)),c=document.createElement("canvas");c.width=i.width*k;c.height=i.height*k;
+  c.getContext("2d").drawImage(i,0,0,c.width,c.height);ok(c.toDataURL("image/jpeg",q))};i.src=r.result};r.readAsDataURL(f)})}
+const setTab=t=>{$$("#tabs button").forEach(x=>x.classList.toggle("on",x.dataset.t===t));document.body.dataset.t=t};
+const notify=(to,type,extra={})=>{if(!to||to===me.uid)return;addDoc(collection(db,"notifs"),{to,from:me.uid,type,...extra,read:false,createdAt:serverTimestamp()}).catch(()=>{})};
 
 // ---------- Friends ----------
-let friends=[];
 const fid=o=>[me.uid,o].sort().join("_");
 const fbtn=o=>{
   const f=friends.find(x=>x.users.includes(o)),s='style="padding:5px 12px;font-size:12px"';
@@ -192,7 +225,7 @@ const fbtn=o=>{
   return `<button class="btn g" ${s} data-f="ok" data-u="${o}">Confirm</button><button class="btn ghost" ${s} data-f="rm" data-u="${o}">Delete</button>`;
 };
 const friendAct=(a,o)=>act(async()=>{
-  if(a==="add")await setDoc(doc(db,"friends",fid(o)),{from:me.uid,to:o,users:[me.uid,o],status:"pending"});
+  if(a==="add"){await setDoc(doc(db,"friends",fid(o)),{from:me.uid,to:o,users:[me.uid,o],status:"pending"});notify(o,"friend")}
   if(a==="ok")await updateDoc(doc(db,"friends",fid(o)),{status:"accepted"});
   if(a==="rm"&&confirm("သေချာလား?"))await deleteDoc(doc(db,"friends",fid(o)));
 });
@@ -217,7 +250,7 @@ $("#gg").onclick=async()=>{
     }else if(x.code!=="auth/popup-closed-by-user"){$("#err").textContent=x.code||x.message}
   }
 };
-$("#out").onclick=async()=>{await signOut(auth);location.reload()};
+$("#out").onclick=async()=>{try{await updateDoc(doc(db,"users",me.uid),{lastSeen:0})}catch(e){}await signOut(auth);location.reload()};
 onAuthStateChanged(auth,async u=>{
   if(!u)return;me=u;
   const d=await getDoc(doc(db,"users",u.uid));
@@ -226,32 +259,73 @@ onAuthStateChanged(auth,async u=>{
   if(!started){started=true;start()}
 });
 
-// ---------- Helpers ----------
-const U=id=>users[id]||{name:"User",photo:""};
-const av=id=>U(id).photo||DEF;
-const when=t=>t?.toDate?t.toDate().toLocaleString("my-MM",{dateStyle:"medium",timeStyle:"short"}):"ယခုလေးတင်";
-const act=async fn=>{try{await fn()}catch(e){alert(e.message)}};
-function shrink(f,max,q=.72){return new Promise((ok,no)=>{const r=new FileReader();r.onerror=no;r.onload=()=>{const i=new Image();i.onerror=no;i.onload=()=>{
-  const k=Math.min(1,max/Math.max(i.width,i.height)),c=document.createElement("canvas");c.width=i.width*k;c.height=i.height*k;
-  c.getContext("2d").drawImage(i,0,0,c.width,c.height);ok(c.toDataURL("image/jpeg",q))};i.src=r.result};r.readAsDataURL(f)})}
-const setTab=t=>{$$("#tabs button").forEach(x=>x.classList.toggle("on",x.dataset.t===t));document.body.dataset.t=t};
-
 // ---------- Tabs / Search ----------
 $$("#tabs button").forEach(b=>b.onclick=()=>{setTab(b.dataset.t);scrollChat()});
 $("#q").oninput=e=>{q=e.target.value.trim().toLowerCase();render()};
 
-// ---------- Live data ----------
-function start(){
-  onSnapshot(query(collection(db,"friends"),where("users","array-contains",me.uid)),s=>{friends=s.docs.map(d=>d.data());render()},e=>console.error(e));
-  onSnapshot(collection(db,"users"),s=>{users={};s.forEach(d=>users[d.id]=d.data());
-    $$(".myav").forEach(i=>i.src=av(me.uid));$("#mn").textContent=U(me.uid).name;
-    if(document.activeElement!==$("#pn"))$("#pn").value=U(me.uid).name;render();renderChat()});
-  onSnapshot(query(collection(db,"posts"),orderBy("createdAt","desc"),limit(50)),s=>{posts=s.docs.map(d=>({id:d.id,...d.data()}));render()});
+// ---------- Presence / DM watchers ----------
+const beat=()=>me&&updateDoc(doc(db,"users",me.uid),{lastSeen:Date.now()}).catch(()=>{});
+const reads=()=>U(me.uid).reads||{};
+const unreadN=i=>(lastM[i]||[]).filter(m=>m.from!==me.uid&&m.t>(reads()[i]||0)).length;
+function watchDM(id){
+  if(dmW.has(id)||id===me.uid)return;dmW.add(id);
+  onSnapshot(query(collection(db,"dms",[me.uid,id].sort().join("_"),"messages"),orderBy("createdAt","desc"),limit(10)),
+    s=>{lastM[id]=s.docs.map(d=>{const x=d.data();return{from:x.from,t:x.createdAt?.toMillis?.()||Date.now()}});unreadUI()},()=>{});
+}
+function unreadUI(){
+  const n=Object.keys(lastM).filter(i=>unreadN(i)>0).length;
+  [$("#tb"),$("#tb2")].forEach(b=>{b.hidden=!n;b.textContent=n});
+  renderChat();
+}
+function markRead(){
+  if(!peer)return;
+  const last=Math.max(0,...dmMsgs.filter(m=>m.from!==me.uid).map(m=>m.createdAt?.toMillis?.()||0));
+  if(last>(reads()[peer]||0)){(U(me.uid).reads=reads())[peer]=last;updateDoc(doc(db,"users",me.uid),{[`reads.${peer}`]:last}).catch(()=>{});unreadUI()}
 }
 
+// ---------- Live data ----------
+function start(){
+  beat();setInterval(beat,90000);
+  document.addEventListener("visibilitychange",()=>{if(!document.hidden)beat()});
+  setInterval(()=>{keep(render);renderChat()},60000);
+  onSnapshot(query(collection(db,"friends"),where("users","array-contains",me.uid)),s=>{friends=s.docs.map(d=>d.data());keep(render)},e=>console.error(e));
+  onSnapshot(query(collection(db,"notifs"),where("to","==",me.uid)),s=>{notifs=s.docs.map(d=>({id:d.id,...d.data()}));bellUI()},e=>console.error(e));
+  onSnapshot(collection(db,"users"),s=>{users={};s.forEach(d=>users[d.id]=d.data());
+    const m=U(me.uid);
+    $$(".myav").forEach(i=>i.src=av(me.uid));$("#mn").textContent=m.name;$("#mb").textContent=m.bio||"";
+    $("#mcv").style.background=m.cover?`url('${m.cover}') center/cover`:"";
+    if(document.activeElement!==$("#pn"))$("#pn").value=m.name;
+    if(document.activeElement!==$("#pbio"))$("#pbio").value=m.bio||"";
+    Object.keys(users).slice(0,40).forEach(watchDM);
+    keep(render);unreadUI();bellUI()});
+  onSnapshot(query(collection(db,"posts"),orderBy("createdAt","desc"),limit(50)),s=>{posts=s.docs.map(d=>({id:d.id,...d.data()}));keep(render)});
+}
+
+// ---------- Notifications ----------
+const ntxt=n=>{const u=esc(U(n.from).name);
+  return n.type==="react"?`${esc(n.emoji||"👍")} <b>${u}</b> က သင့်ပို့စ်ကို Reaction ပေးသည်`
+  :n.type==="comment"?`💬 <b>${u}</b> က သင့်ပို့စ်မှာ Comment ရေးသည်`
+  :n.type==="share"?`↗️ <b>${u}</b> က သင့်ပို့စ်ကို Share လုပ်သည်`
+  :`👥 <b>${u}</b> က Friend Request ပို့သည်`};
+function bellUI(){
+  const sorted=[...notifs].sort((a,b)=>(b.createdAt?.toMillis?.()||Date.now())-(a.createdAt?.toMillis?.()||Date.now())).slice(0,30);
+  const n=notifs.filter(x=>!x.read).length;
+  $("#bb").hidden=!n;$("#bb").textContent=n>9?"9+":n;
+  $("#nl").innerHTML=sorted.map(x=>`<div class="nt ${fresh.has(x.id)?"fr":""}" data-n="${x.id}" data-t="${x.type}" data-u="${x.from}" data-p="${x.postId||""}">${ntxt(x)}<div class="time">${when(x.createdAt)}</div></div>`).join("")||`<div class="pad time">Notification မရှိသေးပါ</div>`;
+}
+$("#bell").onclick=e=>{
+  e.stopPropagation();const p=$("#npn");p.hidden=!p.hidden;
+  if(!p.hidden){
+    const un=notifs.filter(x=>!x.read);fresh=new Set(un.map(x=>x.id));bellUI();
+    un.forEach(x=>updateDoc(doc(db,"notifs",x.id),{read:true}).catch(()=>{}));
+  }
+};
+
 // ---------- Profile ----------
-$("#sn").onclick=()=>act(async()=>{const n=$("#pn").value.trim();if(n)await updateDoc(doc(db,"users",me.uid),{name:n});alert("သိမ်းပြီးပါပြီ ✅")});
-$("#avf").onchange=e=>act(async()=>{const f=e.target.files[0];if(!f)return;await updateDoc(doc(db,"users",me.uid),{photo:await shrink(f,200)});e.target.value=""});
+$("#sn").onclick=()=>act(async()=>{const n=$("#pn").value.trim();await updateDoc(doc(db,"users",me.uid),{...(n?{name:n}:{}),bio:$("#pbio").value.trim()});alert("သိမ်းပြီးပါပြီ ✅")});
+$("#avf").onchange=e=>act(async()=>{const f=e.target.files[0];if(!f)return;await updateDoc(doc(db,"users",me.uid),{photo:await shrink(f,300)});e.target.value=""});
+$("#cvf").onchange=e=>act(async()=>{const f=e.target.files[0];if(!f)return;await updateDoc(doc(db,"users",me.uid),{cover:await shrink(f,640,.6)});e.target.value=""});
+const openProfile=id=>{view=id;setTab("home");render();scrollTo(0,0)};
 
 // ---------- Compose ----------
 $("#file").onchange=e=>{file=e.target.files[0]||null;$("#prev").innerHTML=file?`<img src="${URL.createObjectURL(file)}">`:""};
@@ -267,7 +341,24 @@ $("#post").onclick=async()=>{
 
 // ---------- Feed ----------
 const img=p=>p.image?`<img class="media" src="${esc(p.image)}" loading="lazy">`:"";
-const person=([i,u])=>`<div class="sg" data-dm="${i}"><img class="av" src="${esc(u.photo||DEF)}"><span class="name" style="flex:1">${esc(u.name)}</span>${fbtn(i)}</div>`;
+const person=([i,u])=>`<div class="sg" data-pf="${i}">${avw(i)}<span class="name" style="flex:1">${esc(u.name)}</span>${fbtn(i)}<button class="btn ghost" style="padding:5px 10px;font-size:12px" data-dm="${i}">💬</button></div>`;
+const chatRow=i=>{const n=unreadN(i);return `<div class="sg" data-dm="${i}">${avw(i)}<span class="name" style="flex:1">${esc(U(i).name)}</span>${n?`<b class="bdg">${n>9?"9+":n}</b>`:""}</div>`};
+function postHTML(p){
+  const rs=p.reactions||{},vals=Object.values(rs),mine=rs[me.uid],top=[...new Set(vals)].slice(0,3).join("");
+  const sh=p.shared?`<div class="shared"><div class="row"><img class="av" src="${esc(av(p.shared.uid))}" style="width:30px;height:30px"><span class="name">${esc(U(p.shared.uid).name)}</span></div><div>${esc(p.shared.text)}</div>${img(p.shared)}</div>`:"";
+  const cl=openC.has(p.id)?`<div>${(comments[p.id]||[]).map(c=>`<div class="cm"><img class="av" src="${esc(av(c.uid))}" style="width:30px;height:30px"><div><b>${esc(U(c.uid).name)}</b><br>${esc(c.text)}</div></div>`).join("")}
+    <div class="cm"><input data-ci="${p.id}" placeholder="Comment...(Enter)" style="margin:0;border-radius:20px"></div></div>`:"";
+  return `<div class="card pad" data-id="${p.id}">
+    <div class="row"><span data-pf="${p.uid}" style="cursor:pointer">${avw(p.uid)}</span><div><div class="name" data-pf="${p.uid}" style="cursor:pointer">${esc(U(p.uid).name)}${p.shared?" <span class='time'>Share</span>":""}</div><div class="time">${when(p.createdAt)}${p.edited?" · ပြင်ပြီး":""}</div></div>
+    ${p.uid===me.uid?`<span style="margin-left:auto"><button class="del" data-a="edit" style="margin:0">✏️ Edit</button><button class="del" data-a="del" style="margin:0">Delete</button></span>`:""}</div>
+    <div style="margin-top:8px;white-space:pre-wrap">${esc(p.text)}</div>${p.shared?sh:img(p)}
+    <div class="sum"><span>${vals.length?top+" "+vals.length:""}</span><span>${p.commentCount?p.commentCount+" မှတ်ချက်":""}</span></div>
+    <div class="acts">
+      <div class="lw"><div class="pk">${EMO.map(e=>`<span data-a="react" data-e="${e}">${e}</span>`).join("")}</div>
+        <button data-a="like" class="${mine?"me":""}">${mine?mine:"👍 Like"}</button></div>
+      <button data-a="cm">💬 Comment</button><button data-a="share">↗️ Share</button>
+    </div>${cl}</div>`;
+}
 function render(){
   if(!me)return;
   $("#np").textContent=posts.filter(p=>p.uid===me.uid).length;
@@ -279,39 +370,52 @@ function render(){
   $("#reqc").hidden=!rq.length;
   const match=([i,u])=>i!==me.uid&&(!q||(u.name||"").toLowerCase().includes(q));
   $("#sug").innerHTML=Object.entries(users).filter(match).slice(0,8).map(person).join("")||`<div class="pad time">မတွေ့ပါ</div>`;
-  const found=q?Object.entries(users).filter(match).slice(0,6):[];
-  $("#ppl").innerHTML=found.length?`<div class="card"><div class="ct">👥 လူများ</div>${found.map(person).join("")}</div>`:"";
-  const list=posts.filter(p=>!q||((p.text||"")+U(p.uid).name).toLowerCase().includes(q));
-  $("#feed").innerHTML=list.map(p=>{
-    const rs=p.reactions||{},vals=Object.values(rs),mine=rs[me.uid],top=[...new Set(vals)].slice(0,3).join("");
-    const sh=p.shared?`<div class="shared"><div class="row"><img class="av" src="${esc(av(p.shared.uid))}" style="width:30px;height:30px"><span class="name">${esc(U(p.shared.uid).name)}</span></div><div>${esc(p.shared.text)}</div>${img(p.shared)}</div>`:"";
-    const cl=openC.has(p.id)?`<div>${(comments[p.id]||[]).map(c=>`<div class="cm"><img class="av" src="${esc(av(c.uid))}" style="width:30px;height:30px"><div><b>${esc(U(c.uid).name)}</b><br>${esc(c.text)}</div></div>`).join("")}
-      <div class="cm"><input data-ci="${p.id}" placeholder="Comment...(Enter)" style="margin:0;border-radius:20px"></div></div>`:"";
-    return `<div class="card pad" data-id="${p.id}">
-      <div class="row"><img class="av" src="${esc(av(p.uid))}"><div><div class="name">${esc(U(p.uid).name)}${p.shared?" <span class='time'>Share</span>":""}</div><div class="time">${when(p.createdAt)}</div></div>
-      ${p.uid===me.uid?`<button class="del" data-a="del">Delete</button>`:""}</div>
-      <div style="margin-top:8px;white-space:pre-wrap">${esc(p.text)}</div>${p.shared?sh:img(p)}
-      <div class="sum"><span>${vals.length?top+" "+vals.length:""}</span><span>${p.commentCount?p.commentCount+" မှတ်ချက်":""}</span></div>
-      <div class="acts">
-        <div class="lw"><div class="pk">${EMO.map(e=>`<span data-a="react" data-e="${e}">${e}</span>`).join("")}</div>
-          <button data-a="like" class="${mine?"me":""}">${mine?mine:"👍 Like"}</button></div>
-        <button data-a="cm">💬 Comment</button><button data-a="share">↗️ Share</button>
-      </div>${cl}</div>`}).join("")||`<div class="card pad">ပို့စ်မရှိသေးပါ။</div>`;
+  let list;
+  if(view){
+    const u=U(view),n=posts.filter(p=>p.uid===view).length,cv=u.cover?`style="background:url('${u.cover}') center/cover"`:"";
+    const nf=view===me.uid?acc.length:"";
+    $("#pv").innerHTML=`<div class="card"><button class="btn ghost" data-bk style="margin:10px">← Back</button>
+      <div class="cover" ${cv}></div>
+      <div class="prof"><span class="aw"><img class="big" src="${esc(av(view))}">${on(view)?'<i class="dot"></i>':""}</span>
+      <div class="name" style="font-size:18px;margin:6px 0 4px">${esc(u.name)}</div>
+      <div class="time">${on(view)?"🟢 Online":"Offline"}</div></div>
+      ${u.bio?`<div class="bio" style="padding-top:8px">${esc(u.bio)}</div>`:""}
+      <div class="stats"><div>Posts<b>${n}</b></div>${nf!==""?`<div>Friends<b>${nf}</b></div>`:""}</div>
+      ${view!==me.uid?`<div class="pad row" style="justify-content:center;border-top:1px solid var(--line)">${fbtn(view)}<button class="btn ghost" style="padding:5px 12px;font-size:12px" data-dm="${view}">💬 Message</button></div>`:""}</div>`;
+    $("#cmp").hidden=true;$("#ppl").innerHTML="";
+    list=posts.filter(p=>p.uid===view);
+  }else{
+    $("#pv").innerHTML="";$("#cmp").hidden=false;
+    const found=q?Object.entries(users).filter(match).slice(0,6):[];
+    $("#ppl").innerHTML=found.length?`<div class="card"><div class="ct">👥 လူများ</div>${found.map(person).join("")}</div>`:"";
+    list=posts.filter(p=>!q||((p.text||"")+U(p.uid).name).toLowerCase().includes(q));
+  }
+  $("#feed").innerHTML=list.map(postHTML).join("")||`<div class="card pad">ပို့စ်မရှိသေးပါ။</div>`;
 }
 document.addEventListener("click",e=>{
+  if(!e.target.closest("#npn,#bell"))$("#npn").hidden=true;
+  const nt=e.target.closest("[data-n]");
+  if(nt){$("#npn").hidden=true;
+    if(nt.dataset.t==="friend")openProfile(nt.dataset.u);
+    else{view=null;setTab("home");render();setTimeout(()=>document.querySelector(`[data-id="${nt.dataset.p}"]`)?.scrollIntoView({behavior:"smooth",block:"center"}),60)}
+    return}
+  if(e.target.closest("[data-bk]")){view=null;render();return}
   const f=e.target.closest("[data-f]");if(f){friendAct(f.dataset.f,f.dataset.u);return}
   const d=e.target.closest("[data-dm]");if(d){openChat(d.dataset.dm);return}
+  const pf=e.target.closest("[data-pf]");if(pf){openProfile(pf.dataset.pf);return}
   const t=e.target.closest("[data-a]");if(!t)return;const id=t.closest(".card")?.dataset.id,p=posts.find(x=>x.id===id),a=t.dataset.a;
+  if(!p)return;
   if(a==="react"||a==="like"){
     const mine=p.reactions?.[me.uid];
     const val=a==="react"?(t.dataset.e===mine?null:t.dataset.e):(mine?null:"👍");
-    act(()=>updateDoc(doc(db,"posts",id),{[`reactions.${me.uid}`]:val===null?deleteField():val}));
+    act(async()=>{await updateDoc(doc(db,"posts",id),{[`reactions.${me.uid}`]:val===null?deleteField():val});if(val)notify(p.uid,"react",{postId:id,emoji:val})});
   }
   if(a==="cm"){if(openC.has(id))openC.delete(id);else{openC.add(id);subC(id)}render()}
+  if(a==="edit"){const nt=prompt("ပို့စ်ကို ပြင်ပါ",p.text||"");if(nt===null)return;act(()=>updateDoc(doc(db,"posts",id),{text:nt.trim(),edited:true}))}
   if(a==="del"&&confirm("ဖျက်မလား?"))act(()=>deleteDoc(doc(db,"posts",id)));
   if(a==="share"){const note=prompt("မှတ်ချက်ထည့်မလား? (မထည့်လည်းရ)");if(note===null)return;const s=p.shared||p;
     act(()=>addDoc(collection(db,"posts"),{uid:me.uid,text:note,image:"",reactions:{},commentCount:0,createdAt:serverTimestamp(),
-      shared:{uid:s.uid,text:s.text||"",image:s.image||""}}).then(()=>alert("မျှဝေပြီးပါပြီ ✅")))}
+      shared:{uid:s.uid,text:s.text||"",image:s.image||""}}).then(()=>{notify(s.uid,"share",{postId:id});alert("မျှဝေပြီးပါပြီ ✅")}))}
 });
 // ဖုန်းမှာ Like ကိုဖိထားရင် Emoji ပေါ်
 let lp;document.addEventListener("touchstart",e=>{
@@ -322,18 +426,16 @@ document.addEventListener("touchend",()=>clearTimeout(lp));
 
 const subbed=new Set();
 function subC(id){if(subbed.has(id))return;subbed.add(id);
-  onSnapshot(query(collection(db,"posts",id,"comments"),orderBy("createdAt")),s=>{comments[id]=s.docs.map(d=>d.data());
-    const k=document.activeElement?.dataset?.ci,v=document.activeElement?.value;render();
-    if(k){const i=$(`[data-ci="${k}"]`);if(i){i.value=v;i.focus()}}})}
+  onSnapshot(query(collection(db,"posts",id,"comments"),orderBy("createdAt")),s=>{comments[id]=s.docs.map(d=>d.data());keep(render)})}
 document.addEventListener("keydown",e=>{const i=e.target.dataset?.ci;if(!i||e.key!=="Enter")return;const text=e.target.value.trim();if(!text)return;e.target.value="";
-  act(async()=>{await addDoc(collection(db,"posts",i,"comments"),{uid:me.uid,text,createdAt:serverTimestamp()});await updateDoc(doc(db,"posts",i),{commentCount:increment(1)})})});
+  act(async()=>{await addDoc(collection(db,"posts",i,"comments"),{uid:me.uid,text,createdAt:serverTimestamp()});await updateDoc(doc(db,"posts",i),{commentCount:increment(1)});notify(posts.find(x=>x.id===i)?.uid,"comment",{postId:i})})});
 
 // ---------- Private Chat ----------
 const cid=()=>[me.uid,peer].sort().join("_");
 function openChat(id){
   if(!id||id===me.uid)return;
   peer=id;dmMsgs=[];if(unDM)unDM();
-  unDM=onSnapshot(query(collection(db,"dms",cid(),"messages"),orderBy("createdAt"),limit(200)),s=>{dmMsgs=s.docs.map(d=>d.data());renderChat()},
+  unDM=onSnapshot(query(collection(db,"dms",cid(),"messages"),orderBy("createdAt"),limit(200)),s=>{dmMsgs=s.docs.map(d=>d.data());renderChat();markRead()},
     e=>alert("Chat ဖွင့်မရပါ: "+e.message));
   setTab("chat");renderChat();setTimeout(()=>$("#ci").focus(),50);
 }
@@ -344,16 +446,20 @@ function send(){
 }
 $("#cs").onclick=send;
 $("#ci").onkeydown=e=>{if(e.key==="Enter")send()};
+$("#cimg").onchange=e=>act(async()=>{const f=e.target.files[0];if(!f||!peer)return;
+  const image=await shrink(f,800,.6);
+  await addDoc(collection(db,"dms",cid(),"messages"),{from:me.uid,text:"",image,createdAt:serverTimestamp()});e.target.value=""});
 function scrollChat(){const m=$("#msgs");if(m)m.scrollTop=m.scrollHeight}
 function renderChat(){
   if(!me)return;
   $("#plist").hidden=!!peer;$("#conv").hidden=!peer;
   if(!peer){
-    $("#plist").innerHTML=Object.entries(users).filter(([i])=>i!==me.uid).map(person).join("")||`<div class="pad time">မတွေ့ပါ</div>`;
+    const t=i=>(lastM[i]||[])[0]?.t||0;
+    $("#plist").innerHTML=Object.keys(users).filter(i=>i!==me.uid).sort((a,b)=>t(b)-t(a)).map(chatRow).join("")||`<div class="pad time">မတွေ့ပါ</div>`;
     return;
   }
-  $("#pa").src=av(peer);$("#pnm").textContent=U(peer).name;
-  $("#msgs").innerHTML=dmMsgs.map(m=>`<div class="msg ${m.from===me.uid?"me":""}">${esc(m.text)}</div>`).join("");
+  $("#pa").src=av(peer);$("#pnm").textContent=U(peer).name;$("#pd").hidden=!on(peer);
+  $("#msgs").innerHTML=dmMsgs.map(m=>`<div class="msg ${m.from===me.uid?"me":""}">${m.image?`<img src="${esc(m.image)}">`:""}${m.text?esc(m.text):""}</div>`).join("");
   scrollChat();
 }
 </script>
