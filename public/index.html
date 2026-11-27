@@ -31,7 +31,7 @@ textarea{resize:none}
 #auth a{color:var(--g);cursor:pointer;font-size:14px;font-weight:600}
 .or{margin:6px 0 2px;color:#999;font-size:12px}
 #boot{text-align:center;margin-top:30vh}
-#off{position:fixed;left:0;right:0;bottom:0;z-index:80;color:#fff;text-align:center;padding:8px 10px;font-size:13px;font-weight:600;background:#444}
+#off{position:fixed;left:0;right:0;bottom:0;z-index:90;color:#fff;text-align:center;padding:8px 10px;font-size:13px;font-weight:600;background:#444}
 #hd{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.96);box-shadow:0 2px 12px rgba(0,0,0,.08);border-bottom:3px solid var(--r);backdrop-filter:blur(8px)}
 nav{display:flex;align-items:center;gap:8px;padding:8px 14px}
 nav input{max-width:320px;margin:0;padding:8px 14px;font-size:14px;background:#f0f2f5;border-color:transparent;border-radius:999px}nav .sp{flex:1}
@@ -74,8 +74,63 @@ nav input{max-width:320px;margin:0;padding:8px 14px;font-size:14px;background:#f
 .lw:hover .pk,.pk.show{display:flex}
 .pk span{font-size:28px;cursor:pointer;padding:2px 4px;transition:transform .12s}.pk span:hover{transform:scale(1.4)}
 .cm{display:flex;gap:8px;margin-top:10px}.cm div{background:#f0f2f5;border-radius:18px;padding:8px 14px;font-size:14px}
-.del{color:var(--r);font-size:12px;background:none;margin-left:auto;padding:6px 10px;border-radius:8px}
+.pw{position:relative;margin-left:auto}
+.dots{width:36px;height:36px;border-radius:50%;background:none;color:var(--mut);display:flex;align-items:center;justify-content:center;padding:0}
+.dots .ic{width:24px;height:24px}
+.dots:hover{background:#f0f2f5}
+.pmenu{position:absolute;right:0;top:38px;background:#fff;border-radius:12px;box-shadow:0 6px 24px rgba(0,0,0,.22);padding:6px;z-index:10;min-width:150px}
+.pmenu button{display:flex;gap:10px;align-items:center;width:100%;background:none;padding:10px 12px;border-radius:8px;font-weight:600;color:var(--ink);font-size:14px;text-align:left}
+.pmenu button:hover{background:#f0f2f5}
+.pmenu .rd{color:var(--r)}
 #prev img{max-width:100%;max-height:240px;border-radius:14px;margin-top:8px}
+.fake{flex:1;text-align:left;background:#f0f2f5;color:var(--mut);padding:11px 16px;border-radius:999px;font-size:15px;min-width:0;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+#co{position:fixed;inset:0;z-index:70;background:#fff;display:flex;flex-direction:column}
+.coh{display:flex;align-items:center;gap:8px;padding:10px 12px;border-bottom:1px solid var(--line)}
+.cot{flex:1;text-align:center;font-size:17px}
+.cob{flex:1;overflow-y:auto;display:flex;flex-direction:column}
+#co textarea{flex:1;min-height:40vh;border:0;box-shadow:none;border-radius:0;font-size:18px;padding:8px 16px;margin:0;background:transparent;color:var(--ink)}
+.cof{border-top:1px solid var(--line);padding:10px 12px}
+.chip{display:inline-flex;align-items:center;gap:8px;padding:10px 16px;border-radius:12px;background:#f0f2f5;font-weight:600;font-size:14px;cursor:pointer;color:var(--ink)}
+#sty{display:flex;gap:8px;overflow-x:auto;padding:12px;scrollbar-width:none}
+#sty::-webkit-scrollbar{display:none}
+.sc{position:relative;flex:none;width:104px;height:176px;border-radius:14px;overflow:hidden;cursor:pointer;background:#ddd;color:#fff}
+.sc::after{content:"";position:absolute;left:0;right:0;bottom:0;height:50%;background:linear-gradient(transparent,rgba(0,0,0,.55))}
+.sc .bgi{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.sc .ring{position:absolute;top:8px;left:8px;width:36px;height:36px;border-radius:50%;border:3px solid var(--g);object-fit:cover;z-index:2;background:#ccc}
+.sc .stx{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;padding:10px;text-align:center;font-weight:700;font-size:14px;z-index:1;word-break:break-word}
+.sc span{position:absolute;left:8px;right:8px;bottom:8px;font-size:12px;font-weight:600;text-shadow:0 1px 4px rgba(0,0,0,.6);overflow:hidden;white-space:nowrap;text-overflow:ellipsis;z-index:2}
+.sc.cr{background:#f0f2f5;color:var(--ink)}
+.sc.cr::after{display:none}
+.sc.cr img{position:absolute;top:0;left:0;width:100%;height:68%;object-fit:cover}
+.sc.cr .plus{position:absolute;left:50%;top:68%;transform:translate(-50%,-50%);width:34px;height:34px;border-radius:50%;background:var(--g);border:3px solid #fff;color:#fff;font-size:22px;line-height:1;display:flex;align-items:center;justify-content:center;z-index:2}
+.sc.cr span{text-shadow:none;text-align:center;white-space:normal;left:4px;right:4px;bottom:10px}
+#scr{position:fixed;inset:0;z-index:75;background:#000;display:flex;justify-content:center}
+#scp{position:relative;width:100%;max-width:420px;height:100%;overflow:hidden}
+#scimg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.sch{position:absolute;top:0;left:0;right:0;display:flex;justify-content:space-between;align-items:center;padding:12px;z-index:2}
+#scr textarea{position:absolute;top:70px;left:0;right:0;bottom:90px;width:100%;height:calc(100% - 160px);background:transparent;border:0;box-shadow:none;border-radius:0;color:#fff;text-align:center;font-size:26px;font-weight:700;padding:28vh 20px 20px;margin:0;text-shadow:0 2px 8px rgba(0,0,0,.45);z-index:1;display:block}
+#scr textarea::placeholder{color:rgba(255,255,255,.75)}
+.scf{position:absolute;bottom:0;left:0;right:0;display:flex;align-items:center;justify-content:space-between;padding:14px;z-index:2}
+.scd{display:flex;gap:10px}
+.cdot{width:30px;height:30px;border-radius:50%;border:3px solid rgba(255,255,255,.5);padding:0}
+.cdot.on{border-color:#fff}
+.svx{width:40px;height:40px;border-radius:50%;background:rgba(0,0,0,.4);color:#fff;display:flex;align-items:center;justify-content:center;padding:0;cursor:pointer;flex:none}
+#sv{position:fixed;inset:0;z-index:85;background:#000;display:flex;justify-content:center}
+.svbox{position:relative;width:100%;max-width:420px;height:100%;overflow:hidden}
+.svb{position:absolute;top:8px;left:8px;right:8px;display:flex;gap:4px;z-index:3}
+.svb i{flex:1;height:3px;background:rgba(255,255,255,.35);border-radius:2px;overflow:hidden;position:relative}
+.svb i::after{content:"";position:absolute;left:0;top:0;bottom:0;width:0;background:#fff}
+.svb i.f::after{width:100%}
+.svb i.a::after{animation:pf 5s linear forwards}
+@keyframes pf{from{width:0}to{width:100%}}
+.svh{position:absolute;top:20px;left:0;right:0;display:flex;align-items:center;gap:10px;padding:0 12px;z-index:3}
+.svh .name{color:#fff}.svh .time{color:#ddd}
+.svc{position:absolute;inset:0;display:flex;align-items:center;justify-content:center}
+.svc img{width:100%;height:100%;object-fit:contain}
+.svt{position:absolute;color:#fff;font-size:26px;font-weight:700;text-align:center;padding:24px;text-shadow:0 2px 8px rgba(0,0,0,.4);white-space:pre-wrap;word-break:break-word}
+.svt.cap{bottom:40px;font-size:18px;background:rgba(0,0,0,.45);border-radius:12px;left:16px;right:16px;padding:10px}
+.svz{position:absolute;top:80px;bottom:0;z-index:2;cursor:pointer}
+.svz.l{left:0;width:35%}.svz.r{right:0;width:65%}
 .chat{height:340px;overflow-y:auto;display:flex;flex-direction:column;gap:6px;padding:14px;background:#f7f8fa}
 .msg{max-width:80%;background:#fff;padding:8px 14px;border-radius:18px 18px 18px 4px;font-size:14px;align-self:flex-start;word-break:break-word;box-shadow:0 1px 3px rgba(0,0,0,.08)}
 .msg.me{background:linear-gradient(135deg,#27b567,var(--g));color:#fff;align-self:flex-end;border-radius:18px 18px 4px 18px}
@@ -112,7 +167,7 @@ nav input{max-width:320px;margin:0;padding:8px 14px;font-size:14px;background:#f
 }
 html.dark{--ink:#e4e6eb;--mut:#a0a6ae;--line:#2e3036;--sh:0 2px 14px rgba(0,0,0,.4);color-scheme:dark}
 html.dark body{background:linear-gradient(135deg,#1c1011 0%,#121316 50%,#0f1a14 100%) fixed}
-html.dark .card,html.dark #auth{background:#1e2025}
+html.dark .card,html.dark #auth,html.dark #co{background:#1e2025}
 html.dark #hd{background:rgba(30,32,37,.96)}
 html.dark input,html.dark textarea,html.dark nav input{background:#2a2d33;border-color:#3a3d44;color:#e4e6eb}
 html.dark .btn.ghost{background:#2f3238;color:#ddd}
@@ -124,11 +179,18 @@ html.dark .cm div,html.dark .msg{background:#2a2d33}
 html.dark .msg.me{background:linear-gradient(135deg,#27b567,var(--g))}
 html.dark .chat{background:#17181b}
 html.dark .shared{background:#24262b;border-color:#3a3d44}
-html.dark .pk{background:#2a2d33}
+html.dark .pk,html.dark .pmenu{background:#2a2d33}
+html.dark .dots:hover,html.dark .pmenu button:hover{background:#34373e}
+html.dark .fake{background:#2a2d33}
+html.dark .chip{background:#2f3238}
+html.dark .sc.cr{background:#2a2d33}
+html.dark #co textarea{background:transparent}
+html.dark #scr textarea{background:transparent}
 html.dark .big{border-color:#1e2025}
 html.dark .dot{border-color:#1e2025}
 html.dark .nt.fr{background:#2a1c1d}
 html.dark .time{color:#9aa0a8}
+html.dark .svh .time{color:#ddd}
 html.dark #auth p{color:#a0a6ae!important}
 </style>
 </head><body data-t="home">
@@ -179,6 +241,47 @@ html.dark #auth p{color:#a0a6ae!important}
   </div>
   <div id="lb" hidden><img></div>
 
+  <div id="co" hidden>
+    <div class="coh">
+      <button class="ib" id="cc"><svg class="ic" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+      <b class="cot" data-i="newPost"></b>
+      <button class="btn" id="post" data-i="post"></button>
+    </div>
+    <div class="cob">
+      <div class="row pad"><img class="av myav"><b id="con"></b></div>
+      <textarea id="txt" data-ph="mind"></textarea>
+      <div id="prev" style="padding:0 16px"></div>
+    </div>
+    <div class="cof">
+      <label class="chip"><svg class="ic" viewBox="0 0 24 24" style="color:#27b567"><rect x="3" y="4" width="18" height="16" rx="3"/><circle cx="9" cy="10" r="1.8"/><path d="M4 18l5-5 4 4 3-3 4 4"/></svg><span data-i="gallery"></span><input id="file" type="file" accept="image/*" hidden></label>
+    </div>
+  </div>
+
+  <div id="scr" hidden>
+    <div id="scp">
+      <img id="scimg" hidden>
+      <div class="sch">
+        <button class="svx" id="scx"><svg class="ic" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+        <button class="btn g" id="scs" data-i="shareStory"></button>
+      </div>
+      <textarea id="sctx" data-ph="storyTxt"></textarea>
+      <div class="scf">
+        <div class="scd" id="scd"></div>
+        <label class="svx"><svg class="ic" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="3"/><circle cx="9" cy="10" r="1.8"/><path d="M4 18l5-5 4 4 3-3 4 4"/></svg><input id="sf" type="file" accept="image/*" hidden></label>
+      </div>
+    </div>
+  </div>
+
+  <div id="sv" hidden>
+    <div class="svbox">
+      <div class="svb" id="svb"></div>
+      <div class="svh" id="svh"></div>
+      <div class="svc" id="svc"></div>
+      <div class="svz l" data-sz="-1"></div>
+      <div class="svz r" data-sz="1"></div>
+    </div>
+  </div>
+
   <div class="wrap">
     <aside id="L">
       <div class="card" id="mcard">
@@ -205,13 +308,13 @@ html.dark #auth p{color:#a0a6ae!important}
         <div class="row" style="margin-top:6px"><button class="btn g" id="sn" style="flex:1" data-i="save"></button><button class="btn ghost" id="ec" style="flex:1" data-i="cancel"></button></div>
       </div>
       <div class="card top pad" id="cmp">
-        <div class="row" style="align-items:flex-start"><img class="av myav"><textarea id="txt" rows="2" data-ph="mind"></textarea></div>
-        <div id="prev"></div>
-        <div class="row" style="justify-content:space-between;margin-top:6px">
-          <label class="btn ghost"><span data-i="addPic"></span><input id="file" type="file" accept="image/*" hidden></label>
-          <button class="btn" id="post" data-i="post"></button>
+        <div class="row">
+          <img class="av myav">
+          <button class="fake" id="oc" data-i="mind"></button>
+          <button class="ib" id="og" style="color:#27b567"><svg class="ic" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="3"/><circle cx="9" cy="10" r="1.8"/><path d="M4 18l5-5 4 4 3-3 4 4"/></svg></button>
         </div>
       </div>
+      <div class="card" id="sty"></div>
       <div id="ppl"></div>
       <div id="feed"></div>
     </main>
@@ -258,6 +361,11 @@ const MOON='<svg class="ic" viewBox="0 0 24 24"><path d="M21 13.5A8.5 8.5 0 1 1 
 const I_LIKE='<svg class="ic" viewBox="0 0 24 24"><path d="M7 11v9H4a1 1 0 0 1-1-1v-7a1 1 0 0 1 1-1h3zM7 11l4-8a2 2 0 0 1 2 2v4h6a2 2 0 0 1 2 2.3l-1.2 7A2 2 0 0 1 17.8 20H7"/></svg>';
 const I_CMT='<svg class="ic" viewBox="0 0 24 24"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/></svg>';
 const I_SHR='<svg class="ic" viewBox="0 0 24 24"><path d="M14 4l7 7-7 7v-4c-5 0-8 1.5-10 5 .5-6 4-10 10-10z"/></svg>';
+const I_DOTS='<svg class="ic" viewBox="0 0 24 24"><circle cx="5" cy="12" r="1.7" fill="currentColor"/><circle cx="12" cy="12" r="1.7" fill="currentColor"/><circle cx="19" cy="12" r="1.7" fill="currentColor"/></svg>';
+const I_EDIT='<svg class="ic" viewBox="0 0 24 24"><path d="M4 20h4L19 9l-4-4L4 16zM13.5 6.5l4 4"/></svg>';
+const I_TRASH='<svg class="ic" viewBox="0 0 24 24"><path d="M4 7h16M9 7V4h6v3M6 7l1 13h10l1-13M10 11v6M14 11v6"/></svg>';
+const I_X='<svg class="ic" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg>';
+const BG=["linear-gradient(135deg,#e8343e,#d9232d)","linear-gradient(135deg,#27b567,#1f9d55)","linear-gradient(135deg,#6a11cb,#2575fc)","linear-gradient(135deg,#f7971e,#ffd200)","linear-gradient(135deg,#232526,#414345)"];
 
 // ---------- Language / ဘာသာစကား ----------
 const L={
@@ -268,6 +376,7 @@ my:{
  frReq:"သူငယ်ချင်း တောင်းဆိုမှုများ",pymk:"သိကောင်းနိုင်သူများ",allFr:"သူငယ်ချင်းအားလုံး",online:"Online",
  editProf:"✏️ Profile ပြင်မယ်",chgAv:"📷 Profile ပုံပြောင်းမယ်",chgCv:"🖼 Cover ပြောင်းမယ်",phEpn:"နာမည်",phBio:"Bio (မိတ်ဆက်စာ)",phLives:"🏠 နေရပ်",phWork:"💼 အလုပ်",
  save:"သိမ်းမယ်",cancel:"မလုပ်တော့ဘူး",mind:"ဘာတွေ စဉ်းစားနေလဲ?",addPic:"📷 ပုံထည့်မယ်",post:"တင်မယ်",
+ newPost:"ပို့စ်အသစ်",gallery:"ဓာတ်ပုံ",createStory:"My Day တင်မယ်",yourStory:"သင့် My Day",shareStory:"မျှဝေမယ်",storyTxt:"စာရေးပါ...",
  msgs:"💬 စာများ",phMsg:"စာရိုက်ပါ...",send:"ပို့",
  offB:"📴 အင်တာနက် မရှိပါ · Offline mode (ဖတ်ရုံသာ)",onB:"🟢 အင်တာနက် ပြန်ရပါပြီ",offAlert:"📴 အင်တာနက် မရှိပါ။ ဆက်သွယ်မှု ပြန်ရမှ လုပ်လို့ရပါမယ်။",
  saved:"သိမ်းပြီးပါပြီ ✅",posting:"တင်နေသည်...",postFail:"တင်မရပါ: ",sure:"သေချာလား?",delAsk:"ဖျက်မလား?",editAsk:"ပို့စ်ကို ပြင်ပါ",
@@ -278,7 +387,7 @@ my:{
  noFr:"သူငယ်ချင်း မရှိသေးပါ",none:"မတွေ့ပါ",back:"← နောက်သို့",onl:"🟢 Online",offl:"Offline",
  lives:"🏠 နေရပ် <b>{n}</b>",works:"💼 အလုပ် <b>{n}</b>",nFr:"👥 <b>{n}</b> သူငယ်ချင်း",message:"💬 စာပို့မယ်",photos:"ဓာတ်ပုံ",
  noPhoto:"ဓာတ်ပုံ မရှိသေးပါ",noPost:"ပို့စ်မရှိသေးပါ။",people:"👥 လူများ",shareTag:"မျှဝေသည်",edited:"ပြင်ပြီး",justNow:"ယခုလေးတင်",
- nCm:"{n} မှတ်ချက်",phCm:"မှတ်ချက်ရေးပါ...(Enter)",edit:"✏️ ပြင်မယ်",del:"ဖျက်မယ်",like:"Like",comment:"မှတ်ချက်",share:"မျှဝေမယ်",
+ nCm:"{n} မှတ်ချက်",phCm:"မှတ်ချက်ရေးပါ...(Enter)",edit:"ပြင်မယ်",del:"ဖျက်မယ်",like:"Like",comment:"မှတ်ချက်",share:"မျှဝေမယ်",
  add:"➕ သူငယ်ချင်းထည့်မယ်",isFr:"✓ သူငယ်ချင်း",cancelReq:"ပယ်ဖျက်မယ်",confirm:"လက်ခံမယ်",delete:"ဖျက်မယ်",
  langA:"🌐 English",langM:"English",themeDark:"ညမုဒ်",themeLight:"နေ့မုဒ်"
 },
@@ -289,6 +398,7 @@ en:{
  frReq:"Friend Requests",pymk:"People You May Know",allFr:"All Friends",online:"Online",
  editProf:"✏️ Edit Profile",chgAv:"📷 Change profile photo",chgCv:"🖼 Change cover",phEpn:"Name",phBio:"Bio",phLives:"🏠 Lives in",phWork:"💼 Work",
  save:"Save",cancel:"Cancel",mind:"What's on your mind?",addPic:"📷 Add photo",post:"Post",
+ newPost:"New post",gallery:"Gallery",createStory:"Add to My Day",yourStory:"Your Day",shareStory:"Share",storyTxt:"Type something...",
  msgs:"💬 Messages",phMsg:"Type a message...",send:"Send",
  offB:"📴 No internet connection · Offline mode (read only)",onB:"🟢 Back online",offAlert:"📴 No internet connection. Please try again when you're back online.",
  saved:"Saved ✅",posting:"Posting...",postFail:"Could not post: ",sure:"Are you sure?",delAsk:"Delete this?",editAsk:"Edit your post",
@@ -299,7 +409,7 @@ en:{
  noFr:"No friends yet",none:"Nothing found",back:"← Back",onl:"🟢 Online",offl:"Offline",
  lives:"🏠 Lives in <b>{n}</b>",works:"💼 Works at <b>{n}</b>",nFr:"👥 <b>{n}</b> Friends",message:"💬 Message",photos:"Photos",
  noPhoto:"No photos yet",noPost:"No posts yet.",people:"👥 People",shareTag:"Shared",edited:"edited",justNow:"Just now",
- nCm:"{n} comments",phCm:"Write a comment...(Enter)",edit:"✏️ Edit",del:"Delete",like:"Like",comment:"Comment",share:"Share",
+ nCm:"{n} comments",phCm:"Write a comment...(Enter)",edit:"Edit",del:"Delete",like:"Like",comment:"Comment",share:"Share",
  add:"➕ Add Friend",isFr:"✓ Friends",cancelReq:"Cancel",confirm:"Confirm",delete:"Delete",
  langA:"🌐 မြန်မာဘာသာ",langM:"မြန်မာဘာသာ",themeDark:"Dark mode",themeLight:"Light mode"
 }};
@@ -316,8 +426,9 @@ let saved=null;try{saved=localStorage.getItem("th")}catch(e){}
 setTheme(saved||(matchMedia("(prefers-color-scheme:dark)").matches?"dark":"light"));
 $("#th").onclick=()=>{setTheme(root.classList.contains("dark")?"light":"dark");$("#mnu").hidden=true};
 
-let me=null,users={},posts=[],comments={},openC=new Set(),file=null,reg=false,started=false,q="";
+let me=null,users={},posts=[],comments={},openC=new Set(),file=null,reg=false,started=false,q="",posting=false;
 let peer=null,dmMsgs=[],unDM=null,view=null,ptab="posts",notifs=[],fresh=new Set(),lastM={},dmW=new Set(),friends=[],fLoaded=false;
+let stories=[],sg={},sv={uid:null,i:0},svT=null,sBg=0,sFile=null;
 
 // ---------- Helpers ----------
 const U=id=>users[id]||{name:"User",photo:""};
@@ -436,16 +547,17 @@ function markRead(){
 function start(){
   beat();setInterval(beat,90000);
   document.addEventListener("visibilitychange",()=>{if(!document.hidden)beat()});
-  setInterval(()=>{keep(render);renderChat()},60000);
+  setInterval(()=>{keep(render);renderChat();storiesUI()},60000);
   onSnapshot(query(collection(db,"friends"),where("users","array-contains",me.uid)),s=>{friends=s.docs.map(d=>d.data());fLoaded=true;syncFl();keep(render)},e=>console.error(e));
   onSnapshot(query(collection(db,"notifs"),where("to","==",me.uid)),s=>{notifs=s.docs.map(d=>({id:d.id,...d.data()}));bellUI()},e=>console.error(e));
   onSnapshot(collection(db,"users"),s=>{users={};s.forEach(d=>users[d.id]=d.data());
     const m=U(me.uid);
-    $$(".myav").forEach(i=>i.src=av(me.uid));$("#mn").textContent=m.name;
+    $$(".myav").forEach(i=>i.src=av(me.uid));$("#mn").textContent=m.name;$("#con").textContent=m.name;
     $("#mcv").style.background=m.cover?`url('${m.cover}') center/cover`:"";
     Object.keys(users).slice(0,40).forEach(watchDM);
-    syncFl();keep(render);unreadUI();bellUI()});
+    syncFl();keep(render);unreadUI();bellUI();storiesUI()});
   onSnapshot(query(collection(db,"posts"),orderBy("createdAt","desc"),limit(50)),s=>{posts=s.docs.map(d=>({id:d.id,...d.data()}));keep(render)});
+  onSnapshot(query(collection(db,"stories"),orderBy("createdAt","desc"),limit(60)),s=>{stories=s.docs.map(d=>({id:d.id,...d.data()}));storiesUI()},e=>console.error(e));
 }
 
 // ---------- Notifications ----------
@@ -477,18 +589,76 @@ $("#ec").onclick=()=>{$("#ep").hidden=true};
 $("#avf").onchange=e=>act(async()=>{const f=e.target.files[0];if(!f)return;await updateDoc(doc(db,"users",me.uid),{photo:await shrink(f,300)});e.target.value=""});
 $("#cvf").onchange=e=>act(async()=>{const f=e.target.files[0];if(!f)return;await updateDoc(doc(db,"users",me.uid),{cover:await shrink(f,640,.6)});e.target.value=""});
 
-// ---------- Compose ----------
-$("#file").onchange=e=>{file=e.target.files[0]||null;$("#prev").innerHTML=file?`<img src="${URL.createObjectURL(file)}">`:""};
+// ---------- Compose (Facebook-style full screen) ----------
+const syncPost=()=>{$("#post").disabled=posting||(!$("#txt").value.trim()&&!file)};
+const openCo=pick=>{$("#co").hidden=false;syncPost();setTimeout(()=>pick?$("#file").click():$("#txt").focus(),60)};
+$("#oc").onclick=()=>openCo();
+$("#og").onclick=()=>openCo(true);
+$("#cc").onclick=()=>{$("#co").hidden=true};
+$("#txt").oninput=syncPost;
+$("#file").onchange=e=>{file=e.target.files[0]||null;$("#prev").innerHTML=file?`<img src="${URL.createObjectURL(file)}">`:"";syncPost()};
 $("#post").onclick=async()=>{
   if(offl())return;
-  const text=$("#txt").value.trim();if(!text&&!file)return;const b=$("#post");b.disabled=true;b.textContent=t("posting");
+  const text=$("#txt").value.trim();if(!text&&!file)return;const b=$("#post");posting=true;b.disabled=true;b.textContent=t("posting");
   try{
     const data={uid:me.uid,text,image:file?await shrink(file,900):"",reactions:{},commentCount:0,createdAt:serverTimestamp()};
     await addDoc(collection(db,"posts"),data);
-    $("#txt").value="";$("#prev").innerHTML="";file=null;$("#file").value="";
+    $("#txt").value="";$("#prev").innerHTML="";file=null;$("#file").value="";$("#co").hidden=true;
   }catch(e){alert(t("postFail")+(e.message||e))}
-  b.disabled=false;b.textContent=t("post");
+  posting=false;b.textContent=t("post");syncPost();
 };
+syncPost();
+
+// ---------- My Day (Stories) ----------
+const sts=s=>s.createdAt?.toMillis?.()||Date.now();
+function storiesUI(){
+  if(!me)return;
+  const now=Date.now(),g={};
+  stories.filter(s=>now-sts(s)<864e5).forEach(s=>(g[s.uid]=g[s.uid]||[]).push(s));
+  Object.values(g).forEach(a=>a.sort((x,y)=>sts(x)-sts(y)));
+  sg=g;
+  const ids=Object.keys(g).sort((a,b)=>a===me.uid?-1:b===me.uid?1:sts(g[b][g[b].length-1])-sts(g[a][g[a].length-1]));
+  $("#sty").innerHTML=`<div class="sc cr" data-s="new"><img src="${esc(av(me.uid))}"><div class="plus">+</div><span>${t("createStory")}</span></div>`
+   +ids.map(i=>{const l=g[i][g[i].length-1];
+     return `<div class="sc" data-s="${i}" style="${l.image?"":"background:"+esc(l.bg||BG[0])}">${l.image?`<img class="bgi" src="${esc(l.image)}">`:`<div class="stx">${esc(l.text)}</div>`}<img class="ring" src="${esc(av(i))}"><span>${esc(i===me.uid?t("yourStory"):U(i).name)}</span></div>`}).join("");
+}
+function scrUI(){
+  $("#scp").style.background=sFile?"#000":BG[sBg];
+  $("#scimg").hidden=!sFile;
+  if(sFile)$("#scimg").src=URL.createObjectURL(sFile);
+  $("#scd").innerHTML=BG.map((b,i)=>`<button class="cdot ${i===sBg&&!sFile?"on":""}" data-sb="${i}" style="background:${b}"></button>`).join("");
+}
+function openScr(){sBg=0;sFile=null;$("#sctx").value="";$("#sf").value="";scrUI();$("#scr").hidden=false}
+$("#scx").onclick=()=>{$("#scr").hidden=true};
+$("#sf").onchange=e=>{sFile=e.target.files[0]||null;scrUI()};
+$("#scs").onclick=async()=>{
+  if(offl())return;
+  const text=$("#sctx").value.trim();if(!text&&!sFile)return;
+  const b=$("#scs");b.disabled=true;
+  try{
+    await addDoc(collection(db,"stories"),{uid:me.uid,text,image:sFile?await shrink(sFile,720,.7):"",bg:sFile?"":BG[sBg],createdAt:serverTimestamp()});
+    $("#scr").hidden=true;
+  }catch(e){alert(e.message)}
+  b.disabled=false;
+};
+function closeSv(){clearTimeout(svT);$("#sv").hidden=true}
+function showSv(){
+  clearTimeout(svT);
+  const a=sg[sv.uid]||[],s=a[sv.i];
+  if(!s){closeSv();return}
+  $("#sv").hidden=false;
+  $("#svb").innerHTML=a.map((_,k)=>`<i class="${k<sv.i?"f":k===sv.i?"a":""}"></i>`).join("");
+  $("#svh").innerHTML=`<img class="av" src="${esc(av(sv.uid))}" style="width:36px;height:36px"><div style="flex:1;min-width:0"><div class="name">${esc(U(sv.uid).name)}</div><div class="time">${ago(sts(s))}</div></div>${sv.uid===me.uid?`<button class="svx" data-sx="del">${I_TRASH}</button>`:""}<button class="svx" data-sx="close">${I_X}</button>`;
+  $("#svc").style.background=s.image?"#000":(s.bg||BG[0]);
+  $("#svc").innerHTML=(s.image?`<img src="${esc(s.image)}">`:"")+(s.text?`<div class="svt ${s.image?"cap":""}">${esc(s.text)}</div>`:"");
+  svT=setTimeout(()=>{sv.i++;showSv()},5000);
+}
+function openSv(uid){if(!sg[uid]?.length)return;sv={uid,i:0};showSv()}
+function delStory(){
+  const s=(sg[sv.uid]||[])[sv.i];if(!s)return;
+  if(!confirm(t("delAsk")))return;
+  closeSv();act(()=>deleteDoc(doc(db,"stories",s.id)));
+}
 
 // ---------- Feed ----------
 const img=p=>p.image?`<img class="media" src="${esc(p.image)}" loading="lazy">`:"";
@@ -504,7 +674,7 @@ function postHTML(p){
     <div class="cm"><input data-ci="${p.id}" placeholder="${t("phCm")}" style="margin:0;border-radius:20px"></div></div>`:"";
   return `<div class="card pad" data-id="${p.id}">
     <div class="row"><span data-pf="${p.uid}" style="cursor:pointer">${avw(p.uid)}</span><div><div class="name" data-pf="${p.uid}" style="cursor:pointer">${esc(U(p.uid).name)}${p.shared?` <span class='time'>${t("shareTag")}</span>`:""}</div><div class="time">${when(p.createdAt)}${p.edited?" · "+t("edited"):""}</div></div>
-    ${p.uid===me.uid?`<span style="margin-left:auto"><button class="del" data-a="edit" style="margin:0">${t("edit")}</button><button class="del" data-a="del" style="margin:0">${t("del")}</button></span>`:""}</div>
+    ${p.uid===me.uid?`<span class="pw"><button class="dots" data-a="menu">${I_DOTS}</button><div class="pmenu" hidden><button data-a="edit">${I_EDIT}<span>${t("edit")}</span></button><button class="rd" data-a="del">${I_TRASH}<span>${t("del")}</span></button></div></span>`:""}</div>
     <div style="margin-top:8px;white-space:pre-wrap">${esc(p.text)}</div>${p.shared?sh:img(p)}
     <div class="sum"><span class="lc">${vals.length?`<span class="emo">${top}</span><span>${vals.length}</span>`:""}</span><span>${p.commentCount?t("nCm",p.commentCount):""}</span></div>
     <div class="acts">
@@ -542,14 +712,14 @@ function render(){
       <div class="pad row" style="justify-content:center;flex-wrap:wrap">${isMe?`<button class="btn g" data-edit>${t("editProf")}</button>`
         :`${fbtn(view)}<button class="btn ghost" style="padding:5px 12px;font-size:12px" data-dm="${view}">${t("message")}</button>`}</div>
       <div class="ptabs">${[["posts",t("posts")],["photos",t("photos")],["friends",t("friends")]].map(([k,n])=>`<button data-pt="${k}" class="${ptab===k?"on":""}">${n}</button>`).join("")}</div></div>`;
-    $("#cmp").hidden=true;$("#ppl").innerHTML="";
+    $("#cmp").hidden=true;$("#sty").hidden=true;$("#ppl").innerHTML="";
     if(!isMe)$("#ep").hidden=true;
     if(ptab==="photos"){const ph=posts.filter(p=>p.uid===view&&p.image);
       html=`<div class="card pad">${ph.length?`<div class="pg">${ph.map(p=>`<img data-lb src="${esc(p.image)}" loading="lazy">`).join("")}</div>`:`<div class="time">${t("noPhoto")}</div>`}</div>`}
     else if(ptab==="friends")html=`<div class="card">${fl.map(i=>person([i,U(i)])).join("")||`<div class="pad time">${t("noFr")}</div>`}</div>`;
     else html=posts.filter(p=>p.uid===view).map(postHTML).join("")||`<div class="card pad">${t("noPost")}</div>`;
   }else{
-    $("#pv").innerHTML="";$("#ep").hidden=true;$("#cmp").hidden=false;
+    $("#pv").innerHTML="";$("#ep").hidden=true;$("#cmp").hidden=false;$("#sty").hidden=false;
     const found=q?Object.entries(users).filter(match).slice(0,6):[];
     $("#ppl").innerHTML=found.length?`<div class="card"><div class="ct">${t("people")}</div>${found.map(person).join("")}</div>`:"";
     html=posts.filter(p=>!q||((p.text||"")+U(p.uid).name).toLowerCase().includes(q)).map(postHTML).join("")||`<div class="card pad">${t("noPost")}</div>`;
@@ -559,7 +729,12 @@ function render(){
 document.addEventListener("click",e=>{
   if(!e.target.closest("#npn,#bell"))$("#npn").hidden=true;
   if(!e.target.closest("#mnu,#mb"))$("#mnu").hidden=true;
+  if(!e.target.closest(".pw"))$$(".pmenu").forEach(m=>m.hidden=true);
   if(e.target.closest("#lb")){$("#lb").hidden=true;return}
+  const sc=e.target.closest("[data-s]");if(sc){sc.dataset.s==="new"?openScr():openSv(sc.dataset.s);return}
+  const sz=e.target.closest("[data-sz]");if(sz){sv.i=Math.max(0,sv.i+(+sz.dataset.sz));showSv();return}
+  const sx=e.target.closest("[data-sx]");if(sx){sx.dataset.sx==="close"?closeSv():delStory();return}
+  const sb=e.target.closest("[data-sb]");if(sb){sBg=+sb.dataset.sb;sFile=null;$("#sf").value="";scrUI();return}
   const lb=e.target.closest("[data-lb]");if(lb){$("#lb img").src=lb.src;$("#lb").hidden=false;return}
   const nt=e.target.closest("[data-n]");
   if(nt){$("#npn").hidden=true;
@@ -576,14 +751,15 @@ document.addEventListener("click",e=>{
   const pf=e.target.closest("[data-pf]");if(pf){openProfile(pf.dataset.pf);return}
   const ta=e.target.closest("[data-a]");if(!ta)return;const id=ta.closest(".card")?.dataset.id,p=posts.find(x=>x.id===id),a=ta.dataset.a;
   if(!p)return;
+  if(a==="menu"){const m=ta.parentElement.querySelector(".pmenu"),was=m.hidden;$$(".pmenu").forEach(x=>x.hidden=true);m.hidden=!was;return}
   if(a==="react"||a==="like"){
     const mine=p.reactions?.[me.uid];
     const val=a==="react"?(ta.dataset.e===mine?null:ta.dataset.e):(mine?null:"👍");
     act(async()=>{await updateDoc(doc(db,"posts",id),{[`reactions.${me.uid}`]:val===null?deleteField():val});if(val)notify(p.uid,"react",{postId:id,emoji:val})});
   }
   if(a==="cm"){if(openC.has(id))openC.delete(id);else{openC.add(id);subC(id)}render()}
-  if(a==="edit"){const nt2=prompt(t("editAsk"),p.text||"");if(nt2===null)return;act(()=>updateDoc(doc(db,"posts",id),{text:nt2.trim(),edited:true}))}
-  if(a==="del"&&confirm(t("delAsk")))act(()=>deleteDoc(doc(db,"posts",id)));
+  if(a==="edit"){$$(".pmenu").forEach(x=>x.hidden=true);const nt2=prompt(t("editAsk"),p.text||"");if(nt2===null)return;act(()=>updateDoc(doc(db,"posts",id),{text:nt2.trim(),edited:true}))}
+  if(a==="del"){$$(".pmenu").forEach(x=>x.hidden=true);if(confirm(t("delAsk")))act(()=>deleteDoc(doc(db,"posts",id)))}
   if(a==="share"){const note=prompt(t("shareAsk"));if(note===null)return;const s=p.shared||p;
     act(()=>addDoc(collection(db,"posts"),{uid:me.uid,text:note,image:"",reactions:{},commentCount:0,createdAt:serverTimestamp(),
       shared:{uid:s.uid,text:s.text||"",image:s.image||""}}).then(()=>{notify(s.uid,"share",{postId:id});alert(t("shareOk"))}))}
@@ -646,9 +822,9 @@ function applyLang(){
   $("#lgl").textContent=t("langM");
   $("#lga").textContent=t("langA");
   setTheme(root.classList.contains("dark")?"dark":"light");
-  const pb=$("#post");if(!pb.disabled)pb.textContent=t("post");
+  const pb=$("#post");if(!posting)pb.textContent=t("post");
   if(!offB.hidden&&!navigator.onLine)offB.textContent=t("offB");
-  if(me){render();renderChat();bellUI()}
+  if(me){render();renderChat();bellUI();storiesUI()}
 }
 const toggleLang=()=>{lang=lang==="my"?"en":"my";try{localStorage.setItem("lang",lang)}catch(e){}$("#mnu").hidden=true;applyLang()};
 $("#lgb").onclick=toggleLang;$("#lga").onclick=toggleLang;
