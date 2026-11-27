@@ -50,6 +50,12 @@ nav input{max-width:320px;margin:0;padding:8px 14px;font-size:14px;background:#f
 #tabs .ic{width:25px;height:25px}
 #tabs .bdg{position:absolute;top:4px;right:2px;left:auto;margin:0}
 .wrap{max-width:1100px;margin:18px auto;padding:0 12px 0 64px;display:grid;grid-template-columns:270px 1fr 300px;gap:18px;align-items:start}
+.wrap{transition:padding .25s}
+body.tc .wrap{padding-left:18px}
+#tabs{transition:transform .25s}
+body.tc #tabs{transform:translateX(-100%)}
+#tg{position:fixed;top:130px;left:52px;width:18px;height:46px;z-index:16;background:var(--r);color:#fff;border-radius:0 12px 12px 0;padding:0;font-size:20px;line-height:1;display:flex;align-items:center;justify-content:center;transition:left .25s}
+body.tc #tg{left:0}
 .cover{height:84px;background:linear-gradient(120deg,var(--r) 50%,var(--g) 50%)}
 .pcov{height:160px}
 .prof{text-align:center;margin-top:-46px}
@@ -244,6 +250,7 @@ html.dark #auth p{color:#a0a6ae!important}
     <button data-t="me" title="Profile"><svg class="ic" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8"/></svg></button>
   </div>
 
+  <button id="tg">‹</button>
   <div class="card" id="npn" hidden><div class="ct" data-i="notif"></div><div id="nl"></div></div>
   <div class="card" id="mnu" hidden>
     <button class="mi" id="th"><span class="mic" id="thi"></span><span id="thl"></span></button>
@@ -521,8 +528,11 @@ onAuthStateChanged(auth,u=>{
 });
 
 // ---------- Tabs / Search / Menu ----------
+const tgUI=()=>{$("#tg").textContent=document.body.classList.contains("tc")?"›":"‹"};
+$("#tg").onclick=()=>{document.body.classList.toggle("tc");tgUI()};
 $$("#tabs button").forEach(b=>b.onclick=()=>{
   const tb=b.dataset.t;
+  document.body.classList.add("tc");tgUI();
   setTab(tb);
   if(tb==="home"||tb==="news"||tb==="edu"||tb==="know"){view=null;render();scrollTo(0,0)}
   if(tb==="me"){view=me.uid;ptab="posts";render()}
