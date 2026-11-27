@@ -61,10 +61,14 @@ nav input{max-width:320px;margin:0;padding:8px 14px;font-size:14px;background:#f
 .media{width:calc(100% + 32px);margin:10px -16px 0;max-height:520px;object-fit:contain;background:#111;display:block}
 .shared{border:1px solid #e3e6ea;border-radius:14px;padding:12px;margin-top:8px;background:#fafbfc;overflow:hidden}
 .shared .media{width:calc(100% + 24px);margin:10px -12px -12px}
-.sum{font-size:13px;color:var(--mut);padding:10px 0;display:flex;justify-content:space-between}
-.acts{display:flex;border-top:1px solid var(--line);padding-top:6px;gap:4px}.acts>*{flex:1}
-.acts button{background:none;color:var(--mut);padding:9px;border-radius:10px;font-weight:600;width:100%}
+.sum{font-size:13px;color:var(--mut);padding:10px 0;display:flex;justify-content:space-between;align-items:center}
+.sum .lc{display:flex;align-items:center;gap:6px}
+.acts{display:flex;border-top:1px solid var(--line);padding-top:4px;gap:2px}.acts>*{flex:1}
+.acts button{background:none;color:var(--mut);padding:10px 4px;border-radius:10px;font-weight:600;width:100%;display:flex;align-items:center;justify-content:center;gap:7px;font-size:14px}
+.acts button .ic{width:23px;height:23px}
 .acts button:hover{background:#f0f2f5}.acts .me{color:var(--r)}
+.acts .me .ic{fill:currentColor;fill-opacity:.15}
+.acts .emo{font-size:20px;line-height:1}
 .lw{position:relative}
 .pk{display:none;position:absolute;bottom:46px;left:0;background:#fff;border-radius:30px;box-shadow:0 6px 20px rgba(0,0,0,.22);padding:6px 10px;z-index:5}
 .lw:hover .pk,.pk.show{display:flex}
@@ -251,6 +255,9 @@ const EMO=["👍","❤️","😂","😮","😢","😡"];
 const DEF="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect fill='%23bcc0c4' width='40' height='40'/%3E%3Ccircle cx='20' cy='15' r='7' fill='%23fff'/%3E%3Cellipse cx='20' cy='37' rx='13' ry='11' fill='%23fff'/%3E%3C/svg%3E";
 const SUN='<svg class="ic" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.3M12 19.2v2.3M2.5 12h2.3M19.2 12h2.3M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6"/></svg>';
 const MOON='<svg class="ic" viewBox="0 0 24 24"><path d="M21 13.5A8.5 8.5 0 1 1 10.5 3a7 7 0 0 0 10.5 10.5z"/></svg>';
+const I_LIKE='<svg class="ic" viewBox="0 0 24 24"><path d="M7 11v9H4a1 1 0 0 1-1-1v-7a1 1 0 0 1 1-1h3zM7 11l4-8a2 2 0 0 1 2 2v4h6a2 2 0 0 1 2 2.3l-1.2 7A2 2 0 0 1 17.8 20H7"/></svg>';
+const I_CMT='<svg class="ic" viewBox="0 0 24 24"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/></svg>';
+const I_SHR='<svg class="ic" viewBox="0 0 24 24"><path d="M14 4l7 7-7 7v-4c-5 0-8 1.5-10 5 .5-6 4-10 10-10z"/></svg>';
 
 // ---------- Language / ဘာသာစကား ----------
 const L={
@@ -271,7 +278,7 @@ my:{
  noFr:"သူငယ်ချင်း မရှိသေးပါ",none:"မတွေ့ပါ",back:"← နောက်သို့",onl:"🟢 Online",offl:"Offline",
  lives:"🏠 နေရပ် <b>{n}</b>",works:"💼 အလုပ် <b>{n}</b>",nFr:"👥 <b>{n}</b> သူငယ်ချင်း",message:"💬 စာပို့မယ်",photos:"ဓာတ်ပုံ",
  noPhoto:"ဓာတ်ပုံ မရှိသေးပါ",noPost:"ပို့စ်မရှိသေးပါ။",people:"👥 လူများ",shareTag:"မျှဝေသည်",edited:"ပြင်ပြီး",justNow:"ယခုလေးတင်",
- nCm:"{n} မှတ်ချက်",phCm:"မှတ်ချက်ရေးပါ...(Enter)",edit:"✏️ ပြင်မယ်",del:"ဖျက်မယ်",like:"👍 Like",comment:"💬 မှတ်ချက်",share:"↗️ မျှဝေမယ်",
+ nCm:"{n} မှတ်ချက်",phCm:"မှတ်ချက်ရေးပါ...(Enter)",edit:"✏️ ပြင်မယ်",del:"ဖျက်မယ်",like:"Like",comment:"မှတ်ချက်",share:"မျှဝေမယ်",
  add:"➕ သူငယ်ချင်းထည့်မယ်",isFr:"✓ သူငယ်ချင်း",cancelReq:"ပယ်ဖျက်မယ်",confirm:"လက်ခံမယ်",delete:"ဖျက်မယ်",
  langA:"🌐 English",langM:"English",themeDark:"ညမုဒ်",themeLight:"နေ့မုဒ်"
 },
@@ -292,7 +299,7 @@ en:{
  noFr:"No friends yet",none:"Nothing found",back:"← Back",onl:"🟢 Online",offl:"Offline",
  lives:"🏠 Lives in <b>{n}</b>",works:"💼 Works at <b>{n}</b>",nFr:"👥 <b>{n}</b> Friends",message:"💬 Message",photos:"Photos",
  noPhoto:"No photos yet",noPost:"No posts yet.",people:"👥 People",shareTag:"Shared",edited:"edited",justNow:"Just now",
- nCm:"{n} comments",phCm:"Write a comment...(Enter)",edit:"✏️ Edit",del:"Delete",like:"👍 Like",comment:"💬 Comment",share:"↗️ Share",
+ nCm:"{n} comments",phCm:"Write a comment...(Enter)",edit:"✏️ Edit",del:"Delete",like:"Like",comment:"Comment",share:"Share",
  add:"➕ Add Friend",isFr:"✓ Friends",cancelReq:"Cancel",confirm:"Confirm",delete:"Delete",
  langA:"🌐 မြန်မာဘာသာ",langM:"မြန်မာဘာသာ",themeDark:"Dark mode",themeLight:"Light mode"
 }};
@@ -499,11 +506,11 @@ function postHTML(p){
     <div class="row"><span data-pf="${p.uid}" style="cursor:pointer">${avw(p.uid)}</span><div><div class="name" data-pf="${p.uid}" style="cursor:pointer">${esc(U(p.uid).name)}${p.shared?` <span class='time'>${t("shareTag")}</span>`:""}</div><div class="time">${when(p.createdAt)}${p.edited?" · "+t("edited"):""}</div></div>
     ${p.uid===me.uid?`<span style="margin-left:auto"><button class="del" data-a="edit" style="margin:0">${t("edit")}</button><button class="del" data-a="del" style="margin:0">${t("del")}</button></span>`:""}</div>
     <div style="margin-top:8px;white-space:pre-wrap">${esc(p.text)}</div>${p.shared?sh:img(p)}
-    <div class="sum"><span>${vals.length?top+" "+vals.length:""}</span><span>${p.commentCount?t("nCm",p.commentCount):""}</span></div>
+    <div class="sum"><span class="lc">${vals.length?`<span class="emo">${top}</span><span>${vals.length}</span>`:""}</span><span>${p.commentCount?t("nCm",p.commentCount):""}</span></div>
     <div class="acts">
       <div class="lw"><div class="pk">${EMO.map(e=>`<span data-a="react" data-e="${e}">${e}</span>`).join("")}</div>
-        <button data-a="like" class="${mine?"me":""}">${mine?mine:t("like")}</button></div>
-      <button data-a="cm">${t("comment")}</button><button data-a="share">${t("share")}</button>
+        <button data-a="like" class="${mine?"me":""}">${mine?`<span class="emo">${mine}</span>`:I_LIKE}<span>${t("like")}</span></button></div>
+      <button data-a="cm">${I_CMT}<span>${t("comment")}</span></button><button data-a="share">${I_SHR}<span>${t("share")}</span></button>
     </div>${cl}</div>`;
 }
 function render(){
