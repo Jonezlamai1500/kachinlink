@@ -67,24 +67,22 @@ nav input{max-width:320px;margin:0;background:#f0f2f5;border-color:transparent;b
  #tabs button{flex:1;background:none;padding:13px;font-size:15px;color:var(--mut)}#tabs button.on{color:var(--r);font-weight:700;border-top:3px solid var(--r)}
  nav input{max-width:none}.chat{height:60vh}
 }
-@media(prefers-color-scheme:dark){
- :root{--ink:#e4e6eb;--mut:#a0a6ae;--line:#2e3036;--sh:0 2px 14px rgba(0,0,0,.4);color-scheme:dark}
- body{background:linear-gradient(135deg,#1c1011 0%,#121316 50%,#0f1a14 100%) fixed}
- .card,#auth{background:#1e2025}
- nav,#tabs{background:rgba(30,32,37,.95)}
- input,textarea,nav input{background:#2a2d33;border-color:#3a3d44;color:#e4e6eb}
- .btn.ghost{background:#2f3238;color:#ddd}
- [style*="#eee"]{border-color:#2e3036!important}
- .sg:hover,.acts button:hover{background:#2a2d33}
- .cm div,.msg{background:#2a2d33}
- .msg.me{background:linear-gradient(135deg,#27b567,var(--g))}
- .chat{background:#17181b}
- .shared{background:#24262b;border-color:#3a3d44}
- .pk{background:#2a2d33}
- .big{border-color:#1e2025}
- .time{color:#9aa0a8}
- #auth p{color:#a0a6ae!important}
-}
+html.dark{--ink:#e4e6eb;--mut:#a0a6ae;--line:#2e3036;--sh:0 2px 14px rgba(0,0,0,.4);color-scheme:dark}
+html.dark body{background:linear-gradient(135deg,#1c1011 0%,#121316 50%,#0f1a14 100%) fixed}
+html.dark .card,html.dark #auth{background:#1e2025}
+html.dark nav,html.dark #tabs{background:rgba(30,32,37,.95)}
+html.dark input,html.dark textarea,html.dark nav input{background:#2a2d33;border-color:#3a3d44;color:#e4e6eb}
+html.dark .btn.ghost{background:#2f3238;color:#ddd}
+html.dark [style*="#eee"]{border-color:#2e3036!important}
+html.dark .sg:hover,html.dark .acts button:hover{background:#2a2d33}
+html.dark .cm div,html.dark .msg{background:#2a2d33}
+html.dark .msg.me{background:linear-gradient(135deg,#27b567,var(--g))}
+html.dark .chat{background:#17181b}
+html.dark .shared{background:#24262b;border-color:#3a3d44}
+html.dark .pk{background:#2a2d33}
+html.dark .big{border-color:#1e2025}
+html.dark .time{color:#9aa0a8}
+html.dark #auth p{color:#a0a6ae!important}
 </style>
 </head><body data-t="home">
 
@@ -106,6 +104,7 @@ nav input{max-width:320px;margin:0;background:#f0f2f5;border-color:transparent;b
     <div class="logo">Kachin <i>Link</i></div>
     <input id="q" placeholder="🔍 Find...">
     <span class="sp"></span>
+    <button class="btn ghost" id="th">🌙</button>
     <button class="btn ghost" id="out">Logout</button>
   </nav>
 
@@ -171,6 +170,14 @@ const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
 const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const EMO=["👍","❤️","😂","😮","😢","😡"];
 const DEF="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect fill='%23bcc0c4' width='40' height='40'/%3E%3Ccircle cx='20' cy='15' r='7' fill='%23fff'/%3E%3Cellipse cx='20' cy='37' rx='13' ry='11' fill='%23fff'/%3E%3C/svg%3E";
+
+// ---------- Theme (Dark / Light) ----------
+const root=document.documentElement;
+const setTheme=t=>{root.classList.toggle("dark",t==="dark");const b=document.getElementById("th");if(b)b.textContent=t==="dark"?"☀️":"🌙";try{localStorage.setItem("th",t)}catch(e){}};
+let saved=null;try{saved=localStorage.getItem("th")}catch(e){}
+setTheme(saved||(matchMedia("(prefers-color-scheme:dark)").matches?"dark":"light"));
+document.getElementById("th").onclick=()=>setTheme(root.classList.contains("dark")?"light":"dark");
+
 let me=null,users={},posts=[],comments={},openC=new Set(),file=null,reg=false,started=false,q="";
 let peer=null,dmMsgs=[],unDM=null;
 
