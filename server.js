@@ -8,7 +8,7 @@ const pub = path.join(__dirname, "public");
 
 // ===== ဒီ ၃ ခုကို ကိုယ့်တန်ဖိုးနဲ့ ပြင်ပါ =====
 const APP_ID = "2676497966100916";
-const APP_SECRET = "ဒီနေရာမှာ Secret အသစ် ၃၂ လုံး ထည့်ပါ";
+const APP_SECRET = "a91610deacecb4e4f6910668b1f5ae3";
 const SESSION_KEY = "ကိုယ်ဘာသာ ရောရိုက်ထားတဲ့ စာလုံးရှည်";
 // ==========================================
 const BASE_URL = "https://kachinlink-production.up.railway.app";
