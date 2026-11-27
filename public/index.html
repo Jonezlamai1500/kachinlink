@@ -29,6 +29,8 @@ textarea{resize:none}
 #auth .btn{padding:10px;font-size:15px}
 #auth a{color:var(--g);cursor:pointer;font-size:14px;font-weight:600}
 .or{margin:6px 0 2px;color:#999;font-size:12px}
+#boot{text-align:center;margin-top:30vh}
+#off{position:fixed;left:0;right:0;bottom:0;z-index:80;color:#fff;text-align:center;padding:8px 10px;font-size:13px;font-weight:600;background:#444}
 nav{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.9);box-shadow:0 2px 12px rgba(0,0,0,.08);display:flex;align-items:center;gap:10px;padding:10px 18px;border-bottom:3px solid var(--r)}
 nav input{max-width:320px;margin:0;background:#f0f2f5;border-color:transparent;border-radius:999px}nav .sp{flex:1}
 .wrap{max-width:1100px;margin:18px auto;padding:0 12px;display:grid;grid-template-columns:270px 1fr 300px;gap:18px;align-items:start}
@@ -86,7 +88,9 @@ nav input{max-width:320px;margin:0;background:#f0f2f5;border-color:transparent;b
  #tabs{display:flex;position:fixed;bottom:0;left:0;right:0;background:rgba(255,255,255,.95);box-shadow:0 -2px 14px rgba(0,0,0,.1);z-index:20}
  #tabs button{flex:1;background:none;padding:13px 4px;font-size:14px;color:var(--mut)}#tabs button.on{color:var(--r);font-weight:700;border-top:3px solid var(--r)}
  nav input{max-width:none;min-width:0}.chat{height:60vh}nav{padding:10px 10px;gap:6px}nav .logo{display:none}
+ #off{bottom:48px}
 }
+@media(max-width:900px){body[data-t=fr] #mcard{display:none}}
 html.dark{--ink:#e4e6eb;--mut:#a0a6ae;--line:#2e3036;--sh:0 2px 14px rgba(0,0,0,.4);color-scheme:dark}
 html.dark body{background:linear-gradient(135deg,#1c1011 0%,#121316 50%,#0f1a14 100%) fixed}
 html.dark .card,html.dark #auth{background:#1e2025}
@@ -108,62 +112,71 @@ html.dark #auth p{color:#a0a6ae!important}
 </style>
 </head><body data-t="home">
 
-<div id="auth">
+<div id="boot">
+  <div class="logo" style="font-size:30px">Kachin <i>Link</i></div>
+  <div class="time" style="margin-top:8px" data-i="boot"></div>
+</div>
+
+<div id="auth" hidden>
   <div class="logo" style="font-size:30px">Kachin <i>Link</i></div>
   <p style="color:#777;margin-top:4px">Hkap Tau La Ga Ai</p>
-  <input id="rn" placeholder="Name" hidden>
-  <input id="em" type="email" placeholder="Email">
-  <input id="pw" type="password" placeholder="Password (6 Number )">
+  <input id="rn" data-ph="phName" hidden>
+  <input id="em" type="email" data-ph="phEmail">
+  <input id="pw" type="password" data-ph="phPw">
   <button class="btn g" id="go" style="width:100%;margin:8px 0">Login</button>
-  <div class="or">သို့မဟုတ်</div>
-  <button class="btn ghost" id="gg" style="width:100%;margin:6px 0">🔵 Google နဲ့ ဝင်မယ်</button>
+  <div class="or" data-i="or"></div>
+  <button class="btn ghost" id="gg" style="width:100%;margin:6px 0" data-i="google"></button>
   <div id="err" style="color:var(--r);font-size:13px"></div>
-  <a id="sw">New Creat Account</a>
+  <a id="sw"></a>
+  <div style="margin-top:12px"><a id="lga"></a></div>
 </div>
+
+<div id="off" hidden></div>
 
 <div id="app" hidden>
   <nav>
     <div class="logo" id="lg">Kachin <i>Link</i></div>
-    <input id="q" placeholder="🔍 Find...">
+    <input id="q" data-ph="search">
     <span class="sp"></span>
     <button class="btn ghost" id="bell">🔔<b class="bdg" id="bb" hidden>0</b></button>
+    <button class="btn ghost" id="lgb">EN</button>
     <button class="btn ghost" id="th">🌙</button>
-    <button class="btn ghost" id="out">Logout</button>
+    <button class="btn ghost" id="out" data-i="logout"></button>
   </nav>
-  <div class="card" id="npn" hidden><div class="ct">🔔 Notifications</div><div id="nl"></div></div>
+  <div class="card" id="npn" hidden><div class="ct" data-i="notif"></div><div id="nl"></div></div>
   <div id="lb" hidden><img></div>
 
   <div class="wrap">
     <aside id="L">
-      <div class="card">
+      <div class="card" id="mcard">
         <div class="cover" id="mcv"></div>
         <div class="prof"><img class="big myav" data-pf="me" style="cursor:pointer"><div class="name" id="mn" data-pf="me" style="font-size:18px;margin:6px 0 10px;cursor:pointer"></div></div>
-        <div class="stats"><div>Posts<b id="np">0</b></div><div>Friends<b id="nu">0</b></div></div>
-        <div class="pad" style="border-top:1px solid #eee"><button class="btn g" data-pf="me" style="width:100%">👤 My Profile</button></div>
+        <div class="stats"><div><span data-i="posts"></span><b id="np">0</b></div><div><span data-i="friends"></span><b id="nu">0</b></div></div>
+        <div class="pad" style="border-top:1px solid #eee"><button class="btn g" data-pf="me" style="width:100%" data-i="myProf"></button></div>
       </div>
-      <div class="card" id="reqc" hidden><div class="ct">🔔 Friend Requests</div><div id="req"></div></div>
-      <div class="card"><div class="ct">Friends</div><div id="fl" style="padding:4px 0"></div></div>
-      <div class="card"><div class="ct">People</div><div id="sug" style="padding:4px 0"></div></div>
+      <div class="card" id="reqc" hidden><div class="ct"><span data-i="frReq"></span><b class="bdg" id="rqn"></b></div><div id="req"></div></div>
+      <div class="card"><div class="ct" data-i="pymk"></div><div id="sug" style="padding:4px 0"></div></div>
+      <div class="card"><div class="ct" id="fct"></div><div id="fl" style="padding:4px 0"></div></div>
     </aside>
 
     <main id="C">
       <div id="pv"></div>
       <div class="card pad" id="ep" hidden>
-        <b>✏️ Edit Profile</b>
-        <label class="btn ghost" style="display:block;text-align:center;margin-top:8px">📷 Profile ပုံပြောင်းမယ်<input id="avf" type="file" accept="image/*" hidden></label>
-        <label class="btn ghost" style="display:block;text-align:center;margin-top:6px">🖼 Cover ပြောင်းမယ်<input id="cvf" type="file" accept="image/*" hidden></label>
-        <input id="epn" placeholder="နာမည်">
-        <textarea id="epb" rows="2" placeholder="Bio (မိတ်ဆက်စာ)"></textarea>
-        <input id="epl" placeholder="🏠 နေရပ် (Lives in)">
-        <input id="epw" placeholder="💼 အလုပ် (Work)">
-        <div class="row" style="margin-top:6px"><button class="btn g" id="sn" style="flex:1">Save</button><button class="btn ghost" id="ec" style="flex:1">Cancel</button></div>
+        <b data-i="editProf"></b>
+        <label class="btn ghost" style="display:block;text-align:center;margin-top:8px"><span data-i="chgAv"></span><input id="avf" type="file" accept="image/*" hidden></label>
+        <label class="btn ghost" style="display:block;text-align:center;margin-top:6px"><span data-i="chgCv"></span><input id="cvf" type="file" accept="image/*" hidden></label>
+        <input id="epn" data-ph="phEpn">
+        <textarea id="epb" rows="2" data-ph="phBio"></textarea>
+        <input id="epl" data-ph="phLives">
+        <input id="epw" data-ph="phWork">
+        <div class="row" style="margin-top:6px"><button class="btn g" id="sn" style="flex:1" data-i="save"></button><button class="btn ghost" id="ec" style="flex:1" data-i="cancel"></button></div>
       </div>
       <div class="card top pad" id="cmp">
-        <div class="row" style="align-items:flex-start"><img class="av myav"><textarea id="txt" rows="2" placeholder="What's on your mind?"></textarea></div>
+        <div class="row" style="align-items:flex-start"><img class="av myav"><textarea id="txt" rows="2" data-ph="mind"></textarea></div>
         <div id="prev"></div>
         <div class="row" style="justify-content:space-between;margin-top:6px">
-          <label class="btn ghost">📷 ပုံထည့်မယ်<input id="file" type="file" accept="image/*" hidden></label>
-          <button class="btn" id="post">Post</button>
+          <label class="btn ghost"><span data-i="addPic"></span><input id="file" type="file" accept="image/*" hidden></label>
+          <button class="btn" id="post" data-i="post"></button>
         </div>
       </div>
       <div id="ppl"></div>
@@ -171,7 +184,7 @@ html.dark #auth p{color:#a0a6ae!important}
     </main>
 
     <aside id="R">
-      <div class="card"><div class="ct">💬 Messages<b class="bdg" id="tb2" hidden></b></div>
+      <div class="card"><div class="ct"><span data-i="msgs"></span><b class="bdg" id="tb2" hidden></b></div>
         <div id="plist"></div>
         <div id="conv" hidden>
           <div class="row pad" style="border-bottom:1px solid #eee;padding:8px 14px">
@@ -181,34 +194,86 @@ html.dark #auth p{color:#a0a6ae!important}
           <div class="chat" id="msgs"></div>
           <div class="row pad" style="padding-top:0">
             <label class="btn ghost" style="padding:9px 12px;margin:0">📷<input id="cimg" type="file" accept="image/*" hidden></label>
-            <input id="ci" placeholder="စာရိုက်ပါ..."><button class="btn g" id="cs">ပို့</button>
+            <input id="ci" data-ph="phMsg"><button class="btn g" id="cs" data-i="send"></button>
           </div>
         </div>
       </div>
     </aside>
   </div>
 
-  <div id="tabs"><button data-t="home" class="on">🏠 Home</button><button data-t="fr">👥 Friends</button><button data-t="chat">💬 Chat<b class="bdg" id="tb" hidden></b></button><button data-t="me">👤 Profile</button></div>
+  <div id="tabs"><button data-t="home" class="on"><span data-i="tHome"></span></button><button data-t="fr"><span data-i="tFr"></span><b class="bdg" id="fb" hidden></b></button><button data-t="chat"><span data-i="tChat"></span><b class="bdg" id="tb" hidden></b></button><button data-t="me"><span data-i="tMe"></span></button></div>
 </div>
 
 <script type="module">
 import {initializeApp} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-import {getAuth,onAuthStateChanged,createUserWithEmailAndPassword,signInWithEmailAndPassword,signOut,GoogleAuthProvider,signInWithPopup,signInWithRedirect} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
-import {getFirestore,collection,doc,setDoc,getDoc,addDoc,updateDoc,deleteDoc,deleteField,onSnapshot,query,orderBy,limit,where,serverTimestamp,increment} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+import {initializeAuth,indexedDBLocalPersistence,browserLocalPersistence,browserPopupRedirectResolver,onAuthStateChanged,createUserWithEmailAndPassword,signInWithEmailAndPassword,signOut,GoogleAuthProvider,signInWithPopup,signInWithRedirect} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+import {initializeFirestore,persistentLocalCache,persistentMultipleTabManager,collection,doc,setDoc,getDoc,addDoc,updateDoc,deleteDoc,deleteField,onSnapshot,query,orderBy,limit,where,serverTimestamp,increment} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 const firebaseConfig = {
   apiKey:"AIzaSyDYL20rK-JgxxOIMVaQwTurlVinXBL9q4k", authDomain:"jinghpaw-link.firebaseapp.com", projectId:"jinghpaw-link",
   storageBucket:"jinghpaw-link.firebasestorage.app", messagingSenderId:"790888296721", appId:"1:790888296721:web:1f238b0be41ac85d631cb0"
 };
-const app=initializeApp(firebaseConfig),auth=getAuth(app),db=getFirestore(app);
+const app=initializeApp(firebaseConfig);
+// Login ကို ဖုန်းထဲ အမြဲသိမ်း
+const auth=initializeAuth(app,{persistence:[indexedDBLocalPersistence,browserLocalPersistence],popupRedirectResolver:browserPopupRedirectResolver});
+// Offline မှာ ဖတ်လို့ရအောင် cache သိမ်း
+const db=initializeFirestore(app,{localCache:persistentLocalCache({tabManager:persistentMultipleTabManager()})});
 const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
 const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const EMO=["👍","❤️","😂","😮","😢","😡"];
 const DEF="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect fill='%23bcc0c4' width='40' height='40'/%3E%3Ccircle cx='20' cy='15' r='7' fill='%23fff'/%3E%3Cellipse cx='20' cy='37' rx='13' ry='11' fill='%23fff'/%3E%3C/svg%3E";
 
+// ---------- Language / ဘာသာစကား ----------
+const L={
+my:{
+ boot:"ခဏစောင့်ပါ...",phName:"နာမည်",phEmail:"Email",phPw:"စကားဝှက် (၆ လုံးအထက်)",login:"ဝင်မယ်",or:"သို့မဟုတ်",google:"🔵 Google နဲ့ ဝင်မယ်",
+ newAcc:"အကောင့်အသစ်ဖွင့်မယ်",createBtn:"အကောင့်ဖွင့်မယ်",haveAcc:"အကောင့်ရှိပြီးသား - ဝင်မယ်",
+ search:"🔍 ရှာမယ်...",logout:"ထွက်မယ်",notif:"🔔 အသိပေးချက်များ",posts:"ပို့စ်",friends:"သူငယ်ချင်း",myProf:"👤 ကျွန်ုပ်၏ Profile",
+ frReq:"သူငယ်ချင်း တောင်းဆိုမှုများ",pymk:"သိကောင်းနိုင်သူများ",allFr:"သူငယ်ချင်းအားလုံး",online:"Online",
+ editProf:"✏️ Profile ပြင်မယ်",chgAv:"📷 Profile ပုံပြောင်းမယ်",chgCv:"🖼 Cover ပြောင်းမယ်",phEpn:"နာမည်",phBio:"Bio (မိတ်ဆက်စာ)",phLives:"🏠 နေရပ်",phWork:"💼 အလုပ်",
+ save:"သိမ်းမယ်",cancel:"မလုပ်တော့ဘူး",mind:"ဘာတွေ စဉ်းစားနေလဲ?",addPic:"📷 ပုံထည့်မယ်",post:"တင်မယ်",
+ msgs:"💬 စာများ",phMsg:"စာရိုက်ပါ...",send:"ပို့",tHome:"🏠 ပင်မ",tFr:"👥 သူငယ်ချင်း",tChat:"💬 စကားပြော",tMe:"👤 ကိုယ်ပိုင်",
+ offB:"📴 အင်တာနက် မရှိပါ · Offline mode (ဖတ်ရုံသာ)",onB:"🟢 အင်တာနက် ပြန်ရပါပြီ",offAlert:"📴 အင်တာနက် မရှိပါ။ ဆက်သွယ်မှု ပြန်ရမှ လုပ်လို့ရပါမယ်။",
+ saved:"သိမ်းပြီးပါပြီ ✅",posting:"တင်နေသည်...",postFail:"တင်မရပါ: ",sure:"သေချာလား?",delAsk:"ဖျက်မလား?",editAsk:"ပို့စ်ကို ပြင်ပါ",
+ shareAsk:"မှတ်ချက်ထည့်မလား? (မထည့်လည်းရ)",shareOk:"မျှဝေပြီးပါပြီ ✅",noNotif:"အသိပေးချက် မရှိသေးပါ",
+ nReact:"က သင့်ပို့စ်ကို Reaction ပေးသည်",nComment:"က သင့်ပို့စ်မှာ Comment ရေးသည်",nShare:"က သင့်ပို့စ်ကို Share လုပ်သည်",nFriend:"က သူငယ်ချင်းဖြစ်ဖို့ တောင်းဆိုသည်",
+ appOn:"● App သုံးနေသည်",lastOff:"Offline · {n} သုံးသွားသည်",never:"App မသုံးသေးပါ",
+ agoNow:"ခုနလေးက",agoM:"{n} မိနစ်က",agoH:"{n} နာရီက",agoD:"{n} ရက်က",mutual:"မိတ်ဆွေတူ {n} ယောက်",
+ noFr:"သူငယ်ချင်း မရှိသေးပါ",none:"မတွေ့ပါ",back:"← နောက်သို့",onl:"🟢 Online",offl:"Offline",
+ lives:"🏠 နေရပ် <b>{n}</b>",works:"💼 အလုပ် <b>{n}</b>",nFr:"👥 <b>{n}</b> သူငယ်ချင်း",message:"💬 စာပို့မယ်",photos:"ဓာတ်ပုံ",
+ noPhoto:"ဓာတ်ပုံ မရှိသေးပါ",noPost:"ပို့စ်မရှိသေးပါ။",people:"👥 လူများ",shareTag:"မျှဝေသည်",edited:"ပြင်ပြီး",justNow:"ယခုလေးတင်",
+ nCm:"{n} မှတ်ချက်",phCm:"မှတ်ချက်ရေးပါ...(Enter)",edit:"✏️ ပြင်မယ်",del:"ဖျက်မယ်",like:"👍 Like",comment:"💬 မှတ်ချက်",share:"↗️ မျှဝေမယ်",
+ add:"➕ သူငယ်ချင်းထည့်မယ်",isFr:"✓ သူငယ်ချင်း",cancelReq:"ပယ်ဖျက်မယ်",confirm:"လက်ခံမယ်",delete:"ဖျက်မယ်",lang:"EN",langA:"🌐 English"
+},
+en:{
+ boot:"Loading...",phName:"Name",phEmail:"Email",phPw:"Password (min 6 characters)",login:"Login",or:"or",google:"🔵 Continue with Google",
+ newAcc:"Create new account",createBtn:"Create Account",haveAcc:"Already have an account? Login",
+ search:"🔍 Search...",logout:"Logout",notif:"🔔 Notifications",posts:"Posts",friends:"Friends",myProf:"👤 My Profile",
+ frReq:"Friend Requests",pymk:"People You May Know",allFr:"All Friends",online:"Online",
+ editProf:"✏️ Edit Profile",chgAv:"📷 Change profile photo",chgCv:"🖼 Change cover",phEpn:"Name",phBio:"Bio",phLives:"🏠 Lives in",phWork:"💼 Work",
+ save:"Save",cancel:"Cancel",mind:"What's on your mind?",addPic:"📷 Add photo",post:"Post",
+ msgs:"💬 Messages",phMsg:"Type a message...",send:"Send",tHome:"🏠 Home",tFr:"👥 Friends",tChat:"💬 Chat",tMe:"👤 Profile",
+ offB:"📴 No internet connection · Offline mode (read only)",onB:"🟢 Back online",offAlert:"📴 No internet connection. Please try again when you're back online.",
+ saved:"Saved ✅",posting:"Posting...",postFail:"Could not post: ",sure:"Are you sure?",delAsk:"Delete this?",editAsk:"Edit your post",
+ shareAsk:"Add a comment? (optional)",shareOk:"Shared ✅",noNotif:"No notifications yet",
+ nReact:"reacted to your post",nComment:"commented on your post",nShare:"shared your post",nFriend:"sent you a friend request",
+ appOn:"● Active now",lastOff:"Offline · active {n}",never:"Hasn't used the app yet",
+ agoNow:"just now",agoM:"{n} min ago",agoH:"{n} hr ago",agoD:"{n} d ago",mutual:"{n} mutual friends",
+ noFr:"No friends yet",none:"Nothing found",back:"← Back",onl:"🟢 Online",offl:"Offline",
+ lives:"🏠 Lives in <b>{n}</b>",works:"💼 Works at <b>{n}</b>",nFr:"👥 <b>{n}</b> Friends",message:"💬 Message",photos:"Photos",
+ noPhoto:"No photos yet",noPost:"No posts yet.",people:"👥 People",shareTag:"Shared",edited:"edited",justNow:"Just now",
+ nCm:"{n} comments",phCm:"Write a comment...(Enter)",edit:"✏️ Edit",del:"Delete",like:"👍 Like",comment:"💬 Comment",share:"↗️ Share",
+ add:"➕ Add Friend",isFr:"✓ Friends",cancelReq:"Cancel",confirm:"Confirm",delete:"Delete",lang:"မြန်မာ",langA:"🌐 မြန်မာဘာသာ"
+}};
+let lang="my";try{lang=localStorage.getItem("lang")||"my"}catch(e){}
+const t=(k,n)=>String(L[lang][k]??L.my[k]??k).replace("{n}",n??"");
+
+// ---------- Offline app shell ----------
+if("serviceWorker" in navigator)addEventListener("load",()=>navigator.serviceWorker.register("/sw.js").catch(()=>{}));
+
 // ---------- Theme ----------
 const root=document.documentElement;
-const setTheme=t=>{root.classList.toggle("dark",t==="dark");const b=document.getElementById("th");if(b)b.textContent=t==="dark"?"☀️":"🌙";try{localStorage.setItem("th",t)}catch(e){}};
+const setTheme=th=>{root.classList.toggle("dark",th==="dark");const b=document.getElementById("th");if(b)b.textContent=th==="dark"?"☀️":"🌙";try{localStorage.setItem("th",th)}catch(e){}};
 let saved=null;try{saved=localStorage.getItem("th")}catch(e){}
 setTheme(saved||(matchMedia("(prefers-color-scheme:dark)").matches?"dark":"light"));
 document.getElementById("th").onclick=()=>setTheme(root.classList.contains("dark")?"light":"dark");
@@ -221,13 +286,14 @@ const U=id=>users[id]||{name:"User",photo:""};
 const av=id=>U(id).photo||DEF;
 const on=id=>id===me?.uid||(Date.now()-(U(id).lastSeen||0)<150000);
 const avw=(id,c="av")=>`<span class="aw"><img class="${c}" src="${esc(av(id))}">${on(id)?'<i class="dot"></i>':""}</span>`;
-const when=t=>t?.toDate?t.toDate().toLocaleString("my-MM",{dateStyle:"medium",timeStyle:"short"}):"ယခုလေးတင်";
-const act=async fn=>{try{await fn()}catch(e){alert(e.message)}};
+const when=ts=>ts?.toDate?ts.toDate().toLocaleString(lang==="my"?"my-MM":"en-US",{dateStyle:"medium",timeStyle:"short"}):t("justNow");
+const offl=()=>{if(navigator.onLine)return false;alert(t("offAlert"));return true};
+const act=async fn=>{if(offl())return;try{await fn()}catch(e){alert(e.message)}};
 const keep=fn=>{const k=document.activeElement?.dataset?.ci,v=document.activeElement?.value;fn();if(k){const i=$(`[data-ci="${k}"]`);if(i){i.value=v;i.focus()}}};
-function shrink(f,max,q=.72){return new Promise((ok,no)=>{const r=new FileReader();r.onerror=no;r.onload=()=>{const i=new Image();i.onerror=no;i.onload=()=>{
+function shrink(f,max,qq=.72){return new Promise((ok,no)=>{const r=new FileReader();r.onerror=no;r.onload=()=>{const i=new Image();i.onerror=no;i.onload=()=>{
   const k=Math.min(1,max/Math.max(i.width,i.height)),c=document.createElement("canvas");c.width=i.width*k;c.height=i.height*k;
-  c.getContext("2d").drawImage(i,0,0,c.width,c.height);ok(c.toDataURL("image/jpeg",q))};i.src=r.result};r.readAsDataURL(f)})}
-const setTab=t=>{$$("#tabs button").forEach(x=>x.classList.toggle("on",x.dataset.t===t));document.body.dataset.t=t};
+  c.getContext("2d").drawImage(i,0,0,c.width,c.height);ok(c.toDataURL("image/jpeg",qq))};i.src=r.result};r.readAsDataURL(f)})}
+const setTab=tb=>{$$("#tabs button").forEach(x=>x.classList.toggle("on",x.dataset.t===tb));document.body.dataset.t=tb};
 const notify=(to,type,extra={})=>{if(!to||to===me.uid)return;addDoc(collection(db,"notifs"),{to,from:me.uid,type,...extra,read:false,createdAt:serverTimestamp()}).catch(()=>{})};
 
 // ---------- Friends ----------
@@ -235,26 +301,26 @@ const fid=o=>[me.uid,o].sort().join("_");
 const accIds=()=>friends.filter(f=>f.status==="accepted").map(f=>f.users.find(x=>x!==me.uid));
 const fbtn=o=>{
   const f=friends.find(x=>x.users.includes(o)),s='style="padding:5px 12px;font-size:12px"';
-  if(!f)return `<button class="btn g" ${s} data-f="add" data-u="${o}">➕ Add Friend</button>`;
-  if(f.status==="accepted")return `<button class="btn ghost" ${s} data-f="rm" data-u="${o}">✓ Friends</button>`;
-  if(f.from===me.uid)return `<button class="btn ghost" ${s} data-f="rm" data-u="${o}">Cancel</button>`;
-  return `<button class="btn g" ${s} data-f="ok" data-u="${o}">Confirm</button><button class="btn ghost" ${s} data-f="rm" data-u="${o}">Delete</button>`;
+  if(!f)return `<button class="btn g" ${s} data-f="add" data-u="${o}">${t("add")}</button>`;
+  if(f.status==="accepted")return `<button class="btn ghost" ${s} data-f="rm" data-u="${o}">${t("isFr")}</button>`;
+  if(f.from===me.uid)return `<button class="btn ghost" ${s} data-f="rm" data-u="${o}">${t("cancelReq")}</button>`;
+  return `<button class="btn g" ${s} data-f="ok" data-u="${o}">${t("confirm")}</button><button class="btn ghost" ${s} data-f="rm" data-u="${o}">${t("delete")}</button>`;
 };
 const friendAct=(a,o)=>act(async()=>{
   if(a==="add"){await setDoc(doc(db,"friends",fid(o)),{from:me.uid,to:o,users:[me.uid,o],status:"pending"});notify(o,"friend")}
   if(a==="ok")await updateDoc(doc(db,"friends",fid(o)),{status:"accepted"});
-  if(a==="rm"&&confirm("သေချာလား?"))await deleteDoc(doc(db,"friends",fid(o)));
+  if(a==="rm"&&confirm(t("sure")))await deleteDoc(doc(db,"friends",fid(o)));
 });
-// ကိုယ့် Friend စာရင်းကို ကိုယ့် user doc ထဲ ထပ်သိမ်း (တခြားသူ Profile ကနေ ကြည့်လို့ရအောင်)
 function syncFl(){
-  if(!me||!fLoaded||!users[me.uid])return;
+  if(!me||!fLoaded||!users[me.uid]||!navigator.onLine)return;
   const a=accIds(),x=[...a].sort().join(","),y=[...(U(me.uid).fl||[])].sort().join(",");
   if(x!==y)updateDoc(doc(db,"users",me.uid),{fl:a}).catch(()=>{});
 }
 
 // ---------- Auth ----------
-$("#sw").onclick=()=>{reg=!reg;$("#rn").hidden=!reg;$("#go").textContent=reg?"Creat Account":"Login";$("#sw").textContent=reg?"အကောင့်ရှိပြီးသား - Login":"New Creat Account"};
+$("#sw").onclick=()=>{reg=!reg;$("#rn").hidden=!reg;applyLang()};
 $("#go").onclick=async()=>{
+  if(offl())return;
   $("#err").textContent="";const e=$("#em").value.trim(),p=$("#pw").value;
   try{
     if(reg){const n=$("#rn").value.trim()||e.split("@")[0];const c=await createUserWithEmailAndPassword(auth,e,p);
@@ -263,6 +329,7 @@ $("#go").onclick=async()=>{
   }catch(x){$("#err").textContent=x.code||x.message}
 };
 $("#gg").onclick=async()=>{
+  if(offl())return;
   $("#err").textContent="";
   const gp=new GoogleAuthProvider();
   try{await signInWithPopup(auth,gp)}
@@ -272,27 +339,42 @@ $("#gg").onclick=async()=>{
     }else if(x.code!=="auth/popup-closed-by-user"){$("#err").textContent=x.code||x.message}
   }
 };
-$("#out").onclick=async()=>{try{await updateDoc(doc(db,"users",me.uid),{lastSeen:0})}catch(e){}await signOut(auth);location.reload()};
-onAuthStateChanged(auth,async u=>{
-  if(!u)return;me=u;
-  const d=await getDoc(doc(db,"users",u.uid));
-  if(!d.exists())await setDoc(doc(db,"users",u.uid),{name:u.displayName||(u.email||"user").split("@")[0],photo:u.photoURL||"",createdAt:serverTimestamp()});
-  $("#auth").hidden=true;$("#app").hidden=false;
+$("#out").onclick=async()=>{
+  if(navigator.onLine)updateDoc(doc(db,"users",me.uid),{lastSeen:Date.now()-151000}).catch(()=>{});
+  try{await signOut(auth)}catch(e){}
+  location.reload();
+};
+onAuthStateChanged(auth,u=>{
+  if(!u){$("#boot").hidden=true;$("#app").hidden=true;$("#auth").hidden=false;return}
+  me=u;
+  getDoc(doc(db,"users",u.uid)).then(d=>{
+    if(!d.exists())return setDoc(doc(db,"users",u.uid),{name:u.displayName||(u.email||"user").split("@")[0],photo:u.photoURL||"",createdAt:serverTimestamp()});
+  }).catch(()=>{});
+  $("#boot").hidden=true;$("#auth").hidden=true;$("#app").hidden=false;
   if(!started){started=true;start()}
 });
 
 // ---------- Tabs / Search ----------
 $$("#tabs button").forEach(b=>b.onclick=()=>{
-  const t=b.dataset.t;
-  if(t==="home"){view=null;render()}
-  if(t==="me"){view=me.uid;ptab="posts";render()}
-  setTab(t);scrollChat();
+  const tb=b.dataset.t;
+  if(tb==="home"){view=null;render()}
+  if(tb==="me"){view=me.uid;ptab="posts";render()}
+  setTab(tb);scrollChat();
 });
 $("#lg").onclick=()=>{view=null;setTab("home");render()};
 $("#q").oninput=e=>{q=e.target.value.trim().toLowerCase();render()};
 
 // ---------- Presence / DM watchers ----------
-const beat=()=>me&&updateDoc(doc(db,"users",me.uid),{lastSeen:Date.now()}).catch(()=>{});
+const beat=()=>me&&navigator.onLine&&updateDoc(doc(db,"users",me.uid),{lastSeen:Date.now()}).catch(()=>{});
+// ---------- Online / Offline banner ----------
+const offB=$("#off");let offT;
+const netUI=()=>{
+  clearTimeout(offT);
+  if(!navigator.onLine){offB.textContent=t("offB");offB.style.background="#444";offB.hidden=false}
+  else if(!offB.hidden){offB.textContent=t("onB");offB.style.background="#1f9d55";offT=setTimeout(()=>{offB.hidden=true},2500);beat()}
+};
+addEventListener("online",netUI);addEventListener("offline",netUI);netUI();
+
 const reads=()=>U(me.uid).reads||{};
 const unreadN=i=>(lastM[i]||[]).filter(m=>m.from!==me.uid&&m.t>(reads()[i]||0)).length;
 function watchDM(id){
@@ -308,7 +390,7 @@ function unreadUI(){
 function markRead(){
   if(!peer)return;
   const last=Math.max(0,...dmMsgs.filter(m=>m.from!==me.uid).map(m=>m.createdAt?.toMillis?.()||0));
-  if(last>(reads()[peer]||0)){(U(me.uid).reads=reads())[peer]=last;updateDoc(doc(db,"users",me.uid),{[`reads.${peer}`]:last}).catch(()=>{});unreadUI()}
+  if(last>(reads()[peer]||0)){(U(me.uid).reads=reads())[peer]=last;if(navigator.onLine)updateDoc(doc(db,"users",me.uid),{[`reads.${peer}`]:last}).catch(()=>{});unreadUI()}
 }
 
 // ---------- Live data ----------
@@ -329,21 +411,21 @@ function start(){
 
 // ---------- Notifications ----------
 const ntxt=n=>{const u=esc(U(n.from).name);
-  return n.type==="react"?`${esc(n.emoji||"👍")} <b>${u}</b> က သင့်ပို့စ်ကို Reaction ပေးသည်`
-  :n.type==="comment"?`💬 <b>${u}</b> က သင့်ပို့စ်မှာ Comment ရေးသည်`
-  :n.type==="share"?`↗️ <b>${u}</b> က သင့်ပို့စ်ကို Share လုပ်သည်`
-  :`👥 <b>${u}</b> က Friend Request ပို့သည်`};
+  return n.type==="react"?`${esc(n.emoji||"👍")} <b>${u}</b> ${t("nReact")}`
+  :n.type==="comment"?`💬 <b>${u}</b> ${t("nComment")}`
+  :n.type==="share"?`↗️ <b>${u}</b> ${t("nShare")}`
+  :`👥 <b>${u}</b> ${t("nFriend")}`};
 function bellUI(){
   const sorted=[...notifs].sort((a,b)=>(b.createdAt?.toMillis?.()||Date.now())-(a.createdAt?.toMillis?.()||Date.now())).slice(0,30);
   const n=notifs.filter(x=>!x.read).length;
   $("#bb").hidden=!n;$("#bb").textContent=n>9?"9+":n;
-  $("#nl").innerHTML=sorted.map(x=>`<div class="nt ${fresh.has(x.id)?"fr":""}" data-n="${x.id}" data-t="${x.type}" data-u="${x.from}" data-p="${x.postId||""}">${ntxt(x)}<div class="time">${when(x.createdAt)}</div></div>`).join("")||`<div class="pad time">Notification မရှိသေးပါ</div>`;
+  $("#nl").innerHTML=sorted.map(x=>`<div class="nt ${fresh.has(x.id)?"fr":""}" data-n="${x.id}" data-t="${x.type}" data-u="${x.from}" data-p="${x.postId||""}">${ntxt(x)}<div class="time">${when(x.createdAt)}</div></div>`).join("")||`<div class="pad time">${t("noNotif")}</div>`;
 }
 $("#bell").onclick=e=>{
   e.stopPropagation();const p=$("#npn");p.hidden=!p.hidden;
   if(!p.hidden){
     const un=notifs.filter(x=>!x.read);fresh=new Set(un.map(x=>x.id));bellUI();
-    un.forEach(x=>updateDoc(doc(db,"notifs",x.id),{read:true}).catch(()=>{}));
+    if(navigator.onLine)un.forEach(x=>updateDoc(doc(db,"notifs",x.id),{read:true}).catch(()=>{}));
   }
 };
 
@@ -351,7 +433,7 @@ $("#bell").onclick=e=>{
 const openProfile=id=>{view=id==="me"?me.uid:id;ptab="posts";setTab("me");render();scrollTo(0,0)};
 $("#sn").onclick=()=>act(async()=>{const n=$("#epn").value.trim();
   await updateDoc(doc(db,"users",me.uid),{...(n?{name:n}:{}),bio:$("#epb").value.trim(),lives:$("#epl").value.trim(),work:$("#epw").value.trim()});
-  $("#ep").hidden=true;alert("သိမ်းပြီးပါပြီ ✅")});
+  $("#ep").hidden=true;alert(t("saved"))});
 $("#ec").onclick=()=>{$("#ep").hidden=true};
 $("#avf").onchange=e=>act(async()=>{const f=e.target.files[0];if(!f)return;await updateDoc(doc(db,"users",me.uid),{photo:await shrink(f,300)});e.target.value=""});
 $("#cvf").onchange=e=>act(async()=>{const f=e.target.files[0];if(!f)return;await updateDoc(doc(db,"users",me.uid),{cover:await shrink(f,640,.6)});e.target.value=""});
@@ -359,33 +441,37 @@ $("#cvf").onchange=e=>act(async()=>{const f=e.target.files[0];if(!f)return;await
 // ---------- Compose ----------
 $("#file").onchange=e=>{file=e.target.files[0]||null;$("#prev").innerHTML=file?`<img src="${URL.createObjectURL(file)}">`:""};
 $("#post").onclick=async()=>{
-  const text=$("#txt").value.trim();if(!text&&!file)return;const b=$("#post");b.disabled=true;b.textContent="တင်နေသည်...";
+  if(offl())return;
+  const text=$("#txt").value.trim();if(!text&&!file)return;const b=$("#post");b.disabled=true;b.textContent=t("posting");
   try{
     const data={uid:me.uid,text,image:file?await shrink(file,900):"",reactions:{},commentCount:0,createdAt:serverTimestamp()};
     await addDoc(collection(db,"posts"),data);
     $("#txt").value="";$("#prev").innerHTML="";file=null;$("#file").value="";
-  }catch(e){alert("တင်မရပါ: "+(e.message||e))}
-  b.disabled=false;b.textContent="Post";
+  }catch(e){alert(t("postFail")+(e.message||e))}
+  b.disabled=false;b.textContent=t("post");
 };
 
 // ---------- Feed ----------
 const img=p=>p.image?`<img class="media" src="${esc(p.image)}" loading="lazy">`:"";
-const person=([i,u])=>`<div class="sg" data-pf="${i}">${avw(i)}<span class="name" style="flex:1">${esc(u.name)}</span>${i===me.uid?"":fbtn(i)+`<button class="btn ghost" style="padding:5px 10px;font-size:12px" data-dm="${i}">💬</button>`}</div>`;
+const ago=ts=>{const m=Math.floor((Date.now()-ts)/60000);return m<1?t("agoNow"):m<60?t("agoM",m):m<1440?t("agoH",Math.floor(m/60)):t("agoD",Math.floor(m/1440))};
+const seen=i=>on(i)?`<span style="color:#31c552">${t("appOn")}</span>`:(U(i).lastSeen?t("lastOff",ago(U(i).lastSeen)):t("never"));
+const mutual=i=>{const a=accIds();return (U(i).fl||[]).filter(x=>a.includes(x)).length};
+const person=([i,u])=>`<div class="sg" data-pf="${i}">${avw(i)}<div style="flex:1;min-width:0"><div class="name">${esc(u.name)}</div><div class="time">${i!==me.uid&&mutual(i)?t("mutual",mutual(i))+" · ":""}${seen(i)}</div></div>${i===me.uid?"":fbtn(i)+`<button class="btn ghost" style="padding:5px 10px;font-size:12px" data-dm="${i}">💬</button>`}</div>`;
 const chatRow=i=>{const n=unreadN(i);return `<div class="sg" data-dm="${i}">${avw(i)}<span class="name" style="flex:1">${esc(U(i).name)}</span>${n?`<b class="bdg">${n>9?"9+":n}</b>`:""}</div>`};
 function postHTML(p){
   const rs=p.reactions||{},vals=Object.values(rs),mine=rs[me.uid],top=[...new Set(vals)].slice(0,3).join("");
   const sh=p.shared?`<div class="shared"><div class="row"><img class="av" src="${esc(av(p.shared.uid))}" style="width:30px;height:30px"><span class="name">${esc(U(p.shared.uid).name)}</span></div><div>${esc(p.shared.text)}</div>${img(p.shared)}</div>`:"";
   const cl=openC.has(p.id)?`<div>${(comments[p.id]||[]).map(c=>`<div class="cm"><img class="av" src="${esc(av(c.uid))}" style="width:30px;height:30px"><div><b>${esc(U(c.uid).name)}</b><br>${esc(c.text)}</div></div>`).join("")}
-    <div class="cm"><input data-ci="${p.id}" placeholder="Comment...(Enter)" style="margin:0;border-radius:20px"></div></div>`:"";
+    <div class="cm"><input data-ci="${p.id}" placeholder="${t("phCm")}" style="margin:0;border-radius:20px"></div></div>`:"";
   return `<div class="card pad" data-id="${p.id}">
-    <div class="row"><span data-pf="${p.uid}" style="cursor:pointer">${avw(p.uid)}</span><div><div class="name" data-pf="${p.uid}" style="cursor:pointer">${esc(U(p.uid).name)}${p.shared?" <span class='time'>Share</span>":""}</div><div class="time">${when(p.createdAt)}${p.edited?" · ပြင်ပြီး":""}</div></div>
-    ${p.uid===me.uid?`<span style="margin-left:auto"><button class="del" data-a="edit" style="margin:0">✏️ Edit</button><button class="del" data-a="del" style="margin:0">Delete</button></span>`:""}</div>
+    <div class="row"><span data-pf="${p.uid}" style="cursor:pointer">${avw(p.uid)}</span><div><div class="name" data-pf="${p.uid}" style="cursor:pointer">${esc(U(p.uid).name)}${p.shared?` <span class='time'>${t("shareTag")}</span>`:""}</div><div class="time">${when(p.createdAt)}${p.edited?" · "+t("edited"):""}</div></div>
+    ${p.uid===me.uid?`<span style="margin-left:auto"><button class="del" data-a="edit" style="margin:0">${t("edit")}</button><button class="del" data-a="del" style="margin:0">${t("del")}</button></span>`:""}</div>
     <div style="margin-top:8px;white-space:pre-wrap">${esc(p.text)}</div>${p.shared?sh:img(p)}
-    <div class="sum"><span>${vals.length?top+" "+vals.length:""}</span><span>${p.commentCount?p.commentCount+" မှတ်ချက်":""}</span></div>
+    <div class="sum"><span>${vals.length?top+" "+vals.length:""}</span><span>${p.commentCount?t("nCm",p.commentCount):""}</span></div>
     <div class="acts">
       <div class="lw"><div class="pk">${EMO.map(e=>`<span data-a="react" data-e="${e}">${e}</span>`).join("")}</div>
-        <button data-a="like" class="${mine?"me":""}">${mine?mine:"👍 Like"}</button></div>
-      <button data-a="cm">💬 Comment</button><button data-a="share">↗️ Share</button>
+        <button data-a="like" class="${mine?"me":""}">${mine?mine:t("like")}</button></div>
+      <button data-a="cm">${t("comment")}</button><button data-a="share">${t("share")}</button>
     </div>${cl}</div>`;
 }
 function render(){
@@ -393,37 +479,41 @@ function render(){
   $("#np").textContent=posts.filter(p=>p.uid===me.uid).length;
   const acc=accIds();
   $("#nu").textContent=acc.length;
-  $("#fl").innerHTML=acc.map(i=>person([i,U(i)])).join("")||`<div class="pad time">သူငယ်ချင်း မရှိသေးပါ</div>`;
+  const accS=[...acc].sort((a,b)=>on(b)-on(a));
+  $("#fl").innerHTML=accS.map(i=>person([i,U(i)])).join("")||`<div class="pad time">${t("noFr")}</div>`;
+  $("#fct").innerHTML=`${t("allFr")} · 🟢 ${acc.filter(on).length}/${acc.length} ${t("online")}`;
   const rq=friends.filter(f=>f.status==="pending"&&f.to===me.uid);
   $("#req").innerHTML=rq.map(f=>person([f.from,U(f.from)])).join("");
   $("#reqc").hidden=!rq.length;
+  $("#rqn").textContent=rq.length;
+  $("#fb").hidden=!rq.length;$("#fb").textContent=rq.length;
   const match=([i,u])=>i!==me.uid&&(!q||(u.name||"").toLowerCase().includes(q));
-  $("#sug").innerHTML=Object.entries(users).filter(match).slice(0,8).map(person).join("")||`<div class="pad time">မတွေ့ပါ</div>`;
+  $("#sug").innerHTML=Object.entries(users).filter(e=>match(e)&&!friends.some(f=>f.users.includes(e[0])&&(f.status==="accepted"||f.to===me.uid))).slice(0,30).map(person).join("")||`<div class="pad time">${t("none")}</div>`;
   let html;
   if(view){
     const u=U(view),isMe=view===me.uid,fl=(isMe?acc:(u.fl||[])).filter(i=>users[i]);
     const cv=u.cover?`style="background:url('${u.cover}') center/cover"`:"";
-    $("#pv").innerHTML=`<div class="card"><button class="btn ghost" data-bk style="margin:10px">← Back</button>
+    $("#pv").innerHTML=`<div class="card"><button class="btn ghost" data-bk style="margin:10px">${t("back")}</button>
       <div class="cover pcov" ${cv}></div>
       <div class="prof pf2"><span class="aw"><img class="big pb" src="${esc(av(view))}">${on(view)?'<i class="dot"></i>':""}</span>
         <div class="name" style="font-size:22px;margin:8px 0 2px">${esc(u.name)}</div>
-        <div class="time" style="margin-bottom:6px">${on(view)?"🟢 Online":"Offline"}</div></div>
+        <div class="time" style="margin-bottom:6px">${on(view)?t("onl"):t("offl")}</div></div>
       ${u.bio?`<div class="bio">${esc(u.bio)}</div>`:""}
-      <div class="intro">${u.lives?`<div>🏠 Lives in <b>${esc(u.lives)}</b></div>`:""}${u.work?`<div>💼 Works at <b>${esc(u.work)}</b></div>`:""}<div>👥 <b>${fl.length}</b> Friends</div></div>
-      <div class="pad row" style="justify-content:center;flex-wrap:wrap">${isMe?`<button class="btn g" data-edit>✏️ Edit Profile</button>`
-        :`${fbtn(view)}<button class="btn ghost" style="padding:5px 12px;font-size:12px" data-dm="${view}">💬 Message</button>`}</div>
-      <div class="ptabs">${[["posts","Posts"],["photos","Photos"],["friends","Friends"]].map(([k,n])=>`<button data-pt="${k}" class="${ptab===k?"on":""}">${n}</button>`).join("")}</div></div>`;
+      <div class="intro">${u.lives?`<div>${t("lives",esc(u.lives))}</div>`:""}${u.work?`<div>${t("works",esc(u.work))}</div>`:""}<div>${t("nFr",fl.length)}</div></div>
+      <div class="pad row" style="justify-content:center;flex-wrap:wrap">${isMe?`<button class="btn g" data-edit>${t("editProf")}</button>`
+        :`${fbtn(view)}<button class="btn ghost" style="padding:5px 12px;font-size:12px" data-dm="${view}">${t("message")}</button>`}</div>
+      <div class="ptabs">${[["posts",t("posts")],["photos",t("photos")],["friends",t("friends")]].map(([k,n])=>`<button data-pt="${k}" class="${ptab===k?"on":""}">${n}</button>`).join("")}</div></div>`;
     $("#cmp").hidden=true;$("#ppl").innerHTML="";
     if(!isMe)$("#ep").hidden=true;
     if(ptab==="photos"){const ph=posts.filter(p=>p.uid===view&&p.image);
-      html=`<div class="card pad">${ph.length?`<div class="pg">${ph.map(p=>`<img data-lb src="${esc(p.image)}" loading="lazy">`).join("")}</div>`:`<div class="time">ဓာတ်ပုံ မရှိသေးပါ</div>`}</div>`}
-    else if(ptab==="friends")html=`<div class="card">${fl.map(i=>person([i,U(i)])).join("")||`<div class="pad time">သူငယ်ချင်း မရှိသေးပါ</div>`}</div>`;
-    else html=posts.filter(p=>p.uid===view).map(postHTML).join("")||`<div class="card pad">ပို့စ်မရှိသေးပါ။</div>`;
+      html=`<div class="card pad">${ph.length?`<div class="pg">${ph.map(p=>`<img data-lb src="${esc(p.image)}" loading="lazy">`).join("")}</div>`:`<div class="time">${t("noPhoto")}</div>`}</div>`}
+    else if(ptab==="friends")html=`<div class="card">${fl.map(i=>person([i,U(i)])).join("")||`<div class="pad time">${t("noFr")}</div>`}</div>`;
+    else html=posts.filter(p=>p.uid===view).map(postHTML).join("")||`<div class="card pad">${t("noPost")}</div>`;
   }else{
     $("#pv").innerHTML="";$("#ep").hidden=true;$("#cmp").hidden=false;
     const found=q?Object.entries(users).filter(match).slice(0,6):[];
-    $("#ppl").innerHTML=found.length?`<div class="card"><div class="ct">👥 လူများ</div>${found.map(person).join("")}</div>`:"";
-    html=posts.filter(p=>!q||((p.text||"")+U(p.uid).name).toLowerCase().includes(q)).map(postHTML).join("")||`<div class="card pad">ပို့စ်မရှိသေးပါ။</div>`;
+    $("#ppl").innerHTML=found.length?`<div class="card"><div class="ct">${t("people")}</div>${found.map(person).join("")}</div>`:"";
+    html=posts.filter(p=>!q||((p.text||"")+U(p.uid).name).toLowerCase().includes(q)).map(postHTML).join("")||`<div class="card pad">${t("noPost")}</div>`;
   }
   $("#feed").innerHTML=html;
 }
@@ -444,19 +534,19 @@ document.addEventListener("click",e=>{
   const f=e.target.closest("[data-f]");if(f){friendAct(f.dataset.f,f.dataset.u);return}
   const d=e.target.closest("[data-dm]");if(d){openChat(d.dataset.dm);return}
   const pf=e.target.closest("[data-pf]");if(pf){openProfile(pf.dataset.pf);return}
-  const t=e.target.closest("[data-a]");if(!t)return;const id=t.closest(".card")?.dataset.id,p=posts.find(x=>x.id===id),a=t.dataset.a;
+  const ta=e.target.closest("[data-a]");if(!ta)return;const id=ta.closest(".card")?.dataset.id,p=posts.find(x=>x.id===id),a=ta.dataset.a;
   if(!p)return;
   if(a==="react"||a==="like"){
     const mine=p.reactions?.[me.uid];
-    const val=a==="react"?(t.dataset.e===mine?null:t.dataset.e):(mine?null:"👍");
+    const val=a==="react"?(ta.dataset.e===mine?null:ta.dataset.e):(mine?null:"👍");
     act(async()=>{await updateDoc(doc(db,"posts",id),{[`reactions.${me.uid}`]:val===null?deleteField():val});if(val)notify(p.uid,"react",{postId:id,emoji:val})});
   }
   if(a==="cm"){if(openC.has(id))openC.delete(id);else{openC.add(id);subC(id)}render()}
-  if(a==="edit"){const nt=prompt("ပို့စ်ကို ပြင်ပါ",p.text||"");if(nt===null)return;act(()=>updateDoc(doc(db,"posts",id),{text:nt.trim(),edited:true}))}
-  if(a==="del"&&confirm("ဖျက်မလား?"))act(()=>deleteDoc(doc(db,"posts",id)));
-  if(a==="share"){const note=prompt("မှတ်ချက်ထည့်မလား? (မထည့်လည်းရ)");if(note===null)return;const s=p.shared||p;
+  if(a==="edit"){const nt2=prompt(t("editAsk"),p.text||"");if(nt2===null)return;act(()=>updateDoc(doc(db,"posts",id),{text:nt2.trim(),edited:true}))}
+  if(a==="del"&&confirm(t("delAsk")))act(()=>deleteDoc(doc(db,"posts",id)));
+  if(a==="share"){const note=prompt(t("shareAsk"));if(note===null)return;const s=p.shared||p;
     act(()=>addDoc(collection(db,"posts"),{uid:me.uid,text:note,image:"",reactions:{},commentCount:0,createdAt:serverTimestamp(),
-      shared:{uid:s.uid,text:s.text||"",image:s.image||""}}).then(()=>{notify(s.uid,"share",{postId:id});alert("မျှဝေပြီးပါပြီ ✅")}))}
+      shared:{uid:s.uid,text:s.text||"",image:s.image||""}}).then(()=>{notify(s.uid,"share",{postId:id});alert(t("shareOk"))}))}
 });
 // ဖုန်းမှာ Like ကိုဖိထားရင် Emoji ပေါ်
 let lp;document.addEventListener("touchstart",e=>{
@@ -468,7 +558,7 @@ document.addEventListener("touchend",()=>clearTimeout(lp));
 const subbed=new Set();
 function subC(id){if(subbed.has(id))return;subbed.add(id);
   onSnapshot(query(collection(db,"posts",id,"comments"),orderBy("createdAt")),s=>{comments[id]=s.docs.map(d=>d.data());keep(render)})}
-document.addEventListener("keydown",e=>{const i=e.target.dataset?.ci;if(!i||e.key!=="Enter")return;const text=e.target.value.trim();if(!text)return;e.target.value="";
+document.addEventListener("keydown",e=>{const i=e.target.dataset?.ci;if(!i||e.key!=="Enter")return;const text=e.target.value.trim();if(!text)return;if(offl())return;e.target.value="";
   act(async()=>{await addDoc(collection(db,"posts",i,"comments"),{uid:me.uid,text,createdAt:serverTimestamp()});await updateDoc(doc(db,"posts",i),{commentCount:increment(1)});notify(posts.find(x=>x.id===i)?.uid,"comment",{postId:i})})});
 
 // ---------- Private Chat ----------
@@ -477,12 +567,14 @@ function openChat(id){
   if(!id||id===me.uid)return;
   peer=id;dmMsgs=[];if(unDM)unDM();
   unDM=onSnapshot(query(collection(db,"dms",cid(),"messages"),orderBy("createdAt"),limit(200)),s=>{dmMsgs=s.docs.map(d=>d.data());renderChat();markRead()},
-    e=>alert("Chat ဖွင့်မရပါ: "+e.message));
+    e=>console.error(e));
   setTab("chat");renderChat();setTimeout(()=>$("#ci").focus(),50);
 }
 $("#bk").onclick=()=>{peer=null;if(unDM){unDM();unDM=null}dmMsgs=[];renderChat()};
 function send(){
-  const text=$("#ci").value.trim();if(!text||!peer)return;$("#ci").value="";
+  const text=$("#ci").value.trim();if(!text||!peer)return;
+  if(offl())return;
+  $("#ci").value="";
   act(()=>addDoc(collection(db,"dms",cid(),"messages"),{from:me.uid,text,createdAt:serverTimestamp()}));
 }
 $("#cs").onclick=send;
@@ -495,13 +587,30 @@ function renderChat(){
   if(!me)return;
   $("#plist").hidden=!!peer;$("#conv").hidden=!peer;
   if(!peer){
-    const t=i=>(lastM[i]||[])[0]?.t||0;
-    $("#plist").innerHTML=Object.keys(users).filter(i=>i!==me.uid).sort((a,b)=>t(b)-t(a)).map(chatRow).join("")||`<div class="pad time">မတွေ့ပါ</div>`;
+    const tt=i=>(lastM[i]||[])[0]?.t||0;
+    $("#plist").innerHTML=Object.keys(users).filter(i=>i!==me.uid).sort((a,b)=>tt(b)-tt(a)).map(chatRow).join("")||`<div class="pad time">${t("none")}</div>`;
     return;
   }
   $("#pa").src=av(peer);$("#pnm").textContent=U(peer).name;$("#pd").hidden=!on(peer);
   $("#msgs").innerHTML=dmMsgs.map(m=>`<div class="msg ${m.from===me.uid?"me":""}">${m.image?`<img src="${esc(m.image)}">`:""}${m.text?esc(m.text):""}</div>`).join("");
   scrollChat();
 }
+
+// ---------- Apply language ----------
+function applyLang(){
+  document.documentElement.lang=lang==="my"?"my":"en";
+  $$("[data-i]").forEach(el=>el.textContent=t(el.dataset.i));
+  $$("[data-ph]").forEach(el=>el.placeholder=t(el.dataset.ph));
+  $("#go").textContent=t(reg?"createBtn":"login");
+  $("#sw").textContent=t(reg?"haveAcc":"newAcc");
+  $("#lgb").textContent=t("lang");
+  $("#lga").textContent=t("langA");
+  const pb=$("#post");if(!pb.disabled)pb.textContent=t("post");
+  if(!offB.hidden&&!navigator.onLine)offB.textContent=t("offB");
+  if(me){render();renderChat();bellUI()}
+}
+const toggleLang=()=>{lang=lang==="my"?"en":"my";try{localStorage.setItem("lang",lang)}catch(e){}applyLang()};
+$("#lgb").onclick=toggleLang;$("#lga").onclick=toggleLang;
+applyLang();
 </script>
 </body></html>
