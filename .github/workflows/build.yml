@@ -22,15 +22,9 @@ jobs:
           {"appId":"com.kachinlink.app","appName":"Kachin Link","webDir":"public"}
           EOF
       - run: npx cap add android
-      - run: |
-          R=android/app/src/main/res
-          rm -rf $R/mipmap-anydpi-v26
-          for d in mdpi:48 hdpi:72 xhdpi:96 xxhdpi:144 xxxhdpi:192; do
-            n=${d%%:*}; s=${d##*:}
-            for f in ic_launcher ic_launcher_round ic_launcher_foreground; do
-              convert Kachinlink.png -resize ${s}x${s} $R/mipmap-$n/$f.png
-            done
-          done
+      - run: pip install pillow
+      - run: rm -rf android/app/src/main/res/mipmap-anydpi-v26
+      - run: python3 -c "from PIL import Image; im=Image.open('Kachinlink.png').convert('RGBA'); [im.resize((s,s),Image.LANCZOS).save('android/app/src/main/res/mipmap-'+n+'/'+f+'.png') for n,s in [('mdpi',48),('hdpi',72),('xhdpi',96),('xxhdpi',144),('xxxhdpi',192)] for f in ['ic_launcher','ic_launcher_round','ic_launcher_foreground']]"
       - run: npx cap sync android
       - run: cd android && chmod +x gradlew && ./gradlew assembleDebug
       - uses: actions/upload-artifact@v4
