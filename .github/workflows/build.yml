@@ -22,11 +22,15 @@ jobs:
           {"appId":"com.kachinlink.app","appName":"Kachin Link","webDir":"public"}
           EOF
       - run: npx cap add android
-      - run: npm i -D @capacitor/assets
       - run: |
-          mkdir -p assets
-          cp Kachinlink.png assets/icon-only.png
-          npx capacitor-assets generate --android
+          R=android/app/src/main/res
+          rm -rf $R/mipmap-anydpi-v26
+          for d in mdpi:48 hdpi:72 xhdpi:96 xxhdpi:144 xxxhdpi:192; do
+            n=${d%%:*}; s=${d##*:}
+            for f in ic_launcher ic_launcher_round ic_launcher_foreground; do
+              convert Kachinlink.png -resize ${s}x${s} $R/mipmap-$n/$f.png
+            done
+          done
       - run: npx cap sync android
       - run: cd android && chmod +x gradlew && ./gradlew assembleDebug
       - uses: actions/upload-artifact@v4
