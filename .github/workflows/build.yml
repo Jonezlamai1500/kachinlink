@@ -24,9 +24,9 @@ jobs:
           cat > capacitor.config.json <<'EOF'
           {"appId":"com.kachinlink.app","appName":"Kachin Link","webDir":"public"}
           EOF
-      - run: mkdir -p assets && cp public/Kachinlink.jpg assets/icon-only.png
+      - run: mkdir -p android/app/src/main/res/mipmap-xxhdpi android/app/src/main/res/mipmap-xxxhdpi android/app/src/main/res/mipmap-xhdpi android/app/src/main/res/mipmap-hdpi android/app/src/main/res/mipmap-mdpi
+      - run: cp public/Kachinlink.jpg android/app/src/main/res/mipmap-xxhdpi/ic_launcher.jpg || true
       - run: npx cap add android
-      - run: npx @capacitor/assets generate --android
       - run: npx cap sync android
       - run: cd android && chmod +x gradlew && ./gradlew assembleDebug
       - uses: actions/upload-artifact@v4
@@ -37,4 +37,3 @@ jobs:
         with:
           tag_name: v5-${{ github.run_number }}
           files: android/app/build/outputs/apk/debug/app-debug.apk
-
